@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.security.Key;
 import java.security.KeyPair;
+import java.security.MessageDigest;
 import java.security.Security;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -191,5 +192,37 @@ public class Utils {
 			queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
 		}
 		return queryBuilder.toString();
+	}
+	
+	public static int bitLength(long num) {
+		int bitlen = 0;
+		while ((num >> bitlen) > 0) {
+			bitlen += 1;
+		}
+		return bitlen;
+	}
+	
+	private static long bytes2int(byte[] bytes, int offset) {
+		long val = 0;
+		for(int i = offset; i < offset + 4 && i < bytes.length; i ++) {
+			val |= (bytes[i] << ((3 - i)*8));
+		}
+		return val;
+	}
+	
+	public static long hash(String text, String alg) {
+		try {
+			MessageDigest messageDigest = MessageDigest.getInstance(alg);
+			messageDigest.update(text.getBytes());
+			byte byteBuffer[] = messageDigest.digest();
+			long ret = 0;
+			for (int i = 0; i < byteBuffer.length; i += 4) {
+				ret |= bytes2int(byteBuffer, i);
+			}
+			return ret;
+		}catch (Exception e) {
+			System.out.println("Hash error: " + e);
+			return -1;
+		}
 	}
 }

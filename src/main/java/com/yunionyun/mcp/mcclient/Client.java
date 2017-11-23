@@ -237,6 +237,16 @@ public class Client
 		return this._auth(null, null, null, projectId, projectName, token.getToken());
 	}
 	
+	public TokenCredential Verify(String adminToken, String token) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("X-Subject-Token", token);
+		headers.set("X-Auth-Token", adminToken);
+		JSONObject result = this.jsonRequest(this.authUrl, null, "GET", "/auth/tokens", headers, null);
+		TokenCredential cred = new TokenCredential(token);
+		cred.parseJSON(result);
+		return cred;
+	}
+	
 	public Session newSession(String region, String zone, String endpointType, TokenCredential token) {
 		return new Session(this, region, zone, endpointType, token);
 	}

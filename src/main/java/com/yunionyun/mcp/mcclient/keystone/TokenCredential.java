@@ -121,4 +121,9 @@ public class TokenCredential {
 	public boolean isSystemAdmin() {
 		return (this.getProjectName().equals("system") && this.isAdmin());
 	}
+	
+	public long expireSeconds() {
+		Date now = new Date();
+		return this.expires.getTime() - now.getTime();
+	}
 }
