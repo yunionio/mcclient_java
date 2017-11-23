@@ -139,7 +139,7 @@ public class Utils {
 	}
 	
 	public static Date string2Date(String str) throws Exception {
-		DateFormat format = new SimpleDateFormat("YYYY-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 		Date date = format.parse(str);
 		return date;
 	}
@@ -205,7 +205,8 @@ public class Utils {
 	private static long bytes2int(byte[] bytes, int offset) {
 		long val = 0;
 		for(int i = offset; i < offset + 4 && i < bytes.length; i ++) {
-			val |= (bytes[i] << ((3 - i)*8));
+		    long tmp = ((long)bytes[i] & 0xffL);
+			val |= ((tmp << ((3 - i)*8)) & 0xffffffffL);
 		}
 		return val;
 	}
