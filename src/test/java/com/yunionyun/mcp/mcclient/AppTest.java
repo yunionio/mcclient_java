@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
+import com.yunionyun.mcp.mcclient.managers.impl.ImageManager;
 import com.yunionyun.mcp.mcclient.managers.impl.ServerDiskManager;
 import com.yunionyun.mcp.mcclient.managers.impl.ServerManager;
 
@@ -46,7 +47,10 @@ public class AppTest
         		Session s = cli.newSession("TestLocal", null, null, token);
         		ServerManager mgr = new ServerManager();
         		System.out.println("Start List");
-        		ListResult result = mgr.List(s, null);
+        		JSONObject srvquery = new JSONObject();
+        		srvquery.put("details", true);
+        		srvquery.put("with_meta", true);
+        		ListResult result = mgr.List(s, srvquery);
         		System.out.println(result.toString());
         		JSONObject srv = result.getDataAt(0);
         		if (srv != null) {
@@ -58,7 +62,11 @@ public class AppTest
         			ListResult serverdisks = srvdiskman.LisDescendent(s, id, null);
         			System.out.println(serverdisks.toString());
         		}
-        		
+        		ImageManager imgman = new ImageManager();
+        		JSONObject imgquery = new JSONObject();
+        		imgquery.put("details", true);
+        		ListResult imgs = imgman.List(s, imgquery);
+        		System.out.println(imgs.toString());
         }catch(Exception e) {
         		System.out.print("Client error: " + e);
         }

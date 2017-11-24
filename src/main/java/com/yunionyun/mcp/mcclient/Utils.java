@@ -183,7 +183,7 @@ public class Utils {
 		Iterator iter = obj.keys();
 		while (iter.hasNext()) {
 			String key = (String)iter.next();
-			String val = obj.getString(key);
+			String val = obj.get(key).toString();
 			if (queryBuilder.length() > 0) {
 				queryBuilder.append("&");
 			}
