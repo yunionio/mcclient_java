@@ -6,9 +6,9 @@ import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.Utils;
 
 public class ResourceManager extends BaseManager {
-	String context;
-	String keyword;
-	String keywordPlural;
+	protected String context;
+	protected String keyword;
+	protected String keywordPlural;
 	
 	public ResourceManager(String serviceType, String endpointType, String version, String[] columns, String[] adminColumns, String keyword, String keywordPlural, String context) {
 		super(serviceType, endpointType, version, columns, adminColumns);
@@ -107,7 +107,6 @@ public class ResourceManager extends BaseManager {
 	}
 	
 	public ListResult List(Session s, JSONObject query) throws Exception {
-		System.out.println("List");
 		return this.List(s, query, new ManagerContext[] {});
 	}
 	
