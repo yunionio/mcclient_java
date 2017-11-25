@@ -41,6 +41,16 @@ public class ResourceManager extends BaseManager {
 		return url;
 	}
 	
+	private JSONObject genBody(JSONObject params) {
+		if (params != null) {
+			JSONObject body = new JSONObject();
+			body.put(this.keyword, params);
+			return body;
+		}else {
+			return null;
+		}
+	}
+	
 	public JSONObject Get(Session s, String id, JSONObject query, ManagerContext[] ctx) throws Exception {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
@@ -131,7 +141,7 @@ public class ResourceManager extends BaseManager {
 		url.append(id);
 		url.append("/");
 		url.append(action);
-		return this._post(s, url.toString(), params, this.keyword);
+		return this._post(s, url.toString(), genBody(params), this.keyword);
 	}
 
 	public JSONObject PerformAction(Session s, String id, String action, JSONObject params, ManagerContext ctx) throws Exception {
@@ -147,7 +157,7 @@ public class ResourceManager extends BaseManager {
 		url.append(this.urlKey());
 		url.append("/");
 		url.append(id);
-		return this._put(s, url.toString(), params, this.keyword);
+		return this._put(s, url.toString(), genBody(params), this.keyword);
 	}
 
 	public JSONObject Update(Session s, String id, JSONObject params, ManagerContext ctx) throws Exception {
@@ -163,7 +173,7 @@ public class ResourceManager extends BaseManager {
 		url.append(this.urlKey());
 		url.append("/");
 		url.append(id);
-		return this._patch(s, url.toString(), params, this.keyword);
+		return this._patch(s, url.toString(), genBody(params), this.keyword);
 	}
 
 	public JSONObject Patch(Session s, String id, JSONObject params, ManagerContext ctx) throws Exception {
