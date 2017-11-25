@@ -123,7 +123,7 @@ public class ResourceManager extends BaseManager {
 	public JSONObject Create(Session s, JSONObject params, ManagerContext[] ctx) throws Exception {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
-		return this._post(s, url.toString(), params, this.keyword);
+		return this._post(s, url.toString(), genBody(params), this.keyword);
 	}
 
 	public JSONObject Create(Session s, JSONObject params, ManagerContext ctx) throws Exception {
