@@ -26,4 +26,8 @@ public class JSONClientException extends Exception {
 		builder.append(")");
 		return builder.toString();
 	}
+	
+	public int getCode() {
+		return this.code;
+	}
 }
