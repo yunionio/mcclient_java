@@ -2,6 +2,7 @@ package com.yunionyun.mcp.mcclient.managers;
 
 import org.json.JSONObject;
 
+import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.Utils;
 
@@ -51,7 +52,31 @@ public class ResourceManager extends BaseManager {
 		}
 	}
 	
-	public JSONObject Get(Session s, String id, JSONObject query, ManagerContext[] ctx) throws Exception {
+	public JSONObject GetByName(Session s, String name, JSONObject query, ManagerContext[] ctx) throws Exception {
+		JSONObject query2 = new JSONObject();
+		if (query != null) {
+			for (String key: query.keySet()) {
+				query2.put(key, query.get(key));
+			}
+		}
+		query2.put("name", name);
+		ListResult objs = this.List(s, query2, ctx);
+		if (objs.data.length == 1) {
+			return objs.data[0];
+		} else {
+			throw new JSONClientException(404, "Not Found", "Name " + name + " not found");
+		}
+	}
+	
+	public JSONObject GetByName(Session s, String name, JSONObject query, ManagerContext ctx) throws Exception {
+		return this.GetByName(s, name, query, new ManagerContext[]{ctx});
+	}
+	
+	public JSONObject GetByName(Session s, String name, JSONObject query) throws Exception {
+		return this.GetByName(s, name, query, new ManagerContext[]{});
+	}
+	
+	public JSONObject GetById(Session s, String id, JSONObject query, ManagerContext[] ctx) throws Exception {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		url.append("/");
@@ -66,12 +91,32 @@ public class ResourceManager extends BaseManager {
 		return this._get(s, url.toString(), this.keyword);
 	}
 	
+	public JSONObject GetById(Session s, String id, JSONObject query, ManagerContext ctx) throws Exception {
+		return this.GetById(s, id, query, new ManagerContext[]{ctx});
+	}
+	
+	public JSONObject GetById(Session s, String id, JSONObject query) throws Exception {
+		return this.GetById(s, id, query, new ManagerContext[] {});
+	}
+	
+	public JSONObject Get(Session s, String id, JSONObject query, ManagerContext[] ctx) throws Exception {
+		try {
+			return this.GetById(s, id, query, ctx);
+		} catch (JSONClientException e) {
+			if (e.getCode() == 404) {
+				return this.GetByName(s, id, query, ctx);
+			}else {
+				throw e;
+			}
+		}
+	}
+		
 	public JSONObject Get(Session s, String id, JSONObject query, ManagerContext ctx) throws Exception {
 		return this.Get(s, id, query, new ManagerContext[]{ctx});
 	}
 	
 	public JSONObject Get(Session s, String id, JSONObject query) throws Exception {
-		return this.Get(s, id, query, new ManagerContext[] {});
+		return this.Get(s, id, query, new ManagerContext[]{});
 	}
 	
 	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query, ManagerContext[] ctx) throws Exception {

@@ -99,4 +99,8 @@ public class ListResult {
 			return null;
 		}
 	}
+	
+	public int getDataSize() {
+		return this.data.length;
+	}
 }

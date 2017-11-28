@@ -5,6 +5,9 @@ import org.json.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
 import com.yunionyun.mcp.mcclient.managers.impl.ImageManager;
+import com.yunionyun.mcp.mcclient.managers.impl.ProjectManager;
+import com.yunionyun.mcp.mcclient.managers.impl.RoleAssignmentManager;
+import com.yunionyun.mcp.mcclient.managers.impl.RoleManager;
 import com.yunionyun.mcp.mcclient.managers.impl.ServerDiskManager;
 import com.yunionyun.mcp.mcclient.managers.impl.ServerManager;
 
@@ -70,6 +73,24 @@ public class AppTest
         		s.setTaskNotifyUrl("http://10.168.26.235:8888");
         		ListResult imgs = imgman.List(s, imgquery);
         		System.out.println(imgs.toString());
+        		
+        		ProjectManager projman = new ProjectManager();
+        		JSONObject proj = projman.GetByName(s, "newproject", null);
+        		RoleManager roleman = new RoleManager();
+        		JSONObject role = roleman.GetByName(s, "project_owner", null);
+        		if (role != null) {
+        			JSONObject rolequery = new JSONObject();
+        			rolequery.put("role.id", role.getString("id"));
+        			rolequery.put("project.id", proj.getString("id"));
+        			rolequery.put("effective", "true");
+        			rolequery.put("include_names", "true");
+        			RoleAssignmentManager roleassignman = new RoleAssignmentManager();
+        			ListResult assignments = roleassignman.List(s, rolequery);
+        			for (int i = 0; i < assignments.getDataSize(); i ++) {
+        				JSONObject ass = assignments.getDataAt(i);
+        				System.out.print(ass);
+        			}
+        		}
         }catch(Exception e) {
         		System.out.print("Client error: " + e);
         }
