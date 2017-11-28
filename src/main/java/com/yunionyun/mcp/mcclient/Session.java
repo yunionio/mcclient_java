@@ -1,7 +1,5 @@
 package com.yunionyun.mcp.mcclient;
 
-import java.net.URLEncoder;
-
 import org.json.JSONObject;
 
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
@@ -13,6 +11,8 @@ public class Session {
 	private String endpointType;
 	private TokenCredential token;
 	private HttpHeaders headers;
+	
+	public static final String TASK_NOTIFY_URL_HEAD = "X-Task-Notify-Url";
 	
 	public Session(Client cli, String region, String zone, String endpointType, TokenCredential token) {
 		this.client = cli;
@@ -62,8 +62,11 @@ public class Session {
 	    return this.token.getProjectId();
 	}
 
-	public boolean setTaskNotifyUrl(String url) {
-		this.setHeader("X-Task-Notify-Url", url);
-		return true;
+	public void setTaskNotifyUrl(String url) {
+		this.setHeader(TASK_NOTIFY_URL_HEAD, url);
+	}
+	
+	public void clearTaskNotifyUrl() {
+		this.removeHeader(TASK_NOTIFY_URL_HEAD);
 	}
 }
