@@ -1,5 +1,7 @@
 package com.yunionyun.mcp.mcclient;
 
+import java.net.URLEncoder;
+
 import org.json.JSONObject;
 
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
@@ -10,6 +12,7 @@ public class Session {
 	private String zone;
 	private String endpointType;
 	private TokenCredential token;
+	private HttpHeaders headers;
 	
 	public Session(Client cli, String region, String zone, String endpointType, TokenCredential token) {
 		this.client = cli;
@@ -17,6 +20,19 @@ public class Session {
 		this.zone = region;
 		this.endpointType = endpointType;
 		this.token = token;
+		this.headers = new HttpHeaders();
+	}
+	
+	public void setHeader(String key, String value) {
+		this.headers.set(key, value);
+	}
+	
+	public void removeHeader(String key) {
+		this.headers.remove(key);
+	}
+	
+	public String getHeader(String key) {
+		return this.headers.get(key);
 	}
 	
 	public String getServiceUrl(String service, String endpointType) throws Exception {
@@ -30,7 +46,12 @@ public class Session {
 	public JSONObject jsonRequest(String service, String endpointType, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {
 		String baseurl = Utils.stripURLVersion(this.getServiceUrl(service, endpointType));
 		System.out.println("jsonRequest " + baseurl + " token " +  this.token.getToken());
-		return this.client.jsonRequest(baseurl, this.token.getToken(), method, url, headers, jsonBody);
+		HttpHeaders tmpHdr = new HttpHeaders();
+		if (headers != null) {
+			tmpHdr.update(headers);
+		}
+		tmpHdr.update(this.headers);
+		return this.client.jsonRequest(baseurl, this.token.getToken(), method, url, tmpHdr, jsonBody);
 	}
 	
 	public boolean isSystemAdmin() {
@@ -39,5 +60,10 @@ public class Session {
 
 	public String getProjectId() {
 	    return this.token.getProjectId();
+	}
+
+	public boolean setTaskNotifyUrl(String url) {
+		this.setHeader("X-Task-Notify-Url", url);
+		return true;
 	}
 }

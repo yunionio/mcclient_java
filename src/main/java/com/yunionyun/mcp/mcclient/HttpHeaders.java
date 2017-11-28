@@ -25,6 +25,18 @@ public class HttpHeaders {
 		return _headers.containsKey(key);
 	}
 	
+	public void update(HttpHeaders hdr) {
+		for (String key: hdr._headers.keySet()) {
+			this.set(key, hdr.get(key));
+		}
+	}
+	
+	public void remove(String key) {
+		if (_headers.containsKey(key)) {
+			_headers.remove(key);
+		}
+	}
+	
 	private String normalizeKey(String key) {
 		String[] segs = key.split("-");
 		for(int i = 0; i < segs.length; i ++) {

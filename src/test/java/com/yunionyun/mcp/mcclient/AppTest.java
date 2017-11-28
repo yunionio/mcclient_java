@@ -50,10 +50,12 @@ public class AppTest
         		JSONObject srvquery = new JSONObject();
         		srvquery.put("details", true);
         		srvquery.put("with_meta", true);
+        		s.setTaskNotifyUrl("http://10.168.26.235:7777");
         		ListResult result = mgr.List(s, srvquery);
         		System.out.println(result.toString());
         		JSONObject srv = result.getDataAt(0);
         		if (srv != null) {
+        			s.setTaskNotifyUrl("http://10.168.26.235:8888");
         			String id = srv.getString("id");
         			JSONObject srv2 = mgr.Get(s, id, null);
         			System.out.println(srv2.toString(4));
@@ -65,6 +67,7 @@ public class AppTest
         		ImageManager imgman = new ImageManager();
         		JSONObject imgquery = new JSONObject();
         		imgquery.put("details", true);
+        		s.setTaskNotifyUrl("http://10.168.26.235:8888");
         		ListResult imgs = imgman.List(s, imgquery);
         		System.out.println(imgs.toString());
         }catch(Exception e) {
