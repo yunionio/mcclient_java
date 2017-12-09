@@ -62,26 +62,46 @@ public class BaseManager {
 	
 	public JSONObject _get(Session s, String url, String respKey) throws Exception {
 		JSONObject body = this.jsonRequest(s, "GET", url, null, null);
-		return body.getJSONObject(respKey);
+		if (respKey != null) {
+			return body.getJSONObject(respKey);
+		} else {
+			return body;
+		}
 	}
 	
 	public JSONObject _post(Session s, String url, JSONObject body, String respKey) throws Exception {
 		JSONObject respBody = this.jsonRequest(s, "POST", url, null, body);
-		return respBody.getJSONObject(respKey);
+		if (respKey != null) {
+			return respBody.getJSONObject(respKey);
+		} else {
+			return respBody;
+		}
 	}
 	
 	public JSONObject _put(Session s, String url, JSONObject body, String respKey) throws Exception {
 		JSONObject respBody = this.jsonRequest(s, "PUT", url, null, body);
-		return respBody.getJSONObject(respKey);
+		if (respKey != null) {
+			return respBody.getJSONObject(respKey);
+		} else {
+			return respBody;
+		}
 	}
 	
 	public JSONObject _patch(Session s, String url, JSONObject body, String respKey) throws Exception {
 		JSONObject respBody = this.jsonRequest(s, "PATCH", url, null, body);
-		return respBody.getJSONObject(respKey);
+		if (respKey != null) {
+			return respBody.getJSONObject(respKey);
+		} else {
+			return respBody;
+		}
 	}
 	
 	public JSONObject _delete(Session s, String url, JSONObject body, String respKey) throws Exception {
 		JSONObject respBody = this.jsonRequest(s, "DELETE", url, null, body);
-		return respBody.getJSONObject(respKey);
+		if (respKey != null) {
+			return respBody.getJSONObject(respKey);
+		} else {
+			return respBody;
+		}
 	}
 }
