@@ -179,19 +179,20 @@ public class ResourceManager extends BaseManager {
 		return this.Create(s, params, new ManagerContext[] {});
 	}
 	
-	public JSONObject BatchCreate(Session s, JSONObject params, int count, ManagerContext[] ctx) throws Exception {
+	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count, ManagerContext[] ctx) throws Exception {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		JSONObject body = genBody(params);
 		body.put("count", count);
-		return this._post(s, url.toString(), body, this.keyword);
+		JSONObject obj = this._post(s, url.toString(), body, null);
+		return SubmitResult.parseResult(obj, this.keywordPlural);
 	}
 
-	public JSONObject BatchCreate(Session s, JSONObject params, int count, ManagerContext ctx) throws Exception {
+	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count, ManagerContext ctx) throws Exception {
 		return this.BatchCreate(s, params, count, new ManagerContext[] {ctx});
 	}
 
-	public JSONObject BatchCreate(Session s, JSONObject params, int count) throws Exception {
+	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count) throws Exception {
 		return this.BatchCreate(s, params, count, new ManagerContext[] {});
 	}
 	
