@@ -7,11 +7,13 @@ public class SubmitResult {
 	private int status;
 	private String id;
 	private JSONObject data;
+	private String errmsg;
 	
-	private SubmitResult(int status, String id, JSONObject data) {
+	private SubmitResult(int status, String id, JSONObject data, String errmsg) {
 		this.status = status;
 		this.id = id;
 		this.data = data;
+		this.errmsg = errmsg;
 	}
 	
 	public static SubmitResult[] parseResult(JSONObject obj, String keyword) {
@@ -24,8 +26,14 @@ public class SubmitResult {
 			if (res.has("id")) {
 				id = res.getString("id");
 			}
-			JSONObject dat = res.getJSONObject("data");
-			results[i] = new SubmitResult(status, id, dat);
+			JSONObject dat = null;
+			String errmsg = null;
+			if (status >= 300) {
+				errmsg = res.getString("body");
+			} else {
+				dat = res.getJSONObject("body");
+			}
+			results[i] = new SubmitResult(status, id, dat, errmsg);
 		}
 		return results;
 	}
@@ -40,6 +48,14 @@ public class SubmitResult {
 	
 	public JSONObject getData() {
 		return this.data;
+	}
+	
+	public String getErrmsg() {
+		return this.errmsg;
+	}
+	
+	public boolean isError() {
+		return (this.status >= 300);
 	}
 
 }
