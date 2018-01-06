@@ -37,6 +37,7 @@ public class AuthAgent {
 	}
 	
 	public void start() {
+		this.refreshAdminToken();
 		final AuthAgent self = this;
 		TimerTask task = new TimerTask() {
 			public void run() {
@@ -45,6 +46,10 @@ public class AuthAgent {
 		};
 		Timer timer = new Timer();
 		timer.schedule(task, 0, this.checkPeriodSeconds*1000);
+	}
+	
+	public Session getAdminSession(String region, String zone, String endpointType) {
+		return this.client.newSession(region, zone, endpointType, this.adminToken);
 	}
 
 	public TokenCredential verify(String token) {

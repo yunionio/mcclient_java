@@ -1,6 +1,7 @@
 package com.yunionyun.mcp.mcclient;
 
 public class Cache<T> {
+	
 	private class CacheNode<T> {
 		private String key;
 		private T value;
