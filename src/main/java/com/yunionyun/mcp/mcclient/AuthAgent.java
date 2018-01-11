@@ -36,8 +36,21 @@ public class AuthAgent {
 		}
 	}
 	
+	public void start_sync_ready() {
+		while (this.adminToken == null) {
+			this.refreshAdminToken();
+			if (this.adminToken == null) {
+				try {
+					Thread.sleep(2000); //
+				}catch(Exception e) {
+					System.out.print("Fail to sleep???");
+				}
+			}
+		}
+		this.start();
+	}
+	
 	public void start() {
-		this.refreshAdminToken();
 		final AuthAgent self = this;
 		TimerTask task = new TimerTask() {
 			public void run() {
