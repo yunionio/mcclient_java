@@ -25,7 +25,7 @@ public class AuthAgent {
 		this.checkPeriodSeconds = 300;  // every 5 mintues
 	}
 	
-	public void refreshAdminToken() {
+	private void refreshAdminToken() {
 		if (this.adminToken == null || this.adminToken.expireSeconds() < 3600) {
 			try {
 				TokenCredential adminToken = this.client.Authenticate(this.user, this.passwd, this.domain, this.project);
