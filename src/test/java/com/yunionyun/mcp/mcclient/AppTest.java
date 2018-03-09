@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
 import com.yunionyun.mcp.mcclient.managers.impl.ImageManager;
+import com.yunionyun.mcp.mcclient.managers.impl.NotifyManager;
 import com.yunionyun.mcp.mcclient.managers.impl.ProjectManager;
 import com.yunionyun.mcp.mcclient.managers.impl.RoleAssignmentManager;
 import com.yunionyun.mcp.mcclient.managers.impl.RoleManager;
@@ -91,6 +92,9 @@ public class AppTest
         				System.out.print(ass);
         			}
         		}
+        		
+        		NotifyManager notifyman = new NotifyManager();
+        		notifyman.notify(s, "qiujian", NotifyManager.CONTACT_EMAIL, "test", NotifyManager.PRIORITY_NORMAL, "This is a normal message");
         }catch(Exception e) {
         		System.out.print("Client error: " + e);
         }

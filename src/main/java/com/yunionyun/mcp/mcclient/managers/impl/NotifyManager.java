@@ -57,7 +57,18 @@ public class NotifyManager extends BaseNotifyManager {
 		PRIORITY_FATAL = new NotifyPriority("fatal");
 	}
 	
-	public boolean notify(Session s, String uid, NotifyContactType contact_type, String topic, NotifyPriority priority, String msg) {
+	/**
+	 * 发送消息
+	 * 
+	 * @param s
+	 * @param uid
+	 * @param contact_type
+	 * @param topic
+	 * @param priority
+	 * @param msg
+	 * @return String 返回消息发送任务的ID
+	 */
+	public String notify(Session s, String uid, NotifyContactType contact_type, String topic, NotifyPriority priority, String msg) {
 		JSONObject params = new JSONObject();
 		params.put("uid", uid);
 		params.put("contact_type", contact_type.String());
@@ -65,10 +76,10 @@ public class NotifyManager extends BaseNotifyManager {
 		params.put("priority", priority.String());
 		params.put("msg", msg);
 		try {
-			super.Create(s, params);
-			return true;
+			JSONObject ret = super.Create(s, params);
+			return ret.getString("id");
 		}catch(Exception e) {
-			return false;
+			return null;
 		}
 	}
 	
@@ -86,10 +97,25 @@ public class NotifyManager extends BaseNotifyManager {
 		}
 	}
 	
+	/**
+	 * 更改发送任务状态为成功
+	 * 
+	 * @param s
+	 * @param id 发送任务ID
+	 * @return
+	 */
 	public boolean sendOk(Session s, String id) {
 		return _sendStatus(s, id, "sent_ok", null);
 	}
 	
+	/**
+	 * 更改发送任务状态为失败
+	 * 
+	 * @param s
+	 * @param id 发送任务ID
+	 * @param reason 失败原因
+	 * @return
+	 */
 	public boolean sendFail(Session s, String id, String reason) {
 		return _sendStatus(s, id, "sent_fail", reason);
 	}
