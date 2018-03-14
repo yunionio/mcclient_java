@@ -13,5 +13,7 @@ public class UnitValueTest extends TestCase {
 		System.out.println(Unit.prettyString(10000000, 2, "bps"));
 		System.out.println(Unit.prettyString(0.769, 2, "s"));
 		System.out.println(Unit.prettyString(1024, 2, "KBps"));
+		System.out.println(Unit.prettyString(1000, 2, "KBps"));
+		System.out.println(Unit.prettyString(1000, 2, "Kbps"));
 	}
 }

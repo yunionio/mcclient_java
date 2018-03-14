@@ -51,7 +51,7 @@ public class Unit {
 		percent = new Unit("percent", UnitPrefix.none, UnitBase.percent, UnitSuffix.none);
 		sec = new Unit("second", UnitPrefix.none, UnitBase.seconds, UnitSuffix.none);
 		watt = new Unit("watt", UnitPrefix.none, UnitBase.watt, UnitSuffix.none);
-		millionth = new Unit("%%", UnitPrefix.none, UnitBase.millionth, UnitSuffix.none);
+		millionth = new Unit("millionth", UnitPrefix.none, UnitBase.millionth, UnitSuffix.none);
 	}
 	
 	public String String() {
