@@ -22,7 +22,7 @@ public class EventManager extends ComputeManager {
 	@Override
 	public ListResult List(Session s, JSONObject query, ManagerContext[] ctx) throws Exception {
 		StringBuilder url = new StringBuilder();
-		url.append("/opslogs");
+		url.append("/events");
 		if (query != null) {
 			String queryStr = Utils.JSONObject2QueryString(query);
 			if (queryStr.length() > 0) {
