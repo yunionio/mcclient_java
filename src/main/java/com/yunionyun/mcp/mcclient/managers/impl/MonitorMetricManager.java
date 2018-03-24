@@ -2,6 +2,8 @@ package com.yunionyun.mcp.mcclient.managers.impl;
 
 import java.util.Set;
 
+import org.json.JSONObject;
+
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.managers.BaseMonitorManager;
 
@@ -13,7 +15,8 @@ public class MonitorMetricManager extends BaseMonitorManager {
 		        new String[] {});
 	}
 	
-	public void batchSubmit(Session s, Set<String> sets) {
-		
+	public void batchSubmit(Session s, Set<String> sets) throws Exception {
+		JSONObject params = new JSONObject();
+		this.Create(s, params);
 	}
 }
