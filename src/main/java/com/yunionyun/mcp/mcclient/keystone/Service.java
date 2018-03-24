@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 
 public class Service extends BaseResource {
@@ -17,8 +16,8 @@ public class Service extends BaseResource {
 		super.parseJSON(obj);
 		type = obj.getString("type");
 		JSONArray epArray = obj.getJSONArray("endpoints");
-		endpoints = new Endpoint[epArray.length()];
-		for (int i = 0; i < epArray.length(); i ++) {
+		endpoints = new Endpoint[epArray.size()];
+		for (int i = 0; i < epArray.size(); i ++) {
 			endpoints[i] = new Endpoint();
 			endpoints[i].parseJSON(epArray.getJSONObject(i));
 		}

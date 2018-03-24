@@ -1,7 +1,7 @@
 package com.yunionyun.mcp.mcclient.keystone;
 
-import org.json.JSONObject;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 
 public class Endpoint {
@@ -41,7 +41,7 @@ public class Endpoint {
 	}
 	
 	public boolean isType(EndpointType type) {
-		if (type.String().startsWith(this.type)) {
+		if (type.toString().toLowerCase().startsWith(this.type.toLowerCase())) {
 			return true;
 		}else {
 			return false;

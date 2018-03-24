@@ -13,7 +13,6 @@ import java.security.cert.X509Certificate;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,8 +28,9 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 public class Utils {
 	
@@ -76,7 +76,7 @@ public class Utils {
 	
 	private static final JSONObject empty = new JSONObject();
 	public static JSONObject getJSONResult(JSONObject data, String field) {
-		if (data.length() == 0 || !data.has(field) || !(data.get(field) instanceof JSONObject)) {
+		if (data.size() == 0 || !data.containsKey(field) || !(data.get(field) instanceof JSONObject)) {
 			return empty;
 		}else {
 			return data.getJSONObject(field);
@@ -86,7 +86,7 @@ public class Utils {
 	public static JSONArray stringArray2JSONArray(String[] array) {
 		JSONArray ret = new JSONArray();
 		for(String str: array) {
-			ret.put(str);
+			ret.add(str);
 		}
 		return ret;
 	}
@@ -125,7 +125,7 @@ public class Utils {
 			String key = keys[i];
 			if (i < keys.length - 1) {
 				JSONObject target = null;
-				if (current.has(key)) {
+				if (current.containsKey(key)) {
 					target = current.getJSONObject(key);
 				} else {
 					target = new JSONObject();
@@ -179,11 +179,8 @@ public class Utils {
 	
 	private static String _JSONObject2QueryString(JSONObject obj) throws Exception {
 		StringBuilder queryBuilder = new StringBuilder();
-		@SuppressWarnings("rawtypes")
-		Iterator iter = obj.keys();
-		while (iter.hasNext()) {
-			String key = (String)iter.next();
-			String val = obj.get(key).toString();
+		for (String key: obj.keySet()) {
+			String val = obj.getString(key);
 			if (queryBuilder.length() > 0) {
 				queryBuilder.append("&");
 			}

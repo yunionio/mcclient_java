@@ -1,7 +1,7 @@
 package com.yunionyun.mcp.mcclient.managers;
 
-import org.json.JSONObject;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.HttpHeaders;
 import com.yunionyun.mcp.mcclient.Session;

@@ -1,23 +1,23 @@
 package com.yunionyun.mcp.mcclient.managers;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 public class ListResult {
 	JSONObject[] data;
 	int total;
 	int limit;
 	int offset;
-	String prev;
-	String next;
+	// String prev;
+	// String next;
 	
 	public ListResult() {
 		this.data = null;
 		this.total = 0;
 		this.limit = 0;
 		this.offset = 0;
-		this.prev = null;
-		this.next = null;
+		// this.prev = null;
+		// this.next = null;
 	}
 	
 	public ListResult(JSONObject[] data, int total, int limit, int offset, String prev, String next) {
@@ -25,39 +25,39 @@ public class ListResult {
 		this.total = total;
 		this.limit = limit;
 		this.offset = offset;
-		this.prev = prev;
-		this.next = next;
+		// this.prev = prev;
+		// this.next = next;
 	}
 	
 	public void parseJSON(JSONObject result, String respKey) {
 		JSONArray arr = result.getJSONArray(respKey);
-		this.data = new JSONObject[arr.length()];
-		for (int i = 0; i < arr.length(); i ++) {
+		this.data = new JSONObject[arr.size()];
+		for (int i = 0; i < arr.size(); i ++) {
 			this.data[i] = arr.getJSONObject(i);
 		}
-		if (result.has("total")) {
-			this.total = result.getInt("total");
-			if (result.has("limit")) {
-				this.limit = result.getInt("limit");
+		if (result.containsKey("total")) {
+			this.total = result.getIntValue("total");
+			if (result.containsKey("limit")) {
+				this.limit = result.getIntValue("limit");
 			}else {
 				this.limit = 0;
 			}
-			if (result.has("offset")) {
-				this.offset = result.getInt("offset");
+			if (result.containsKey("offset")) {
+				this.offset = result.getIntValue("offset");
 			}else {
 				this.offset = 0;
 			}
 		} else {
-			this.total = arr.length();
+			this.total = arr.size();
 			this.limit = 0;
 			this.offset = 0;
 		}
-		if (result.has("prev")) {
+		/* if (result.containsKey("prev")) {
 			this.prev = result.getString("prev");
 		}
-		if (result.has("next")) {
+		if (result.containsKey("next")) {
 			this.next = result.getString("next");
-		}		
+		}*/
 	}
 	
 	public String toString() {

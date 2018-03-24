@@ -16,7 +16,16 @@ public abstract class BaseEnumConstants {
 		constantsMap.put(rep, this);
 	}
 	
-	public String String() {
+	@Override
+	public String toString() {
 		return this.rep;
+	}
+	
+	public static BaseEnumConstants string2Const(String str) {
+		if (constantsMap.containsKey(str)) {
+			return constantsMap.get(str);
+		}else {
+			return null;
+		}
 	}
 }

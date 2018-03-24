@@ -17,4 +17,12 @@ public class EndpointType extends BaseEnumConstants{
 		PublicURL = new EndpointType("PublicURL");
 		AdminURL = new EndpointType("AdminURL");
 	}
+	
+	public static EndpointType string2EndpointType(String str) {
+		BaseEnumConstants cont = string2Const(str);
+		if (cont != null) {
+			return (EndpointType) cont;
+		}
+		return InternalURL;
+	}
 }

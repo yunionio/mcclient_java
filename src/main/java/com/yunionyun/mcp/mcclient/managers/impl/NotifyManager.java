@@ -1,7 +1,7 @@
 package com.yunionyun.mcp.mcclient.managers.impl;
 
-import org.json.JSONObject;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.common.BaseEnumConstants;
 import com.yunionyun.mcp.mcclient.managers.BaseNotifyManager;
@@ -74,9 +74,9 @@ public class NotifyManager extends BaseNotifyManager {
 	public String notify(Session s, String uid, NotifyContactType contact_type, String topic, NotifyPriority priority, String msg) {
 		JSONObject params = new JSONObject();
 		params.put("uid", uid);
-		params.put("contact_type", contact_type.String());
+		params.put("contact_type", contact_type.toString());
 		params.put("topic", topic);
-		params.put("priority", priority.String());
+		params.put("priority", priority.toString());
 		params.put("msg", msg);
 		try {
 			JSONObject ret = super.Create(s, params);

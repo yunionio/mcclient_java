@@ -1,7 +1,7 @@
 package com.yunionyun.mcp.mcclient;
 
-import org.json.JSONObject;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
 import com.yunionyun.mcp.mcclient.managers.impl.ImageManager;
@@ -62,7 +62,7 @@ public class AppTest
         			s.setTaskNotifyUrl("http://10.168.26.235:8888");
         			String id = srv.getString("id");
         			JSONObject srv2 = mgr.Get(s, id, null);
-        			System.out.println(srv2.toString(4));
+        			System.out.println(srv2.toJSONString());
         			
         			ServerDiskManager srvdiskman = new ServerDiskManager();
         			ListResult serverdisks = srvdiskman.LisDescendent(s, id, null);
@@ -95,7 +95,10 @@ public class AppTest
         		
         		NotifyManager notifyman = new NotifyManager();
         		notifyman.notify(s, "qiujian", NotifyManager.CONTACT_EMAIL, "test", NotifyManager.PRIORITY_NORMAL, "This is a normal message");
+
+        		System.out.println("Test complete!!!");
         }catch(Exception e) {
+        		e.printStackTrace();
         		System.out.print("Client error: " + e);
         }
     }
