@@ -7,6 +7,8 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.yunionyun.mcp.mcclient.EndpointType;
+
 public class Service extends BaseResource {
 	private String type;
 	private Endpoint[] endpoints;
@@ -33,7 +35,7 @@ public class Service extends BaseResource {
 		return this.type;
 	}
 	
-	public String getServiceUrl(String region, String zone, String endpointType) throws Exception {
+	public String getServiceUrl(String region, String zone, EndpointType endpointType) throws Exception {
 		HashMap<String, HashSet<String>> urlTbl = new HashMap<String, HashSet<String>>();
 		for (int i = 0; i < this.endpoints.length; i ++) {
 			if (this.endpoints[i].isType(endpointType)) {

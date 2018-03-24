@@ -2,6 +2,7 @@ package com.yunionyun.mcp.mcclient.managers;
 
 import org.json.JSONObject;
 
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.Utils;
@@ -11,7 +12,7 @@ public class ResourceManager extends BaseManager {
 	protected String keyword;
 	protected String keywordPlural;
 	
-	public ResourceManager(String serviceType, String endpointType, String version, String[] columns, String[] adminColumns, String keyword, String keywordPlural, String context) {
+	public ResourceManager(String serviceType, EndpointType endpointType, String version, String[] columns, String[] adminColumns, String keyword, String keywordPlural, String context) {
 		super(serviceType, endpointType, version, columns, adminColumns);
 		this.context = context;
 		this.keyword = keyword;

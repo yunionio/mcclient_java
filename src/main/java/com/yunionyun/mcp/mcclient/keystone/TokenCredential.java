@@ -6,6 +6,7 @@ import java.util.HashSet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.Utils;
 
 public class TokenCredential {
@@ -99,7 +100,7 @@ public class TokenCredential {
 		return regionSet.toArray(regions);
 	}
 	
-	public String getServiceUrl(String service, String region, String zone, String endpointType) throws Exception {
+	public String getServiceUrl(String service, String region, String zone, EndpointType endpointType) throws Exception {
 		for (int i = 0; i < this.services.length; i ++) {
 			if (this.services[i].getType().equals(service)) {
 				return this.services[i].getServiceUrl(region, zone, endpointType);

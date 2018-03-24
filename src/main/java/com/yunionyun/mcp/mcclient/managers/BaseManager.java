@@ -2,18 +2,19 @@ package com.yunionyun.mcp.mcclient.managers;
 
 import org.json.JSONObject;
 
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.HttpHeaders;
 import com.yunionyun.mcp.mcclient.Session;
 
 public class BaseManager {
 	String serviceType;
-	String endpointType;
+	EndpointType endpointType;
 	String version;
 	String[] colums;
 	String[] adminColums;
 	String[] allColumns;
  	
-	public BaseManager(String serviceType, String endpointType, String version, String[] columns, String[] adminColumns) {
+	public BaseManager(String serviceType, EndpointType endpointType, String version, String[] columns, String[] adminColumns) {
 		this.serviceType = serviceType;
 		this.endpointType = endpointType;
 		this.version = version;

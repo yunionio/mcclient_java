@@ -3,6 +3,7 @@ package com.yunionyun.mcp.mcclient.managers.impl;
 import org.json.JSONObject;
 
 import com.yunionyun.mcp.mcclient.Session;
+import com.yunionyun.mcp.mcclient.common.BaseEnumConstants;
 import com.yunionyun.mcp.mcclient.managers.BaseNotifyManager;
 
 
@@ -14,27 +15,20 @@ public class NotifyManager extends BaseNotifyManager {
 				new String[] {});
 	}
 	
-	
-	private static class NotifyMetadata {
-		private String rep;
-		
-		NotifyMetadata(String rep) {
-			this.rep = rep;
-		}
-		
-		public String String() {
-			return this.rep;
-		}
-	}
-	
-	public static class NotifyContactType extends NotifyMetadata {
+	public static class NotifyContactType extends BaseEnumConstants {
 		private NotifyContactType(String rep) {
 			super(rep);
 		}
 	}
 	
-	public static class NotifyPriority extends NotifyMetadata {
+	public static class NotifyPriority extends BaseEnumConstants {
 		private NotifyPriority(String rep) {
+			super(rep);
+		}
+	}
+	
+	public static class NotifyTopic extends BaseEnumConstants {
+		public NotifyTopic(String rep) {
 			super(rep);
 		}
 	}
@@ -46,6 +40,11 @@ public class NotifyManager extends BaseNotifyManager {
 	public static final NotifyPriority PRIORITY_NORMAL;
 	public static final NotifyPriority PRIORITY_IMPORTANT;
 	public static final NotifyPriority PRIORITY_FATAL;
+	
+	public static final NotifyTopic VERIFY_MESSAGE;
+	public static final NotifyTopic ALARM_MESSAGE;
+	public static final NotifyTopic CUSTOMIZE_MESSAGE;
+	
 
 	static {
 		CONTACT_MOBILE = new NotifyContactType("mobile");
@@ -55,10 +54,14 @@ public class NotifyManager extends BaseNotifyManager {
 		PRIORITY_NORMAL = new NotifyPriority("normal");
 		PRIORITY_IMPORTANT = new NotifyPriority("important");
 		PRIORITY_FATAL = new NotifyPriority("fatal");
+		
+		VERIFY_MESSAGE = new NotifyTopic("VERIFY_MESSAGE");
+		ALARM_MESSAGE = new NotifyTopic("ALARM_MESSAGE");
+		CUSTOMIZE_MESSAGE = new NotifyTopic("");
 	}
 	
 	/**
-	 * 发送消息
+	 * 发送任意字符串消息，但是不能发短信
 	 * 
 	 * @param s
 	 * @param uid

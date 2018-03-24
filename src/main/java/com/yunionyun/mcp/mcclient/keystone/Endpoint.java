@@ -2,6 +2,8 @@ package com.yunionyun.mcp.mcclient.keystone;
 
 import org.json.JSONObject;
 
+import com.yunionyun.mcp.mcclient.EndpointType;
+
 public class Endpoint {
 	String id;
 	String type;
@@ -38,8 +40,8 @@ public class Endpoint {
 		return Id2RegionZone(this.regionId);
 	}
 	
-	public boolean isType(String type) {
-		if (type.startsWith(this.type)) {
+	public boolean isType(EndpointType type) {
+		if (type.String().startsWith(this.type)) {
 			return true;
 		}else {
 			return false;
