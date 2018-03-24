@@ -1,4 +1,4 @@
-package com.yunionyun.mcp.mcclient.common;
+package com.yunionyun.mcp.mcclient.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +15,9 @@ public class ConfManager {
 
     static {
         try {
-//            System.out.println(System.getProperty("conf"));
             prop = new Properties();
-//            InputStreamReader reader = new InputStreamReader(new FileInputStream(System.getProperty("conf")), "utf-8");
-            InputStreamReader reader =new InputStreamReader(new FileInputStream("extra/samples/config.properties"),"utf-8");
+            InputStreamReader reader = new InputStreamReader(new FileInputStream(System.getProperty("conf")), "utf-8");
+            // InputStreamReader reader =new InputStreamReader(new FileInputStream("extra/samples/config.properties"),"utf-8");
             prop.load(reader);
             System.setProperty("LOG_PATH", prop.getProperty("log.path"));
             System.setProperty("APPDIR", prop.getProperty("app.dir"));
