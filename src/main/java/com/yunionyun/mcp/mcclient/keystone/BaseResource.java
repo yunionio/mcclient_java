@@ -1,8 +1,8 @@
 package com.yunionyun.mcp.mcclient.keystone;
 
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
-public class BaseResource {
+public abstract class BaseResource {
 	private String id;
 	private String name;
 	

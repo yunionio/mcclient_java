@@ -1,7 +1,7 @@
 package com.yunionyun.mcp.mcclient.managers;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 public class SubmitResult {
 	private int status;
@@ -18,12 +18,12 @@ public class SubmitResult {
 	
 	public static SubmitResult[] parseResult(JSONObject obj, String keyword) {
 		JSONArray array = obj.getJSONArray(keyword);
-		SubmitResult[] results = new SubmitResult[array.length()];
-		for (int i = 0; i < array.length(); i++) {
+		SubmitResult[] results = new SubmitResult[array.size()];
+		for (int i = 0; i < array.size(); i++) {
 			JSONObject res = array.getJSONObject(i);
-			int status = res.getInt("status");
+			int status = res.getIntValue("status");
 			String id = "";
-			if (res.has("id")) {
+			if (res.containsKey("id")) {
 				id = res.getString("id");
 			}
 			JSONObject dat = null;

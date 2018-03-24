@@ -1,7 +1,8 @@
 package com.yunionyun.mcp.mcclient.managers.impl;
 
-import org.json.JSONObject;
 
+
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.Utils;
 import com.yunionyun.mcp.mcclient.managers.ComputeManager;
@@ -22,7 +23,8 @@ public class EventManager extends ComputeManager {
 	@Override
 	public ListResult List(Session s, JSONObject query, ManagerContext[] ctx) throws Exception {
 		StringBuilder url = new StringBuilder();
-		url.append("/events");
+		url.append("/");
+		url.append(this.keywordPlural);
 		if (query != null) {
 			String queryStr = Utils.JSONObject2QueryString(query);
 			if (queryStr.length() > 0) {

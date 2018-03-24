@@ -3,9 +3,9 @@ package com.yunionyun.mcp.mcclient.keystone;
 import java.util.Date;
 import java.util.HashSet;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.Utils;
 
 public class TokenCredential {
@@ -32,14 +32,14 @@ public class TokenCredential {
 		project = new Project();
 		project.parseJSON(token.getJSONObject("project"));
 		JSONArray rolesJSON = token.getJSONArray("roles");
-		roles = new Role[rolesJSON.length()];
-		for (int i = 0; i < rolesJSON.length(); i ++) {
+		roles = new Role[rolesJSON.size()];
+		for (int i = 0; i < rolesJSON.size(); i ++) {
 			roles[i] = new Role();
 			roles[i].parseJSON(rolesJSON.getJSONObject(i));
 		}
 		JSONArray serviceJSON = token.getJSONArray("catalog");
-		services = new Service[serviceJSON.length()];
-		for (int i = 0; i < serviceJSON.length(); i ++) {
+		services = new Service[serviceJSON.size()];
+		for (int i = 0; i < serviceJSON.size(); i ++) {
 			services[i] = new Service();
 			services[i].parseJSON(serviceJSON.getJSONObject(i));
 		}
@@ -99,7 +99,7 @@ public class TokenCredential {
 		return regionSet.toArray(regions);
 	}
 	
-	public String getServiceUrl(String service, String region, String zone, String endpointType) throws Exception {
+	public String getServiceUrl(String service, String region, String zone, EndpointType endpointType) throws Exception {
 		for (int i = 0; i < this.services.length; i ++) {
 			if (this.services[i].getType().equals(service)) {
 				return this.services[i].getServiceUrl(region, zone, endpointType);

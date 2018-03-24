@@ -8,8 +8,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import org.json.JSONObject;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 
 /**
@@ -159,7 +159,7 @@ public class Client
 				System.out.println("Response: " + textResult);
 			}
 			try {
-				jsonResult = new JSONObject(textResult);
+				jsonResult = JSONObject.parseObject(textResult);
 			}catch(Exception e) {
 				throw new JSONClientException(499, "Malformed JSON body", textResult);
 			}
@@ -173,16 +173,16 @@ public class Client
 		} else if (code >= 300 && code < 400) {
 			throw new JSONClientException(code, "redirect", req.getHeaderField("Location"));
 		}else  if (jsonResult != null) {
-			if (jsonResult.has("error")) {
+			if (jsonResult.containsKey("error")) {
 				JSONObject errBody = jsonResult.getJSONObject("error");
-				if (errBody.has("message") && errBody.has("title") && errBody.has("code")) {
-					throw new JSONClientException(errBody.getInt("code"), errBody.getString("title"), errBody.getString("message"));
-				} else if (errBody.has("code") && errBody.has("details")) {
+				if (errBody.containsKey("message") && errBody.containsKey("title") && errBody.containsKey("code")) {
+					throw new JSONClientException(errBody.getIntValue("code"), errBody.getString("title"), errBody.getString("message"));
+				} else if (errBody.containsKey("code") && errBody.containsKey("details")) {
 					String errCls = req.getResponseMessage();
-					if (errBody.has("class")) {
+					if (errBody.containsKey("class")) {
 						errCls = errBody.getString("class");
 					}
-					throw new JSONClientException(errBody.getInt("code"), errCls, errBody.getString("details"));
+					throw new JSONClientException(errBody.getIntValue("code"), errCls, errBody.getString("details"));
 				} else {
 					throw new JSONClientException(code, req.getResponseMessage(), errBody.toString());
 				}
@@ -247,7 +247,7 @@ public class Client
 		return cred;
 	}
 	
-	public Session newSession(String region, String zone, String endpointType, TokenCredential token) {
+	public Session newSession(String region, String zone, EndpointType endpointType, TokenCredential token) {
 		return new Session(this, region, zone, endpointType, token);
 	}
 }
