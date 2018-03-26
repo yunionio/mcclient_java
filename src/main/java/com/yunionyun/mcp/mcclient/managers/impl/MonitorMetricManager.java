@@ -2,6 +2,7 @@ package com.yunionyun.mcp.mcclient.managers.impl;
 
 import java.util.Set;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.managers.BaseMonitorManager;
@@ -14,8 +15,19 @@ public class MonitorMetricManager extends BaseMonitorManager {
 		        new String[] {});
 	}
 	
-	public void batchSubmit(Session s, Set<String> sets) throws Exception {
-		JSONObject params = new JSONObject();
+	public void batchSubmit(Session s, Set<String> sets) throws Exception 
+	{
+	    JSONArray metrics = new JSONArray();
+	    for (String name : sets)
+        {
+	        JSONObject node = new JSONObject();
+	        node.put("name", name);
+	        metrics.add(node);
+        }
+	    
+	    JSONObject params = new JSONObject();
+		params.put("metrics", metrics);
+		
 		this.Create(s, params);
 	}
 }
