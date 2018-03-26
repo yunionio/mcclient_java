@@ -28,11 +28,14 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class Utils {
+    private static Logger logger = LoggerFactory.getLogger(Utils.class);
 	
 	private static Pattern duration_pattern = Pattern.compile("^\\d+[HhMm]$");
 	public static boolean matchDuration(String dura) {
@@ -172,7 +175,7 @@ public class Utils {
 		try{ 
 			return _JSONObject2QueryString(obj);
 		}catch (Exception e) {
-			System.out.println(e);
+		    logger.error("", e);
 		}
 		return "";
 	}
@@ -219,7 +222,7 @@ public class Utils {
 			}
 			return ret;
 		}catch (Exception e) {
-			System.out.println("Hash error: " + e);
+		    logger.error("Hash error: " + e);
 			return -1;
 		}
 	}

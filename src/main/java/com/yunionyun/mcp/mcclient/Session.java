@@ -1,5 +1,8 @@
 package com.yunionyun.mcp.mcclient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 
@@ -10,6 +13,7 @@ public class Session {
 	private EndpointType endpointType;
 	private TokenCredential token;
 	private HttpHeaders headers;
+	private static Logger logger = LoggerFactory.getLogger(Session.class);
 	
 	public static final String TASK_NOTIFY_URL_HEAD = "X-Task-Notify-Url";
 	
@@ -38,13 +42,13 @@ public class Session {
 		if (this.endpointType != null) {
 			endpointType = this.endpointType;
 		}
-		System.out.println("getServiceUrl " + service + " epType " + endpointType);
+		logger.debug("getServiceUrl " + service + " epType " + endpointType);
 		return this.token.getServiceUrl(service, this.region, this.zone, endpointType);
 	}
 	
 	public JSONObject jsonRequest(String service, EndpointType endpointType, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {
 		String baseurl = Utils.stripURLVersion(this.getServiceUrl(service, endpointType));
-		System.out.println("jsonRequest " + baseurl + " token " +  this.token.getToken());
+		logger.debug("jsonRequest " + baseurl + " token " +  this.token.getToken());
 		HttpHeaders tmpHdr = new HttpHeaders();
 		if (headers != null) {
 			tmpHdr.update(headers);

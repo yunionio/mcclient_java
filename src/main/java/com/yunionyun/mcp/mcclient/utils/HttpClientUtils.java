@@ -138,8 +138,9 @@ public class HttpClientUtils {
                 client = HttpClientUtils.client;
                 res = client.execute(post);
             }
-//            logger.info("status code:%s",);
-            // System.out.println(res.getStatusLine().getStatusCode());
+            
+            logger.debug(res.getStatusLine().getStatusCode() + "");
+            
             if (res.getStatusLine().getStatusCode() == 204) {
                 result = "success";
             } else {
@@ -187,7 +188,6 @@ public class HttpClientUtils {
                     formParams.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
                 }
                 UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams, Consts.UTF_8);
-//                System.out.println(entity.toString());
                 post.setEntity(entity);
             }
 
@@ -396,7 +396,7 @@ public class HttpClientUtils {
             map.put("name", "111");
             map.put("page", "222");
             String str= postForm("https://localhost:443/ssl/test.shtml",map,null, 10000, 10000);*/
-        System.out.println(str);
+        logger.info(str);
 
     }
 

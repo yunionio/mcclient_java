@@ -3,12 +3,17 @@ package com.yunionyun.mcp.mcclient.keystone;
 import java.util.Date;
 import java.util.HashSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.Utils;
 
 public class TokenCredential {
+    private final static Logger logger = LoggerFactory.getLogger(TokenCredential.class);
+    
 	private String token;
 	private User user;
 	private Project project;
@@ -25,7 +30,7 @@ public class TokenCredential {
 		try {
 			expires = Utils.string2Date(token.getString("expires_at"));
 		} catch (Exception e) {
-			System.out.println("parse date error " + e);
+		    logger.error("parse date error " + e);
 		}
 		user = new User();
 		user.parseJSON(token.getJSONObject("user"));
