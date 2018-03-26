@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.managers.BaseMonitorManager;
+import com.yunionyun.mcp.mcclient.managers.ManagerContext;
 
 public class MonitorNodeManager extends BaseMonitorManager {
 
@@ -35,6 +36,9 @@ public class MonitorNodeManager extends BaseMonitorManager {
         JSONObject params = new JSONObject();
         params.put("nodes", nodes);
         
-        this.Create(s, params);
+        StringBuilder url = this.getContextPath(new ManagerContext[] {});
+        url.append(this.urlKey());
+        
+        this._post(s, url.toString(), params, null);
     }
 }

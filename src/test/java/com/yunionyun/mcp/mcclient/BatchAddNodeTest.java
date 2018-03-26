@@ -24,7 +24,6 @@ public class BatchAddNodeTest extends TestCase
             
             Set<String> sets = new HashSet<String>(Arrays.asList("host01_1.1.1.1", "host02_2.2.2.2"));
             //manager.batchSubmit(s, sets);
-            
         }
         catch (Exception e)
         {

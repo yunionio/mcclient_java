@@ -24,7 +24,6 @@ public class BatchAddMetricTest extends TestCase
             
             Set<String> sets = new HashSet<String>(Arrays.asList("test_metric01", "test_metric02"));
             //manager.batchSubmit(s, sets);
-            
         }
         catch (Exception e)
         {
