@@ -9,6 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 
@@ -22,6 +25,7 @@ public class Client
 	private int timeout;
 	private boolean debug;
 	private boolean inSecure;
+	private static Logger logger = LoggerFactory.getLogger(Client.class);
 	
 	public static final String USER_AGENT = "yunioncloud-java/201711";
 	
@@ -36,7 +40,7 @@ public class Client
 		method = method.toUpperCase();
 		
 		if (this.debug) {
-			System.out.println(method + " " + endpoint + url);
+		    logger.debug(method + " " + endpoint + url);
 		}
 		URL requrl = new URL(endpoint + url);
 		
@@ -155,8 +159,8 @@ public class Client
 		if (input != null) {
 			textResult = _inputStream2String(input);
 			if (this.debug) {
-				System.out.println("Response code: " + code);
-				System.out.println("Response: " + textResult);
+			    logger.debug("Response code: " + code);
+			    logger.debug("Response: " + textResult);
 			}
 			try {
 				jsonResult = JSONObject.parseObject(textResult);
@@ -165,7 +169,7 @@ public class Client
 			}
 		} else {
 			if (this.debug) {
-				System.out.println("jsonRequest: no body");
+			    logger.debug("jsonRequest: no body");
 			}
 		}
 		if (code >= 200 && code < 300) {

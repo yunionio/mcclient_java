@@ -1,6 +1,9 @@
 package com.yunionyun.mcp.mcclient;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
@@ -22,6 +25,8 @@ import junit.framework.TestSuite;
 public class AppTest 
     extends TestCase
 {
+    private static Logger logger = LoggerFactory.getLogger(AppTest.class);
+    
     /**
      * Create the test case
      *
@@ -50,30 +55,30 @@ public class AppTest
         		TokenCredential token = cli.Authenticate("sysadmin", "sysadmin", "Default", "system");
         		Session s = cli.newSession("TestLocal", null, null, token);
         		ServerManager mgr = new ServerManager();
-        		System.out.println("Start List");
+        		logger.info("Start List");
         		JSONObject srvquery = new JSONObject();
         		srvquery.put("details", true);
         		srvquery.put("with_meta", true);
         		s.setTaskNotifyUrl("http://10.168.26.235:7777");
         		ListResult result = mgr.List(s, srvquery);
-        		System.out.println(result.toString());
+        		logger.info(result.toString());
         		JSONObject srv = result.getDataAt(0);
         		if (srv != null) {
         			s.setTaskNotifyUrl("http://10.168.26.235:8888");
         			String id = srv.getString("id");
         			JSONObject srv2 = mgr.Get(s, id, null);
-        			System.out.println(srv2.toJSONString());
+        			logger.info(srv2.toJSONString());
         			
         			ServerDiskManager srvdiskman = new ServerDiskManager();
         			ListResult serverdisks = srvdiskman.LisDescendent(s, id, null);
-        			System.out.println(serverdisks.toString());
+        			logger.info(serverdisks.toString());
         		}
         		ImageManager imgman = new ImageManager();
         		JSONObject imgquery = new JSONObject();
         		imgquery.put("details", true);
         		s.setTaskNotifyUrl("http://10.168.26.235:8888");
         		ListResult imgs = imgman.List(s, imgquery);
-        		System.out.println(imgs.toString());
+        		logger.info(imgs.toString());
         		
         		ProjectManager projman = new ProjectManager();
         		JSONObject proj = projman.GetByName(s, "newproject", null);
@@ -96,7 +101,7 @@ public class AppTest
         		NotifyManager notifyman = new NotifyManager();
         		notifyman.notify(s, "qiujian", NotifyManager.CONTACT_EMAIL, "test", NotifyManager.PRIORITY_NORMAL, "This is a normal message");
 
-        		System.out.println("Test complete!!!");
+        		logger.info("Test complete!!!");
         }catch(Exception e) {
         		e.printStackTrace();
         		System.out.print("Client error: " + e);

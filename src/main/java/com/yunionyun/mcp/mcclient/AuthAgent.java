@@ -3,7 +3,11 @@ package com.yunionyun.mcp.mcclient;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
+import com.yunionyun.mcp.mcclient.utils.HttpClientUtils;
 
 public class AuthAgent {
 	private Client client;
@@ -14,6 +18,7 @@ public class AuthAgent {
 	private TokenCredential adminToken;
 	private Cache<TokenCredential> tokenCache;
 	private int checkPeriodSeconds;
+	private static Logger logger = LoggerFactory.getLogger(AuthAgent.class);
 	
 	public AuthAgent(String authUrl, String domain, String user, String passwd, String project, int cacheSize, int timeout, boolean debug, boolean insecure) {
 		this.client = new Client(authUrl, timeout, debug, insecure);
@@ -31,7 +36,7 @@ public class AuthAgent {
 				TokenCredential adminToken = this.client.Authenticate(this.user, this.passwd, this.domain, this.project);
 				this.adminToken = adminToken;
 			}catch(Exception e) {
-				System.out.println("Fail to get adminToken");
+			    logger.error("Fail to get adminToken");
 			}
 		}
 	}
@@ -43,7 +48,7 @@ public class AuthAgent {
 				try {
 					Thread.sleep(2000); //
 				}catch(Exception e) {
-					System.out.print("Fail to sleep???");
+				    logger.error("Fail to sleep???");
 				}
 			}
 		}
