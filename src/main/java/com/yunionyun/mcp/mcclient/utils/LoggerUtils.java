@@ -44,7 +44,7 @@ public class LoggerUtils
         fileAppender.setName("logFile");
         fileAppender.setEncoder(encoder);
         fileAppender.setAppend(true);
-        fileAppender.setFile(LOG_PATH);
+        fileAppender.setFile(file);
         
         TimeBasedRollingPolicy<ILoggingEvent> logFilePolicy = new TimeBasedRollingPolicy<ILoggingEvent>();
         logFilePolicy.setContext(context);
