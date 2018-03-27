@@ -2,7 +2,6 @@ package com.yunionyun.mcp.mcclient;
 
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
@@ -14,6 +13,7 @@ import com.yunionyun.mcp.mcclient.managers.impl.RoleAssignmentManager;
 import com.yunionyun.mcp.mcclient.managers.impl.RoleManager;
 import com.yunionyun.mcp.mcclient.managers.impl.ServerDiskManager;
 import com.yunionyun.mcp.mcclient.managers.impl.ServerManager;
+import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -25,7 +25,7 @@ import junit.framework.TestSuite;
 public class AppTest 
     extends TestCase
 {
-    private static Logger logger = LoggerFactory.getLogger(AppTest.class);
+    private static Logger logger = LoggerUtils.createLoggerFor(AppTest.class.getName());
     
     /**
      * Create the test case

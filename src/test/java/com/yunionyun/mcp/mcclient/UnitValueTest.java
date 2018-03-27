@@ -1,14 +1,15 @@
 package com.yunionyun.mcp.mcclient;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.yunionyun.mcp.mcclient.unit.Unit;
+import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 
 import junit.framework.TestCase;
 
 public class UnitValueTest extends TestCase {
-    private static Logger logger = LoggerFactory.getLogger(UnitValueTest.class);
+    private static Logger logger = LoggerUtils.createLoggerFor(UnitValueTest.class.getName());
+    
     
 	public void testApp() {
 		Unit bps = Unit.parse("bps");
