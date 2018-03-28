@@ -10,10 +10,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
+import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 
 /**
  * Hello world!
@@ -25,7 +25,7 @@ public class Client
 	private int timeout;
 	private boolean debug;
 	private boolean inSecure;
-	private static Logger logger = LoggerFactory.getLogger(Client.class);
+	private static Logger logger = LoggerUtils.createLoggerFor(Client.class.getName());
 	
 	public static final String USER_AGENT = "yunioncloud-java/201711";
 	

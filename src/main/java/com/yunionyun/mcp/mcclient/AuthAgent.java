@@ -4,10 +4,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
-import com.yunionyun.mcp.mcclient.utils.HttpClientUtils;
+import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 
 public class AuthAgent {
 	private Client client;
@@ -18,7 +17,8 @@ public class AuthAgent {
 	private TokenCredential adminToken;
 	private Cache<TokenCredential> tokenCache;
 	private int checkPeriodSeconds;
-	private static Logger logger = LoggerFactory.getLogger(AuthAgent.class);
+	private static Logger logger = LoggerUtils.createLoggerFor(AuthAgent.class.getName());
+	
 	
 	public AuthAgent(String authUrl, String domain, String user, String passwd, String project, int cacheSize, int timeout, boolean debug, boolean insecure) {
 		this.client = new Client(authUrl, timeout, debug, insecure);

@@ -1,15 +1,21 @@
 package com.yunionyun.mcp.mcclient.utils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import org.apache.http.util.TextUtils;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.http.util.TextUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
+import ch.qos.logback.classic.Logger;
 
 /**
  * 模拟accessToken和jsTicket的数据持久化<br/>
@@ -17,7 +23,7 @@ import java.util.logging.Logger;
  * 正式项目最好是写入到Mysql
  */
 public class FileUtils {
-    private static Logger logger = Logger.getLogger("FileUtils");
+    private static Logger logger = LoggerUtils.createLoggerFor(FileUtils.class.getName());
     private static final String FILEPATH = "conf";
 
     // json写入文件
@@ -95,7 +101,7 @@ public class FileUtils {
             jsonObject = JSONObject.parseObject(laststr.toString());
         } catch (IOException e) {
             logger.info("data error:"+laststr);
-            logger.log(Level.INFO,e.getMessage(),e);
+            logger.info(e.getMessage(), e);
         }
 
         return jsonObject;

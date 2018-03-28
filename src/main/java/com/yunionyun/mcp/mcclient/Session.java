@@ -1,10 +1,10 @@
 package com.yunionyun.mcp.mcclient;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
+import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 
 public class Session {
 	private Client client;
@@ -13,7 +13,8 @@ public class Session {
 	private EndpointType endpointType;
 	private TokenCredential token;
 	private HttpHeaders headers;
-	private static Logger logger = LoggerFactory.getLogger(Session.class);
+	private static Logger logger = LoggerUtils.createLoggerFor(Session.class.getName());
+	
 	
 	public static final String TASK_NOTIFY_URL_HEAD = "X-Task-Notify-Url";
 	

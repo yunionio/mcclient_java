@@ -1,5 +1,17 @@
 package com.yunionyun.mcp.mcclient.utils;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.net.ssl.SSLContext;
+
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,25 +35,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.net.ssl.SSLContext;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class HttpClientUtils {
     private static final int connTimeout = 30000;
     private static final int readTimeout = 30000;
     private static final String charset = "UTF-8";
     private static HttpClient client = null;
-    private static Logger logger = LoggerFactory.getLogger(HttpClientUtils.class);
+    private static Logger logger = LoggerUtils.createLoggerFor(HttpClientUtils.class.getName());
 
     static {
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
