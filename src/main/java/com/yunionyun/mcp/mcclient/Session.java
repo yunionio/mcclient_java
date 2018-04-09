@@ -43,8 +43,16 @@ public class Session {
 		if (this.endpointType != null) {
 			endpointType = this.endpointType;
 		}
-		logger.debug("getServiceUrl " + service + " epType " + endpointType);
+		// logger.debug("getServiceUrl " + service + " epType " + endpointType);
 		return this.token.getServiceUrl(service, this.region, this.zone, endpointType);
+	}
+	
+	public String[] getServiceUrls(String service, EndpointType endpointType) throws Exception {
+		if (this.endpointType != null) {
+			endpointType = this.endpointType;
+		}
+		// logger.debug("getServiceUrl " + service + " epType " + endpointType);
+		return this.token.getServiceUrls(service, this.region, this.zone, endpointType);
 	}
 	
 	public JSONObject jsonRequest(String service, EndpointType endpointType, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {

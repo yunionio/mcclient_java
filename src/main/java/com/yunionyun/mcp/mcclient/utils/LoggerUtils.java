@@ -59,7 +59,7 @@ public class LoggerUtils
         Logger logger = (Logger) LoggerFactory.getLogger(name);
         logger.addAppender(consoleAppeder);
         logger.addAppender(fileAppender);
-        logger.setLevel(Level.DEBUG);
+        logger.setLevel(Level.INFO);
         logger.setAdditive(false); /* set to true if root should log too */
         
         return logger;
