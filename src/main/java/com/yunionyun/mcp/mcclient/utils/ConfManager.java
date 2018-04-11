@@ -15,13 +15,14 @@ public class ConfManager {
 
     static {
         try {
+        		logger = LoggerFactory.getLogger("ConfManager");
+            System.out.println("Read configure: " + System.getProperty("conf"));
             prop = new Properties();
             InputStreamReader reader = new InputStreamReader(new FileInputStream(System.getProperty("conf")), "utf-8");
             // InputStreamReader reader =new InputStreamReader(new FileInputStream("extra/samples/config.properties"),"utf-8");
             prop.load(reader);
-            System.setProperty("LOG_PATH", prop.getProperty("log.path"));
-            System.setProperty("APPDIR", prop.getProperty("app.dir"));
-            logger = LoggerFactory.getLogger("ConfManager");
+            // System.setProperty("LOG_PATH", prop.getProperty("log.path"));
+            // System.setProperty("APPDIR", prop.getProperty("app.dir"));
             logger.info("properties:{}", prop);
         } catch (Exception e) {
             e.printStackTrace();

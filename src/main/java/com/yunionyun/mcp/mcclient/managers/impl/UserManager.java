@@ -25,7 +25,7 @@ public class UserManager extends KeystoneManager {
 	public ListResult getGroups(Session s, String uId) {
 		String url = "/users/" + uId + "/groups";
 		try {
-			return this._list(s, url, "projects");
+			return this._list(s, url, "groups");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

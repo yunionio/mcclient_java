@@ -99,7 +99,7 @@ public class BaseManager {
 	
 	public JSONObject _delete(Session s, String url, JSONObject body, String respKey) throws Exception {
 		JSONObject respBody = this.jsonRequest(s, "DELETE", url, null, body);
-		if (respKey != null) {
+		if (respKey != null && respBody != null) {
 			return respBody.getJSONObject(respKey);
 		} else {
 			return respBody;

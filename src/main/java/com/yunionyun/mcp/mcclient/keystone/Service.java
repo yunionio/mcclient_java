@@ -34,7 +34,7 @@ public class Service extends BaseResource {
 		return this.type;
 	}
 	
-	public String getServiceUrl(String region, String zone, EndpointType endpointType) throws Exception {
+	public String[] getServiceUrls(String region, String zone, EndpointType endpointType) throws Exception {
 		HashMap<String, HashSet<String>> urlTbl = new HashMap<String, HashSet<String>>();
 		for (int i = 0; i < this.endpoints.length; i ++) {
 			if (this.endpoints[i].isType(endpointType)) {
@@ -62,6 +62,11 @@ public class Service extends BaseResource {
 		}
 		String[] candidates = new String[urls.size()];
 		candidates = urls.toArray(candidates);
+		return candidates;
+	}
+	
+	public String getServiceUrl(String region, String zone, EndpointType endpointType) throws Exception {
+		String[] candidates = this.getServiceUrls(region, zone, endpointType);
 		int randidx = (int)(Math.random()*candidates.length);
 		return candidates[randidx];
 	}
