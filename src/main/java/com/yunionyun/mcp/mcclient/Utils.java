@@ -3,6 +3,8 @@ package com.yunionyun.mcp.mcclient;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.security.Key;
 import java.security.KeyPair;
@@ -33,6 +35,9 @@ import org.slf4j.Logger;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
+
+import sun.net.www.protocol.https.HttpsURLConnectionImpl;
+
 
 public class Utils {
     private static Logger logger = LoggerUtils.createLoggerFor(Utils.class.getName());
@@ -225,5 +230,25 @@ public class Utils {
 		    logger.error("Hash error: " + e);
 			return -1;
 		}
+	}
+	
+	public static void setHttpRequestMethod(final HttpURLConnection c, final String value) {
+	    try {
+	        final Object target;
+	        if (c instanceof HttpsURLConnectionImpl) {
+	            final Field delegate = HttpsURLConnectionImpl.class.getDeclaredField("delegate");
+	            delegate.setAccessible(true);
+	            target = delegate.get(c);
+	        } else {
+	            target = c;
+	        }
+	        final Field f = HttpURLConnection.class.getDeclaredField("method");
+	        f.setAccessible(true);
+	        f.set(target, value);
+	    } catch (IllegalAccessException ex) {
+	        throw new AssertionError(ex);
+	    } catch (NoSuchFieldException ex) {
+	    		throw new AssertionError(ex);
+	    }
 	}
 }

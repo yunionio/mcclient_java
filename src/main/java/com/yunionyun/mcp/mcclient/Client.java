@@ -49,7 +49,8 @@ public class Client
         }
 
         HttpURLConnection req = (HttpURLConnection) requrl.openConnection();
-		req.setRequestMethod(method);
+		// req.setRequestMethod(method);
+		Utils.setHttpRequestMethod(req, method);
         req.setRequestProperty("User-Agent", USER_AGENT);
         req.setInstanceFollowRedirects(false);
         req.setConnectTimeout(this.timeout*1000);

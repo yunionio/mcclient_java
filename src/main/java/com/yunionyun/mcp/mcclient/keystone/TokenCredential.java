@@ -104,6 +104,15 @@ public class TokenCredential {
 		return regionSet.toArray(regions);
 	}
 	
+	public String[] getServiceUrls(String service, String region, String zone, EndpointType endpointType) throws Exception {
+		for (int i = 0; i < this.services.length; i ++) {
+			if (this.services[i].getType().equals(service)) {
+				return this.services[i].getServiceUrls(region, zone, endpointType);
+			}
+		}
+		throw new Exception("No service URL found for " + service + " " + endpointType + " " + Endpoint.RegionID(region, zone));
+	}
+	
 	public String getServiceUrl(String service, String region, String zone, EndpointType endpointType) throws Exception {
 		for (int i = 0; i < this.services.length; i ++) {
 			if (this.services[i].getType().equals(service)) {

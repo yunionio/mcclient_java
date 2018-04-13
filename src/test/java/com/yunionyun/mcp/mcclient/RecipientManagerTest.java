@@ -1,22 +1,18 @@
 package com.yunionyun.mcp.mcclient;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.slf4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
-import com.yunionyun.mcp.mcclient.managers.impl.HostAlarmRecipientManager;
+import com.yunionyun.mcp.mcclient.managers.impl.RecipientManager;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 
 import junit.framework.TestCase;
 
-public class HostAlarmRecipientTest extends TestCase
+public class RecipientManagerTest extends TestCase
 {
-    private static Logger logger = LoggerUtils.createLoggerFor(HostAlarmRecipientTest.class.getName());
+    private static Logger logger = LoggerUtils.createLoggerFor(RecipientManagerTest.class.getName());
     
     public void testApp()
     {
@@ -27,12 +23,11 @@ public class HostAlarmRecipientTest extends TestCase
             logger.info(token.toString());
             logger.debug(token.toString());
             Session s = cli.newSession("Beijing", null, null, token);
-            HostAlarmRecipientManager manager = new HostAlarmRecipientManager();
+            RecipientManager manager = new RecipientManager();
             
             JSONObject query = new JSONObject();
-            query.put("host_name", "git");
-            query.put("metric_name", "cpu.usage_user");
-            query.put("template", "2,3");
+            query.put("node_labels", "corp=1,owt=2,pdl=157,srv=158,env=159");
+            query.put("type", "junior");
             
             ListResult list = manager.List(s, query);
             
