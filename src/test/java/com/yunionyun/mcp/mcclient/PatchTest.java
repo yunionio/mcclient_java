@@ -22,7 +22,7 @@ public class PatchTest extends TestCase {
         		projman.Patch(s, id, params);
         		results = projman.GetByName(s, "system", null);
         		for (String key: results.keySet()) {
-        			System.out.print(key + ": " + results.getString(key));
+        			System.out.println(key + ": " + results.getString(key));
         		}
         }catch(Exception e) {
         		e.printStackTrace();
