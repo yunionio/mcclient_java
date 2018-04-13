@@ -63,27 +63,46 @@ public class NotifyManager extends BaseNotifyManager {
 	/**
 	 * 发送任意字符串消息，但是不能发短信
 	 * 
-	 * @param s
-	 * @param uid
-	 * @param contact_type
-	 * @param topic
-	 * @param priority
-	 * @param msg
+	 * @param s 连接会话
+	 * @param uid 用户ID/组ID，指定通知将发送给谁
+	 * @param type 用户类型：user/group
+	 * @param contact_type 通知类型：email/mobile
+	 * @param topic 通知标题
+	 * @param priority 通知优先级
+	 * @param msg 通知内容
 	 * @return String 返回消息发送任务的ID
 	 */
-	public String notify(Session s, String uid, NotifyContactType contact_type, String topic, NotifyPriority priority, String msg) {
-		JSONObject params = new JSONObject();
-		params.put("uid", uid);
-		params.put("contact_type", contact_type.toString());
-		params.put("topic", topic);
-		params.put("priority", priority.toString());
-		params.put("msg", msg);
-		try {
-			JSONObject ret = super.Create(s, params);
-			return ret.getString("id");
-		}catch(Exception e) {
-			return null;
+	public String notify(Session s, String type, String id, NotifyContactType contact_type, String topic, NotifyPriority priority, String msg) 
+	{
+	    JSONObject params = new JSONObject();
+	    params.put("contact_type", contact_type.toString());
+	    params.put("topic", topic);
+	    params.put("priority", priority.toString());
+	    params.put("msg", msg);
+	    
+		if ("user".equals(type))
+		{
+		    params.put("uid", id);
 		}
+		else if ("group".equals(type))
+		{
+		    params.put("gid", id);
+		}
+		
+		return doNotify(s, params);
+	}
+	
+	public String doNotify(Session s, JSONObject params) 
+	{
+        try
+        {
+            JSONObject ret = super.Create(s, params);
+            return ret.getString("id");
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
 	}
 	
 	private boolean _sendStatus(Session s, String id, String status, String reason) {
