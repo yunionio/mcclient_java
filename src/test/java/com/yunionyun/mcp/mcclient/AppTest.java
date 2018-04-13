@@ -99,7 +99,7 @@ public class AppTest
         		}
         		
         		NotifyManager notifyman = new NotifyManager();
-        		notifyman.notify(s, "qiujian", NotifyManager.CONTACT_EMAIL, "test", NotifyManager.PRIORITY_NORMAL, "This is a normal message");
+        		notifyman.notify(s, "user", "qiujian", NotifyManager.CONTACT_EMAIL, "test", NotifyManager.PRIORITY_NORMAL, "This is a normal message");
 
         		logger.info("Test complete!!!");
         }catch(Exception e) {
