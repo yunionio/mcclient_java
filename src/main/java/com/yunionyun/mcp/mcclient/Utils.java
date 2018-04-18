@@ -3,6 +3,7 @@ package com.yunionyun.mcp.mcclient;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
@@ -188,16 +189,39 @@ public class Utils {
 	private static String _JSONObject2QueryString(JSONObject obj) throws Exception {
 		StringBuilder queryBuilder = new StringBuilder();
 		for (String key: obj.keySet()) {
-			String val = obj.getString(key);
-			if (queryBuilder.length() > 0) {
-				queryBuilder.append("&");
+			Object valObj = obj.get(key);
+			if(valObj instanceof JSONArray) {//如果是JSONArray的情况@added by zhengjiajie@20180418
+				JSONArray dataArray = (JSONArray)valObj;
+				for(int idx=0; idx<dataArray.size(); idx++) {
+					String val = (String)dataArray.get(idx);
+					addKeyValueToStringBuilder(queryBuilder, key, val);
+				}
+			} else {//不是JSONArray的情况,按照原有的逻辑进行处理
+				String val = obj.getString(key);
+				addKeyValueToStringBuilder(queryBuilder, key, val);
 			}
-			queryBuilder.append(URLEncoder.encode(key, "UTF-8"));
-			queryBuilder.append("=");
-			queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
 		}
 		return queryBuilder.toString();
 	}
+
+	/**
+	 * 把key和val添加到queryBuilder中
+	 * @param queryBuilder
+	 * @param key
+	 * @param val
+	 * @throws UnsupportedEncodingException
+	 */
+	private static void addKeyValueToStringBuilder(StringBuilder queryBuilder, String key, String val)
+			throws UnsupportedEncodingException {
+		if (queryBuilder.length() > 0) {
+			queryBuilder.append("&");
+		}
+		queryBuilder.append(URLEncoder.encode(key, "UTF-8"));
+		queryBuilder.append("=");
+		queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
+	}
+	
+	
 	
 	public static int bitLength(long num) {
 		int bitlen = 0;
