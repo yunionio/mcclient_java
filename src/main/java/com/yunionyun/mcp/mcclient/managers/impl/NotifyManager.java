@@ -86,7 +86,7 @@ public class NotifyManager extends BaseNotifyManager {
 		}
 	}
 	
-	public String notifyGroup(Session s, String type, String id, NotifyContactType contact_type, String topic, NotifyPriority priority, String msg) 
+	public String notifyGroup(Session s, String id, NotifyContactType contact_type, String topic, NotifyPriority priority, String msg) 
 	{
 		JSONObject params = new JSONObject();
 		params.put("gid", id);
