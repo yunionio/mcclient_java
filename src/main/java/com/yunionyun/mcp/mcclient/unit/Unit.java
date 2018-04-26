@@ -82,6 +82,8 @@ public class Unit {
 	
 	public static String prettyString(double value, int precision, Unit unit) {
 		UnitValue uv = new UnitValue(value, unit);
+		if(value == 0)
+			return uv.String(precision);
 		uv.makePretty();
 		return uv.String(precision);
 	}
