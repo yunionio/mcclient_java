@@ -36,6 +36,7 @@ public class AlarmMetricHostTest extends TestCase
             int dataSize = list.getDataSize();
             for (int i = 0; i < dataSize; i++)
             {
+                System.out.println(list.getDataAt(i));
                 logger.debug( "---> " + list.getDataAt(i));
             }
         }
