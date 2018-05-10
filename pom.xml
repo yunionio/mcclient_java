@@ -4,7 +4,7 @@
 
 	<groupId>com.yunionyun.mcp</groupId>
 	<artifactId>mcclient</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>mcclient</name>
@@ -47,6 +47,12 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.3</version>
 		</dependency>
-
 	</dependencies>
+    
+    <distributionManagement>
+        <repository>
+            <id>maven-3rd</id>
+            <url>http://10.168.222.249:8081/repository/maven-3rd/</url>
+        </repository>
+    </distributionManagement>
 </project>
