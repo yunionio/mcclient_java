@@ -35,13 +35,14 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HttpClientUtils {
     private static final int connTimeout = 30000;
     private static final int readTimeout = 30000;
     private static final String charset = "UTF-8";
     private static HttpClient client = null;
-    private static Logger logger = LoggerUtils.createLoggerFor(HttpClientUtils.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(HttpClientUtils.class);
 
     static {
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
@@ -148,10 +149,10 @@ public class HttpClientUtils {
             }
         } catch (GeneralSecurityException e) {
             logger.info("error  url:{}  boby {}", url, body);
-            logger.error("error", e);
+            logger.error(e.getMessage() , e);
         } catch (IOException e) {
             logger.info("error  url:{}  boby {}", url, body);
-            logger.error("error", e);
+            logger.error(e.getMessage(), e);
         } finally {
             post.releaseConnection();
             if (url.startsWith("https") && client != null && client instanceof CloseableHttpClient) {
