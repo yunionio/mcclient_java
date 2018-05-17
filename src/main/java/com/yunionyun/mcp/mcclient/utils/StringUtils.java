@@ -21,7 +21,7 @@ public class StringUtils {
 					split = true;
 				}
 				nchar = Character.toLowerCase(ch);
-			} else if (Character.isLowerCase(ch)) {
+			} else if (Character.isLowerCase(ch) || Character.isDigit(ch)) {
 				nchar = ch;
 			} else {
 				split = true;
