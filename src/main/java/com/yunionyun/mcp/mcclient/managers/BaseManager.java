@@ -72,11 +72,16 @@ public class BaseManager {
 	
 	public JSONObject _post(Session s, String url, JSONObject body, String respKey) throws Exception {
 		JSONObject respBody = this.jsonRequest(s, "POST", url, null, body);
-		if (respKey != null) {
-			return respBody.getJSONObject(respKey);
-		} else {
-			return respBody;
+		
+		if (respBody != null) {
+		    if (respKey != null) {
+		        return respBody.getJSONObject(respKey);
+		    } else {
+		        return respBody;
+		    }
 		}
+		
+		return null;
 	}
 	
 	public JSONObject _put(Session s, String url, JSONObject body, String respKey) throws Exception {
