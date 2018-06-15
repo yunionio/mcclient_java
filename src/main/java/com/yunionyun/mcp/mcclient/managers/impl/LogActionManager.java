@@ -42,7 +42,7 @@ public class LogActionManager extends BaseLogActionManager
             
             String url = builder.toString();
             
-            super._post(s, url, params, this.keyword);
+            super._post(s, url, params, null);
         }
         catch (Exception e)
         {
