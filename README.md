@@ -7,7 +7,7 @@ mcclient Java implementation
 ======================================
 
 * Client: 客户端实例
-* Session: 一个请求实例，通过client.newSession 获得
+* Session: 一个请求实例，通过 client.newSession 获得
 * AuthAgent: 一个验证token的服务Agent实例
 
 
