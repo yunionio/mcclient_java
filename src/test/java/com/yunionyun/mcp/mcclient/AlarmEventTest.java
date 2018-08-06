@@ -24,7 +24,7 @@ public class AlarmEventTest extends TestCase
             TokenCredential token = cli.Authenticate("sysadmin", "MxqhTC2VKe067jtD", "Default", "system");
             logger.info(token.toString());
             logger.debug(token.toString());
-            Session s = cli.newSession("LocalTest", null, null, token);
+            Session s = cli.newSession("LocalTest", null, null, token, "");
             
             MonitorAlarmEventManager manager = new MonitorAlarmEventManager();
             
@@ -65,7 +65,7 @@ public class AlarmEventTest extends TestCase
             TokenCredential token = cli.Authenticate("sysadmin", "MxqhTC2VKe067jtD", "Default", "system");
             logger.info(token.toString());
             logger.debug(token.toString());
-            Session s = cli.newSession("LocalTest", null, null, token);
+            Session s = cli.newSession("LocalTest", null, null, token, "");
             
             MonitorAlarmEventManager manager = new MonitorAlarmEventManager();
             
