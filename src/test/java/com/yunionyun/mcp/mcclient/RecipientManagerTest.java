@@ -22,7 +22,7 @@ public class RecipientManagerTest extends TestCase
             TokenCredential token = cli.Authenticate("servicetreeadm", "123@yunion.com", "Default", "system");
             logger.info(token.toString());
             logger.debug(token.toString());
-            Session s = cli.newSession("Beijing", null, null, token);
+            Session s = cli.newSession("Beijing", null, null, token, "");
             RecipientManager manager = new RecipientManager();
             
             JSONObject query = new JSONObject();

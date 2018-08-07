@@ -50,10 +50,10 @@ public class AppTest
      */
     public void testApp()
     {
-        Client cli = new Client("http://10.168.26.235:5000/v3", 1000, true, true);
+        Client cli = new Client("http://10.168.222.235:5000/v3", 1000, true, true);
         try {
         		TokenCredential token = cli.Authenticate("sysadmin", "sysadmin", "Default", "system");
-        		Session s = cli.newSession("TestLocal", null, null, token);
+        		Session s = cli.newSession("LocalTest", null, null, token, "v2");
         		ServerManager mgr = new ServerManager();
         		logger.info("Start List");
         		JSONObject srvquery = new JSONObject();
