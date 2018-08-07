@@ -13,7 +13,7 @@ public class PatchTest extends TestCase {
         Client cli = new Client("http://10.168.26.235:5000/v3", 1000, true, true);
         try {
         		TokenCredential token = cli.Authenticate("sysadmin", "sysadmin", "Default", "system");
-        		Session s = cli.newSession("TestLocal", null, null, token);
+        		Session s = cli.newSession("TestLocal", null, null, token, "");
         		ProjectManager projman = new ProjectManager();
         		JSONObject results = projman.GetByName(s, "system", null);
         		String id = results.getString("id");

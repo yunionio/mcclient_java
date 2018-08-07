@@ -66,8 +66,8 @@ public class AuthAgent {
 		timer.schedule(task, 0, this.checkPeriodSeconds*1000);
 	}
 	
-	public Session getAdminSession(String region, String zone, EndpointType endpointType) {
-		return this.client.newSession(region, zone, endpointType, this.adminToken);
+	public Session getAdminSession(String region, String zone, EndpointType endpointType, String apiVersion) {
+		return this.client.newSession(region, zone, endpointType, this.adminToken, apiVersion);
 	}
 
 	public TokenCredential verify(String token) {

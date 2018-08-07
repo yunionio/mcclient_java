@@ -13,20 +13,22 @@ public class Session {
 	private EndpointType endpointType;
 	private TokenCredential token;
 	private HttpHeaders headers;
+	private String apiVersion;
 	private static Logger logger = LoggerUtils.createLoggerFor(Session.class.getName());
 	
-	
 	public static final String TASK_NOTIFY_URL_HEAD = "X-Task-Notify-Url";
-	
-	public Session(Client cli, String region, String zone, EndpointType endpointType, TokenCredential token) {
+	public static final String DEFAULT_API_VERSION = "v1";
+
+	public Session(Client cli, String region, String zone, EndpointType endpointType, TokenCredential token, String apiVersion) {
 		this.client = cli;
 		this.region = region;
 		this.zone = zone;
 		this.endpointType = endpointType;
 		this.token = token;
 		this.headers = new HttpHeaders();
+		this.apiVersion = apiVersion;
 	}
-	
+
 	public void setHeader(String key, String value) {
 		this.headers.set(key, value);
 	}
@@ -39,12 +41,19 @@ public class Session {
 		return this.headers.get(key);
 	}
 	
+	private String getServiceType(String service) {
+		if (this.apiVersion != null && this.apiVersion.length() > 0 && ! this.apiVersion.equals(DEFAULT_API_VERSION)) {
+			service += "_" + this.apiVersion;
+		}
+		return service;
+	}
+	
 	public String getServiceUrl(String service, EndpointType endpointType) throws Exception {
 		if (this.endpointType != null) {
 			endpointType = this.endpointType;
 		}
 		// logger.debug("getServiceUrl " + service + " epType " + endpointType);
-		return this.token.getServiceUrl(service, this.region, this.zone, endpointType);
+		return this.token.getServiceUrl(this.getServiceType(service), this.region, this.zone, endpointType);
 	}
 	
 	public String[] getServiceUrls(String service, EndpointType endpointType) throws Exception {
@@ -52,7 +61,7 @@ public class Session {
 			endpointType = this.endpointType;
 		}
 		// logger.debug("getServiceUrl " + service + " epType " + endpointType);
-		return this.token.getServiceUrls(service, this.region, this.zone, endpointType);
+		return this.token.getServiceUrls(this.getServiceType(service), this.region, this.zone, endpointType);
 	}
 	
 	public JSONObject jsonRequest(String service, EndpointType endpointType, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {

@@ -252,7 +252,7 @@ public class Client
 		return cred;
 	}
 	
-	public Session newSession(String region, String zone, EndpointType endpointType, TokenCredential token) {
-		return new Session(this, region, zone, endpointType, token);
+	public Session newSession(String region, String zone, EndpointType endpointType, TokenCredential token, String apiVersion) {
+		return new Session(this, region, zone, endpointType, token, apiVersion);
 	}
 }

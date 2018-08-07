@@ -27,7 +27,7 @@ public class MetricTest extends TestCase
             TokenCredential token = cli.Authenticate("servicetreeadm", "123@yunion.com", "Default", "system");
             logger.info(token.toString());
             logger.debug(token.toString());
-            Session s = cli.newSession("Beijing", null, null, token);
+            Session s = cli.newSession("Beijing", null, null, token, "");
             MonitorMetricManager manager = new MonitorMetricManager();
             
             Set<String> sets = new HashSet<String>(Arrays.asList("test_metric01", "test_metric02"));
