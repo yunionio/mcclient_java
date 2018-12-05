@@ -23,7 +23,7 @@ public class LogActionTest extends TestCase
             logger.info(token.toString());
             logger.debug(token.toString());
            
-            Session s = cli.newSession("Yunion", null, null, token);
+            Session s = cli.newSession("Yunion", null, null, token, "v2");
             LogActionManager manager = new LogActionManager();
             
             JSONObject params = new JSONObject();
