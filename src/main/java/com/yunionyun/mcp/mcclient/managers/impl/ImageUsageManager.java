@@ -4,7 +4,7 @@ import com.yunionyun.mcp.mcclient.managers.GlanceManager;
 
 public class ImageUsageManager extends GlanceManager
 {
-    public ImageUsageManager(String keyword, String keywordPlural, String[] columns, String[] adminColumns)
+    public ImageUsageManager()
     {
         super("usage", "usages", new String[] { "Field", "Value" }, new String[] {});
     }
