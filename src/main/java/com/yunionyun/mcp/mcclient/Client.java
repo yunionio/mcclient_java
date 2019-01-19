@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
+import com.yunionyun.mcp.mcclient.utils.LocalSslUtils;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 
 /**
@@ -47,7 +48,9 @@ public class Client
 		if (requrl.getProtocol().equals("https") && this.inSecure) {
             Utils.disableHttpsVerification();
         }
-
+		if("https".equalsIgnoreCase(requrl.getProtocol())){
+        	LocalSslUtils.ignoreSsl();
+        }
         HttpURLConnection req = (HttpURLConnection) requrl.openConnection();
 		// req.setRequestMethod(method);
 		Utils.setHttpRequestMethod(req, method);
