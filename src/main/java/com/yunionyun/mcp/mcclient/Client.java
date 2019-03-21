@@ -3,15 +3,20 @@ package com.yunionyun.mcp.mcclient;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 import org.slf4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.utils.LocalSslUtils;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
@@ -37,7 +42,7 @@ public class Client
 		this.inSecure = insecure;
 	}
 	
-	private HttpURLConnection rawRequest(String endpoint, String token, String method, String url, HttpHeaders headers, InputStream body) throws Exception {
+	private HttpURLConnection rawRequest(String endpoint, String token, String method, String url, HttpHeaders headers, InputStream body) throws IOException, KeyManagementException, NoSuchAlgorithmException {
 		method = method.toUpperCase();
 		
 		if (this.debug) {
@@ -103,7 +108,7 @@ public class Client
         return req;
 	}
 	
-	private String _inputStream2String(InputStream input) throws Exception {
+	private String _inputStream2String(InputStream input) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(input));
         String inputLine;
         StringBuffer response = new StringBuffer();
@@ -116,11 +121,11 @@ public class Client
         return response.toString();
     }
 	
-	public JSONObject jsonRequest(String endpoint, String token, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {
+	public JSONObject jsonRequest(String endpoint, String token, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws IOException, JSONClientException {
 		return this.parseJSONResult(this._jsonRequest(endpoint, token, method, url, headers, jsonBody));
 	}
 	
-	private HttpURLConnection _jsonRequest(String endpoint, String token, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {
+	private HttpURLConnection _jsonRequest(String endpoint, String token, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws JSONClientException {
 		String bodyStr = null;
 		int contlen = 0;
 		
@@ -149,7 +154,7 @@ public class Client
 		}
 	}
 	
-	private JSONObject parseJSONResult(HttpURLConnection req) throws Exception {
+	private JSONObject parseJSONResult(HttpURLConnection req) throws IOException, JSONClientException  {
 		int code = req.getResponseCode();
 		req.getErrorStream();
 		InputStream input = null;
@@ -204,7 +209,7 @@ public class Client
 		}
 	}
 	
-	private TokenCredential _auth(String domainName, String userName, String passwd, String projectId, String projectName, String token) throws Exception {
+	private TokenCredential _auth(String domainName, String userName, String passwd, String projectId, String projectName, String token) throws JSONClientException, McClientJavaBizException, IOException {
 		JSONObject body = new JSONObject();
 		if (userName != null && passwd != null && userName.length() > 0 && passwd.length() > 0) {
 			Utils.JSONAdd(body, Utils.stringArray2JSONArray(new String[] {"password"}), "auth", "identity", "methods");
@@ -229,7 +234,7 @@ public class Client
 		HttpURLConnection req = this._jsonRequest(this.authUrl, null, "POST", "/auth/tokens", null, body);
 		String subjectId = req.getHeaderField("X-Subject-Token");
 		if (subjectId == null || subjectId.length() == 0) {
-			throw new Exception("Invalid token response from keystone");
+			throw new McClientJavaBizException("Invalid token response from keystone");
 		}
 		TokenCredential cred = new TokenCredential(subjectId);
 		JSONObject result = this.parseJSONResult(req);
@@ -237,15 +242,15 @@ public class Client
 		return cred;
 	}
 	
-	public TokenCredential Authenticate(String user, String passwd, String domain, String project) throws Exception {
+	public TokenCredential Authenticate(String user, String passwd, String domain, String project) throws JSONClientException, McClientJavaBizException, IOException {
 		return this._auth(domain, user, passwd, null, project, null);
 	}
 	
-	public TokenCredential SwitchProject(String projectId, String projectName, TokenCredential token) throws Exception {
+	public TokenCredential SwitchProject(String projectId, String projectName, TokenCredential token) throws JSONClientException, McClientJavaBizException, IOException {
 		return this._auth(null, null, null, projectId, projectName, token.getToken());
 	}
 	
-	public TokenCredential Verify(String adminToken, String token) throws Exception {
+	public TokenCredential Verify(String adminToken, String token) throws IOException, JSONClientException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("X-Subject-Token", token);
 		headers.set("X-Auth-Token", adminToken);

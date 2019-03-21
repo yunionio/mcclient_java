@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.Utils;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 
 public class TokenCredential {
     private final static Logger logger = LoggerFactory.getLogger(TokenCredential.class);
@@ -104,22 +105,22 @@ public class TokenCredential {
 		return regionSet.toArray(regions);
 	}
 	
-	public String[] getServiceUrls(String service, String region, String zone, EndpointType endpointType) throws Exception {
+	public String[] getServiceUrls(String service, String region, String zone, EndpointType endpointType) throws McClientJavaBizException {
 		for (int i = 0; i < this.services.length; i ++) {
 			if (this.services[i].getType().equals(service)) {
 				return this.services[i].getServiceUrls(region, zone, endpointType);
 			}
 		}
-		throw new Exception("No service URL found for " + service + " " + endpointType + " " + Endpoint.RegionID(region, zone));
+		throw new McClientJavaBizException("No service URL found for " + service + " " + endpointType + " " + Endpoint.RegionID(region, zone));
 	}
 	
-	public String getServiceUrl(String service, String region, String zone, EndpointType endpointType) throws Exception {
+	public String getServiceUrl(String service, String region, String zone, EndpointType endpointType) throws McClientJavaBizException {
 		for (int i = 0; i < this.services.length; i ++) {
 			if (this.services[i].getType().equals(service)) {
 				return this.services[i].getServiceUrl(region, zone, endpointType);
 			}
 		}
-		throw new Exception("No service URL found for " + service + " " + endpointType + " " + Endpoint.RegionID(region, zone));
+		throw new McClientJavaBizException("No service URL found for " + service + " " + endpointType + " " + Endpoint.RegionID(region, zone));
 	}
 	
 	public boolean isAdmin() {
