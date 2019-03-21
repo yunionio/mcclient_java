@@ -7,6 +7,7 @@ import java.util.Set;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 
 public class Service extends BaseResource {
 	private String type;
@@ -34,7 +35,7 @@ public class Service extends BaseResource {
 		return this.type;
 	}
 	
-	public String[] getServiceUrls(String region, String zone, EndpointType endpointType) throws Exception {
+	public String[] getServiceUrls(String region, String zone, EndpointType endpointType) {
 		HashMap<String, HashSet<String>> urlTbl = new HashMap<String, HashSet<String>>();
 		for (int i = 0; i < this.endpoints.length; i ++) {
 			if (this.endpoints[i].isType(endpointType)) {
@@ -51,7 +52,7 @@ public class Service extends BaseResource {
 		HashSet<String> urls = null;
 		if (region == null || region.length() == 0) {
 			if (urlTbl.size() > 1) {
-				throw new Exception("region must be specified!");
+				throw new McClientJavaBizException("region must be specified!");
 			} else {
 				urls = urlTbl.get(urlTbl.keySet().toArray(new String[1])[0]);
 			}
@@ -65,7 +66,7 @@ public class Service extends BaseResource {
 		return candidates;
 	}
 	
-	public String getServiceUrl(String region, String zone, EndpointType endpointType) throws Exception {
+	public String getServiceUrl(String region, String zone, EndpointType endpointType) {
 		String[] candidates = this.getServiceUrls(region, zone, endpointType);
 		int randidx = (int)(Math.random()*candidates.length);
 		return candidates[randidx];
