@@ -11,11 +11,11 @@ public class BillBalanceTest extends TestCase
 {
     public void testBatchInsert()
     {
-        String authURL = "https://192.168.222.171:5000/v3";
-        String domain = "Default";
-        String username = "sysadmin";
-        String password = "ixtPb1Z3_crqS8YG";
-        String project = "system";
+        String authURL = "";
+        String domain = "";
+        String username = "";
+        String password = "";
+        String project = "";
         int cacheSize = 0;
         int timeout = 0;
         boolean debug = true;
@@ -24,7 +24,7 @@ public class BillBalanceTest extends TestCase
         AuthAgent authAgent = new AuthAgent(authURL, domain, username, password, project, cacheSize, timeout, debug, insecure);
         authAgent.start_sync_ready();
         
-        Session session = authAgent.getAdminSession("YunionHQ", null, null, "");
+        Session session = authAgent.getAdminSession("", null, null, "");
         
         try
         {
