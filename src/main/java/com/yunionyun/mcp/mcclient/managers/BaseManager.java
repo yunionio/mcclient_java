@@ -1,10 +1,14 @@
 package com.yunionyun.mcp.mcclient.managers;
 
 
+import java.io.IOException;
+
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.HttpHeaders;
+import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.Session;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 
 public class BaseManager {
 	String serviceType;
@@ -50,18 +54,18 @@ public class BaseManager {
 		}
 	}
 	
-	protected JSONObject jsonRequest(Session s, String method, String url, HttpHeaders headers, JSONObject body) throws Exception {
+	protected JSONObject jsonRequest(Session s, String method, String url, HttpHeaders headers, JSONObject body) throws McClientJavaBizException, IOException, JSONClientException  {
 		return s.jsonRequest(this.serviceType, this.endpointType, method, url, headers, body);
 	}
 	
-	public ListResult _list(Session s, String url, String respKey) throws Exception {
+	public ListResult _list(Session s, String url, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject result = this.jsonRequest(s, "GET", url, null, null);
 		ListResult ret = new ListResult();
 		ret.parseJSON(result, respKey);
 		return ret;
 	}
 	
-	public JSONObject _get(Session s, String url, String respKey) throws Exception {
+	public JSONObject _get(Session s, String url, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject body = this.jsonRequest(s, "GET", url, null, null);
 		if (respKey != null) {
 			return body.getJSONObject(respKey);
@@ -70,7 +74,7 @@ public class BaseManager {
 		}
 	}
 	
-	public JSONObject _post(Session s, String url, JSONObject body, String respKey) throws Exception {
+	public JSONObject _post(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "POST", url, null, body);
 		
 		if (respBody != null) {
@@ -84,7 +88,7 @@ public class BaseManager {
 		return null;
 	}
 	
-	public JSONObject _put(Session s, String url, JSONObject body, String respKey) throws Exception {
+	public JSONObject _put(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "PUT", url, null, body);
 		if (respKey != null) {
 			return respBody.getJSONObject(respKey);
@@ -93,7 +97,7 @@ public class BaseManager {
 		}
 	}
 	
-	public JSONObject _patch(Session s, String url, JSONObject body, String respKey) throws Exception {
+	public JSONObject _patch(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "PATCH", url, null, body);
 		if (respKey != null) {
 			return respBody.getJSONObject(respKey);
@@ -102,7 +106,7 @@ public class BaseManager {
 		}
 	}
 	
-	public JSONObject _delete(Session s, String url, JSONObject body, String respKey) throws Exception {
+	public JSONObject _delete(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "DELETE", url, null, body);
 		if (respKey != null && respBody != null) {
 			return respBody.getJSONObject(respKey);

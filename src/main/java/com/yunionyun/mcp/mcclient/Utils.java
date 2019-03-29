@@ -14,6 +14,7 @@ import java.security.Security;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -147,7 +148,7 @@ public class Utils {
 		}
 	}
 	
-	public static Date string2Date(String str) throws Exception {
+	public static Date string2Date(String str) throws ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 		Date date = format.parse(str);
 		return date;
@@ -186,7 +187,7 @@ public class Utils {
 		return "";
 	}
 	
-	private static String _JSONObject2QueryString(JSONObject obj) throws Exception {
+	private static String _JSONObject2QueryString(JSONObject obj) throws UnsupportedEncodingException  {
 		StringBuilder queryBuilder = new StringBuilder();
 		for (String key: obj.keySet()) {
 			Object valObj = obj.get(key);

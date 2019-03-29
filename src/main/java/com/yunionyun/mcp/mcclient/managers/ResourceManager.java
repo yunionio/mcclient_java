@@ -1,11 +1,14 @@
 package com.yunionyun.mcp.mcclient.managers;
 
 
+import java.io.IOException;
+
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.Utils;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 
 public class ResourceManager extends BaseManager {
 	protected String context;
@@ -53,7 +56,7 @@ public class ResourceManager extends BaseManager {
 		}
 	}
 	
-	public JSONObject GetByName(Session s, String name, JSONObject query, ManagerContext[] ctx) throws Exception {
+	public JSONObject GetByName(Session s, String name, JSONObject query, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject query2 = new JSONObject();
 		if (query != null) {
 			for (String key: query.keySet()) {
@@ -69,15 +72,15 @@ public class ResourceManager extends BaseManager {
 		}
 	}
 	
-	public JSONObject GetByName(Session s, String name, JSONObject query, ManagerContext ctx) throws Exception {
+	public JSONObject GetByName(Session s, String name, JSONObject query, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.GetByName(s, name, query, new ManagerContext[]{ctx});
 	}
 	
-	public JSONObject GetByName(Session s, String name, JSONObject query) throws Exception {
+	public JSONObject GetByName(Session s, String name, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.GetByName(s, name, query, new ManagerContext[]{});
 	}
 	
-	public JSONObject GetById(Session s, String id, JSONObject query, ManagerContext[] ctx) throws Exception {
+	public JSONObject GetById(Session s, String id, JSONObject query, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		url.append("/");
@@ -92,15 +95,15 @@ public class ResourceManager extends BaseManager {
 		return this._get(s, url.toString(), this.keyword);
 	}
 	
-	public JSONObject GetById(Session s, String id, JSONObject query, ManagerContext ctx) throws Exception {
+	public JSONObject GetById(Session s, String id, JSONObject query, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.GetById(s, id, query, new ManagerContext[]{ctx});
 	}
 	
-	public JSONObject GetById(Session s, String id, JSONObject query) throws Exception {
+	public JSONObject GetById(Session s, String id, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.GetById(s, id, query, new ManagerContext[] {});
 	}
 	
-	public JSONObject Get(Session s, String id, JSONObject query, ManagerContext[] ctx) throws Exception {
+	public JSONObject Get(Session s, String id, JSONObject query, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		try {
 			return this.GetById(s, id, query, ctx);
 		} catch (JSONClientException e) {
@@ -112,15 +115,15 @@ public class ResourceManager extends BaseManager {
 		}
 	}
 		
-	public JSONObject Get(Session s, String id, JSONObject query, ManagerContext ctx) throws Exception {
+	public JSONObject Get(Session s, String id, JSONObject query, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Get(s, id, query, new ManagerContext[]{ctx});
 	}
 	
-	public JSONObject Get(Session s, String id, JSONObject query) throws Exception {
+	public JSONObject Get(Session s, String id, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Get(s, id, query, new ManagerContext[]{});
 	}
 	
-	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query, ManagerContext[] ctx) throws Exception {
+	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		url.append("/");
@@ -137,15 +140,15 @@ public class ResourceManager extends BaseManager {
 		return this._get(s, url.toString(), this.keyword);
 	}
 	
-	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query, ManagerContext ctx) throws Exception {
+	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.GetSpecific(s, id, spec, query, new ManagerContext[] {ctx});
 	}
 	
-	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query) throws Exception {
+	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.GetSpecific(s, id, spec, query, new ManagerContext[] {});
 	}
 
-	public ListResult List(Session s, JSONObject query, ManagerContext[] ctx) throws Exception {
+	public ListResult List(Session s, JSONObject query, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		if (query != null) {
@@ -158,29 +161,29 @@ public class ResourceManager extends BaseManager {
 		return this._list(s, url.toString(), this.keywordPlural);
 	}
 	
-	public ListResult List(Session s, JSONObject query, ManagerContext ctx) throws Exception {
+	public ListResult List(Session s, JSONObject query, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.List(s, query, new ManagerContext[] {ctx});
 	}
 	
-	public ListResult List(Session s, JSONObject query) throws Exception {
+	public ListResult List(Session s, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.List(s, query, new ManagerContext[] {});
 	}
 	
-	public JSONObject Create(Session s, JSONObject params, ManagerContext[] ctx) throws Exception {
+	public JSONObject Create(Session s, JSONObject params, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		return this._post(s, url.toString(), genBody(params), this.keyword);
 	}
 
-	public JSONObject Create(Session s, JSONObject params, ManagerContext ctx) throws Exception {
+	public JSONObject Create(Session s, JSONObject params, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Create(s, params, new ManagerContext[] {ctx});
 	}
 
-	public JSONObject Create(Session s, JSONObject params) throws Exception {
+	public JSONObject Create(Session s, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Create(s, params, new ManagerContext[] {});
 	}
 	
-	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count, ManagerContext[] ctx) throws Exception {
+	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		JSONObject body = genBody(params);
@@ -189,15 +192,15 @@ public class ResourceManager extends BaseManager {
 		return SubmitResult.parseResult(obj, this.keywordPlural);
 	}
 
-	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count, ManagerContext ctx) throws Exception {
+	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.BatchCreate(s, params, count, new ManagerContext[] {ctx});
 	}
 
-	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count) throws Exception {
+	public SubmitResult[] BatchCreate(Session s, JSONObject params, int count) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.BatchCreate(s, params, count, new ManagerContext[] {});
 	}
 	
-	public JSONObject PerformAction(Session s, String id, String action, JSONObject params, ManagerContext[] ctx) throws Exception {
+	public JSONObject PerformAction(Session s, String id, String action, JSONObject params, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		url.append("/");
@@ -207,15 +210,15 @@ public class ResourceManager extends BaseManager {
 		return this._post(s, url.toString(), genBody(params), this.keyword);
 	}
 
-	public JSONObject PerformAction(Session s, String id, String action, JSONObject params, ManagerContext ctx) throws Exception {
+	public JSONObject PerformAction(Session s, String id, String action, JSONObject params, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.PerformAction(s, id, action, params, new ManagerContext[] {ctx});
 	}
 
-	public JSONObject PerformAction(Session s, String id, String action, JSONObject params) throws Exception {
+	public JSONObject PerformAction(Session s, String id, String action, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.PerformAction(s, id, action, params, new ManagerContext[] {});
 	}
 	
-	public JSONObject Update(Session s, String id, JSONObject params, ManagerContext[] ctx) throws Exception {
+	public JSONObject Update(Session s, String id, JSONObject params, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		url.append("/");
@@ -223,15 +226,15 @@ public class ResourceManager extends BaseManager {
 		return this._put(s, url.toString(), genBody(params), this.keyword);
 	}
 
-	public JSONObject Update(Session s, String id, JSONObject params, ManagerContext ctx) throws Exception {
+	public JSONObject Update(Session s, String id, JSONObject params, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Update(s, id, params, new ManagerContext[] {ctx});
 	}
 
-	public JSONObject Update(Session s, String id, JSONObject params) throws Exception {
+	public JSONObject Update(Session s, String id, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Update(s, id, params, new ManagerContext[] {});
 	}
 	
-	public JSONObject Patch(Session s, String id, JSONObject params, ManagerContext[] ctx) throws Exception {
+	public JSONObject Patch(Session s, String id, JSONObject params, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		url.append("/");
@@ -239,15 +242,15 @@ public class ResourceManager extends BaseManager {
 		return this._patch(s, url.toString(), genBody(params), this.keyword);
 	}
 
-	public JSONObject Patch(Session s, String id, JSONObject params, ManagerContext ctx) throws Exception {
+	public JSONObject Patch(Session s, String id, JSONObject params, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Patch(s, id, params, new ManagerContext[] {ctx});
 	}
 
-	public JSONObject Patch(Session s, String id, JSONObject params) throws Exception {
+	public JSONObject Patch(Session s, String id, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Patch(s, id, params, new ManagerContext[] {});
 	}
 
-	public JSONObject Delete(Session s, String id, ManagerContext[] ctx) throws Exception {
+	public JSONObject Delete(Session s, String id, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		url.append("/");
@@ -255,11 +258,11 @@ public class ResourceManager extends BaseManager {
 		return this._delete(s, url.toString(), null, this.keyword);
 	}
 
-	public JSONObject Delete(Session s, String id, ManagerContext ctx) throws Exception {
+	public JSONObject Delete(Session s, String id, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Delete(s, id,new ManagerContext[] {ctx});
 	}
 
-	public JSONObject Delete(Session s, String id) throws Exception {
+	public JSONObject Delete(Session s, String id) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Delete(s, id, new ManagerContext[] {});
 	}
 }

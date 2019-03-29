@@ -1,8 +1,11 @@
 package com.yunionyun.mcp.mcclient;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 
@@ -48,7 +51,7 @@ public class Session {
 		return service;
 	}
 	
-	public String getServiceUrl(String service, EndpointType endpointType) throws Exception {
+	public String getServiceUrl(String service, EndpointType endpointType) throws McClientJavaBizException {
 		if (this.endpointType != null) {
 			endpointType = this.endpointType;
 		}
@@ -56,7 +59,7 @@ public class Session {
 		return this.token.getServiceUrl(this.getServiceType(service), this.region, this.zone, endpointType);
 	}
 	
-	public String[] getServiceUrls(String service, EndpointType endpointType) throws Exception {
+	public String[] getServiceUrls(String service, EndpointType endpointType) throws McClientJavaBizException {
 		if (this.endpointType != null) {
 			endpointType = this.endpointType;
 		}
@@ -64,7 +67,7 @@ public class Session {
 		return this.token.getServiceUrls(this.getServiceType(service), this.region, this.zone, endpointType);
 	}
 	
-	public JSONObject jsonRequest(String service, EndpointType endpointType, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {
+	public JSONObject jsonRequest(String service, EndpointType endpointType, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws McClientJavaBizException, IOException, JSONClientException {
 		String baseurl = Utils.stripURLVersion(this.getServiceUrl(service, endpointType));
 		logger.debug("jsonRequest " + baseurl + " token " +  this.token.getToken());
 		HttpHeaders tmpHdr = new HttpHeaders();

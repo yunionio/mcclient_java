@@ -1,8 +1,12 @@
 package com.yunionyun.mcp.mcclient.managers.impl;
 
+import java.io.IOException;
+
 import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.Utils;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import com.yunionyun.mcp.mcclient.managers.ComputeManager;
 
 public class UsageManager extends ComputeManager
@@ -13,7 +17,7 @@ public class UsageManager extends ComputeManager
     }
     
     
-    public JSONObject Get(Session s, JSONObject query) throws Exception
+    public JSONObject Get(Session s, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException
     {
         StringBuilder url = new StringBuilder();
         url.append("/");
