@@ -1,5 +1,7 @@
 package com.yunionyun.mcp.mcclient.utils;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HostnameVerifier;
@@ -12,7 +14,7 @@ public class LocalSslUtils {
 	public LocalSslUtils() {
 	}
 
-	private static void trustAllHttpsCertificates() throws Exception {
+	private static void trustAllHttpsCertificates() throws NoSuchAlgorithmException, KeyManagementException {
 		TrustManager[] trustAllCerts = new TrustManager[1];
 		TrustManager tm = new miTM();
 		trustAllCerts[0] = tm;
@@ -46,7 +48,7 @@ public class LocalSslUtils {
 		}
 	}
 
-	public static void ignoreSsl() throws Exception {
+	public static void ignoreSsl() throws KeyManagementException, NoSuchAlgorithmException {
 		HostnameVerifier hv = new HostnameVerifier() {
 			public boolean verify(String urlHostName, SSLSession session) {
 				System.out.println("Warning: URL Host: " + urlHostName + " vs. " + session.getPeerHost());
