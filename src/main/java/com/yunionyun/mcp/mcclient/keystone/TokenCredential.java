@@ -71,6 +71,14 @@ public class TokenCredential {
 		return this.user.getDomain().getName();
 	}
 	
+	public String getProjectDomainId() {
+	    return this.project.getDomain().getId();
+	}
+	
+	public String getProjectDomainName() {
+	    return this.project.getDomain().getName();
+	}
+	
 	public String getProjectId() {
 		return this.project.getId();
 	}
