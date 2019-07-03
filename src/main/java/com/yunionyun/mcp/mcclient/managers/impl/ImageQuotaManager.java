@@ -34,4 +34,36 @@ public class ImageQuotaManager extends GlanceManager
         
         return this._get(s, url.toString(), this.keywordPlural);
     }
+    
+    public JSONObject addQuota(Session s, String type, String id, JSONObject body, boolean cascade) throws McClientJavaBizException, IOException, JSONClientException
+    {
+        body.put("action", "add");
+        body.put("cascade", cascade);
+        return quotaSet(s, type, id, body);
+    }
+    
+    public JSONObject resetQuota(Session s, String type, String id, JSONObject body, boolean cascade) throws McClientJavaBizException, IOException, JSONClientException
+    {
+        body.put("action", "reset");
+        body.put("cascade", cascade);
+        return quotaSet(s, type, id, body);
+    }
+    
+    private JSONObject quotaSet(Session s, String type, String id, JSONObject body) throws McClientJavaBizException, IOException, JSONClientException
+    {
+        StringBuilder url = new StringBuilder();
+        url.append("/");
+        url.append(this.keywordPlural);
+        url.append("/");
+        url.append(type);
+        url.append("/");
+        url.append(id);
+        
+        if ("domains".equals(type) && !body.containsKey("domain"))
+        {
+            body.put("domain", id);
+        }
+        
+        return this._post(s, url.toString(), body, this.keywordPlural);
+    }
 }
