@@ -90,11 +90,17 @@ public class BaseManager {
 	
 	public JSONObject _put(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "PUT", url, null, body);
-		if (respKey != null) {
-			return respBody.getJSONObject(respKey);
-		} else {
-			return respBody;
+		
+		if (respBody != null)
+		{
+		    if (respKey != null) {
+		        return respBody.getJSONObject(respKey);
+		    } else {
+		        return respBody;
+		    }
 		}
+		
+		return null;
 	}
 	
 	public JSONObject _patch(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
