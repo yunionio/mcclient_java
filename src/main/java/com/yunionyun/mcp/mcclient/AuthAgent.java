@@ -18,16 +18,21 @@ public class AuthAgent {
 	private Cache<TokenCredential> tokenCache;
 	private int checkPeriodSeconds;
 	private static Logger logger = LoggerUtils.createLoggerFor(AuthAgent.class.getName());
+	private static final String DEFAULT_AUTH_SOURCE_OPERATOR = "operator";
 	
 	
 	public AuthAgent(String authUrl, String domain, String user, String passwd, String project, int cacheSize, int timeout, boolean debug, boolean insecure) {
-		this.client = new Client(authUrl, timeout, debug, insecure);
-		this.domain = domain;
-		this.user = user;
-		this.passwd = passwd;
-		this.project = project;
-		this.tokenCache = new Cache<TokenCredential>(cacheSize);
-		this.checkPeriodSeconds = 300;  // every 5 mintues
+		this(authUrl, domain, user, passwd, project, DEFAULT_AUTH_SOURCE_OPERATOR, cacheSize, timeout, debug, insecure);
+	}
+	public AuthAgent(String authUrl, String domain, String user, String passwd, String project, String sourceOperator, int cacheSize, int timeout, boolean debug, boolean insecure) {
+	    this.client = new Client(authUrl, timeout, debug, insecure);
+	    this.client.setSourceOperator(sourceOperator);
+	    this.domain = domain;
+	    this.user = user;
+	    this.passwd = passwd;
+	    this.project = project;
+	    this.tokenCache = new Cache<TokenCredential>(cacheSize);
+	    this.checkPeriodSeconds = 300;  // every 5 mintues
 	}
 	
 	private void refreshAdminToken() {

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
@@ -32,6 +31,7 @@ public class Client
 	private boolean debug;
 	private boolean inSecure;
 	private static Logger logger = LoggerUtils.createLoggerFor(Client.class.getName());
+	private String sourceOperator;
 	
 	public static final String USER_AGENT = "yunioncloud-java/201711";
 	
@@ -231,6 +231,9 @@ public class Client
 			Utils.JSONAdd(body, "default", "auth", "scope", "project", "domain", "id");
 			Utils.JSONAdd(body, projectName, "auth", "scope", "project", "name");
 		}
+		if (this.sourceOperator != null && !"".equals(sourceOperator)) {
+		    Utils.JSONAdd(body, this.sourceOperator, "auth", "context", "source");
+		}
 		HttpURLConnection req = this._jsonRequest(this.authUrl, null, "POST", "/auth/tokens", null, body);
 		String subjectId = req.getHeaderField("X-Subject-Token");
 		if (subjectId == null || subjectId.length() == 0) {
@@ -263,4 +266,9 @@ public class Client
 	public Session newSession(String region, String zone, EndpointType endpointType, TokenCredential token, String apiVersion) {
 		return new Session(this, region, zone, endpointType, token, apiVersion);
 	}
+
+    public void setSourceOperator(String sourceOperator)
+    {
+        this.sourceOperator = sourceOperator;
+    }
 }
