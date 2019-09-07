@@ -18,11 +18,10 @@ public class AuthAgent {
 	private Cache<TokenCredential> tokenCache;
 	private int checkPeriodSeconds;
 	private static Logger logger = LoggerUtils.createLoggerFor(AuthAgent.class.getName());
-	private static final String DEFAULT_AUTH_SOURCE_OPERATOR = "operator";
 	
 	
 	public AuthAgent(String authUrl, String domain, String user, String passwd, String project, int cacheSize, int timeout, boolean debug, boolean insecure) {
-		this(authUrl, domain, user, passwd, project, DEFAULT_AUTH_SOURCE_OPERATOR, cacheSize, timeout, debug, insecure);
+		this(authUrl, domain, user, passwd, project, null, cacheSize, timeout, debug, insecure);
 	}
 	public AuthAgent(String authUrl, String domain, String user, String passwd, String project, String sourceOperator, int cacheSize, int timeout, boolean debug, boolean insecure) {
 	    this.client = new Client(authUrl, timeout, debug, insecure);
