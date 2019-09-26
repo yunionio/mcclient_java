@@ -16,5 +16,8 @@ hs_err_pid*
 /.classpath
 /.project
 /.settings/
+/.idea/
 /logs
 /bin/
+
+.DS_Store
