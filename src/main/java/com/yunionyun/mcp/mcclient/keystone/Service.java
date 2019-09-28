@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
+import com.yunionyun.mcp.mcclient.utils.StringUtils;
 
 public class Service extends BaseResource {
 	private String type;
@@ -61,14 +62,26 @@ public class Service extends BaseResource {
 		} else if (urlTbl.containsKey(region)) {
 			urls = urlTbl.get(region);
 		}
-		String[] candidates = new String[urls.size()];
-		candidates = urls.toArray(candidates);
-		return candidates;
+		//可能存在urls为null的情况：服务端目录列表中没有对应的url与配置文件中传入的url进行匹配
+		if(urls != null){
+			String[] candidates = new String[urls.size()];
+			candidates = urls.toArray(candidates);
+			return candidates;
+		}else {
+			return new String[0];
+		}
+
 	}
 	
 	public String getServiceUrl(String region, String zone, EndpointType endpointType) throws McClientJavaBizException {
 		String[] candidates = this.getServiceUrls(region, zone, endpointType);
 		int randidx = (int)(Math.random()*candidates.length);
-		return candidates[randidx];
+		if(candidates.length != 0){
+			return candidates[randidx];
+		}else {
+			//此种情况是服务端目录列表中没有对应的url与配置文件中传入的url进行匹配
+			return "no-defalutUrl";
+		}
+
 	}
 }

@@ -9,5 +9,9 @@ public class ConfigManager extends ResourceManager
     {
         super("yunionconf", EndpointType.InternalURL, null, columns, adminColumns, keyword, keywordPlural, null);
     }
+    public ConfigManager(String keyword, String keywordPlural, EndpointType endpointType, String[] columns, String[] adminColumns)
+    {
+        super("yunionconf", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+    }
     
 }
