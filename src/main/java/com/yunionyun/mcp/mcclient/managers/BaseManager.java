@@ -67,7 +67,7 @@ public class BaseManager {
 	
 	public JSONObject _get(Session s, String url, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject body = this.jsonRequest(s, "GET", url, null, null);
-		if (respKey != null) {
+		if (respKey != null && body != null) {
 			return body.getJSONObject(respKey);
 		} else {
 			return body;
@@ -77,7 +77,7 @@ public class BaseManager {
 	public JSONObject _post(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "POST", url, null, body);
 		
-		if (respBody != null) {
+		if (respBody != null ) {
 		    if (respKey != null) {
 		        return respBody.getJSONObject(respKey);
 		    } else {
@@ -90,7 +90,7 @@ public class BaseManager {
 	
 	public JSONObject _put(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "PUT", url, null, body);
-		if (respKey != null) {
+		if (respKey != null && respBody != null ) {
 			return respBody.getJSONObject(respKey);
 		} else {
 			return respBody;
@@ -99,7 +99,7 @@ public class BaseManager {
 	
 	public JSONObject _patch(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "PATCH", url, null, body);
-		if (respKey != null) {
+		if (respKey != null && respBody != null) {
 			return respBody.getJSONObject(respKey);
 		} else {
 			return respBody;
