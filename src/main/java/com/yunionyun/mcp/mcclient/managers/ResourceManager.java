@@ -258,6 +258,24 @@ public class ResourceManager extends BaseManager {
 		return this._delete(s, url.toString(), null, this.keyword);
 	}
 
+	public JSONObject Delete(Session s, String id, ManagerContext[] ctx, String... params) throws McClientJavaBizException, IOException, JSONClientException {
+		StringBuilder url = this.getContextPath(ctx);
+		url.append(this.urlKey());
+		url.append("/");
+		url.append(id);
+		if(params.length > 0){
+			for(int i = 0; i < params.length; i++){
+				String param = params[i];
+				if(i == 0){
+					url.append("?").append(param);
+				}else {
+					url.append("&").append(param);
+				}
+			}
+		}
+		return this._delete(s, url.toString(), null, this.keyword);
+	}
+
 	public JSONObject Delete(Session s, String id, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Delete(s, id,new ManagerContext[] {ctx});
 	}
@@ -265,4 +283,5 @@ public class ResourceManager extends BaseManager {
 	public JSONObject Delete(Session s, String id) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Delete(s, id, new ManagerContext[] {});
 	}
+
 }
