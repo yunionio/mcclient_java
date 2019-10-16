@@ -2,6 +2,7 @@ package com.yunionyun.mcp.mcclient.managers;
 
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
@@ -258,18 +259,22 @@ public class ResourceManager extends BaseManager {
 		return this._delete(s, url.toString(), null, this.keyword);
 	}
 
-	public JSONObject Delete(Session s, String id, ManagerContext[] ctx, String... params) throws McClientJavaBizException, IOException, JSONClientException {
+	public JSONObject Delete(Session s, String id, ManagerContext[] ctx, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		url.append("/");
 		url.append(id);
-		if(params.length > 0){
-			for(int i = 0; i < params.length; i++){
-				String param = params[i];
-				if(i == 0){
-					url.append("?").append(param);
+		if(params != null && params.size() > 0){
+			Iterator<String> paramKeys = params.keySet().iterator();
+			boolean firstParam = false;
+			while (paramKeys.hasNext()){
+				String key = paramKeys.next();
+				String value = params.getString(key);
+				if(!firstParam){
+					url.append("?").append(key + "=" + value);
+					firstParam = true;
 				}else {
-					url.append("&").append(param);
+					url.append("&").append(key + "=" + value);
 				}
 			}
 		}
