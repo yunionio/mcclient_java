@@ -2,6 +2,7 @@ package com.yunionyun.mcp.mcclient.managers.impl;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.common.BaseEnumConstants;
 import com.yunionyun.mcp.mcclient.managers.BaseNotifyManager;
@@ -11,6 +12,11 @@ public class NotifyManager extends BaseNotifyManager {
 	
 	public NotifyManager() {
 		super("notification", "notifications",
+				new String[] {"id", "uid", "contact_type", "topic", "priority", "msg", "status"},
+				new String[] {});
+	}
+	public NotifyManager(EndpointType endpointType){
+		super("notification", "notifications", endpointType,
 				new String[] {"id", "uid", "contact_type", "topic", "priority", "msg", "status"},
 				new String[] {});
 	}
