@@ -2,6 +2,7 @@ package com.yunionyun.mcp.mcclient.managers;
 
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
@@ -258,6 +259,28 @@ public class ResourceManager extends BaseManager {
 		return this._delete(s, url.toString(), null, this.keyword);
 	}
 
+	public JSONObject Delete(Session s, String id, ManagerContext[] ctx, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
+		StringBuilder url = this.getContextPath(ctx);
+		url.append(this.urlKey());
+		url.append("/");
+		url.append(id);
+		if(params != null && params.size() > 0){
+			Iterator<String> paramKeys = params.keySet().iterator();
+			boolean firstParam = false;
+			while (paramKeys.hasNext()){
+				String key = paramKeys.next();
+				String value = params.getString(key);
+				if(!firstParam){
+					url.append("?").append(key + "=" + value);
+					firstParam = true;
+				}else {
+					url.append("&").append(key + "=" + value);
+				}
+			}
+		}
+		return this._delete(s, url.toString(), null, this.keyword);
+	}
+
 	public JSONObject Delete(Session s, String id, ManagerContext ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Delete(s, id,new ManagerContext[] {ctx});
 	}
@@ -265,4 +288,5 @@ public class ResourceManager extends BaseManager {
 	public JSONObject Delete(Session s, String id) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Delete(s, id, new ManagerContext[] {});
 	}
+
 }

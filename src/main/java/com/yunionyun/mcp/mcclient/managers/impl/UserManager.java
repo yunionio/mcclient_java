@@ -1,6 +1,7 @@
 package com.yunionyun.mcp.mcclient.managers.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.managers.KeystoneManager;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
@@ -13,6 +14,12 @@ public class UserManager extends KeystoneManager {
                         "Enabled", "Email", "Mobile"});
 	}
 
+	public UserManager(EndpointType endpointType) {
+		super("user", "users",endpointType,
+				new String[] {},
+				new String[]{"ID", "Name", "Domain_Id",
+						"Enabled", "Email", "Mobile"});
+	}
 	public ListResult getProjects(Session s, String uId) {
 		String url = "/users/" + uId + "/projects";
 		try {
