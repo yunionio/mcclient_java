@@ -3,7 +3,9 @@ package com.yunionyun.mcp.mcclient.managers;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Map;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.JSONClientException;
@@ -123,6 +125,24 @@ public class ResourceManager extends BaseManager {
 	public JSONObject Get(Session s, String id, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Get(s, id, query, new ManagerContext[]{});
 	}
+
+	public JSONArray getV2(Session s, Map<String, String> param) throws McClientJavaBizException, IOException, JSONClientException{
+		StringBuilder url = new StringBuilder();
+		url.append("/");
+		url.append(this.keywordPlural);
+		if (param != null) {
+			Iterator var4 = param.entrySet().iterator();
+
+			while(var4.hasNext()) {
+				Map.Entry<String, String> entry = (Map.Entry)var4.next();
+				url.append("/" + (String)entry.getKey() + "/");
+				url.append((String)entry.getValue());
+			}
+		}
+
+		return this._getV2(s, url.toString(), this.keywordPlural);
+	}
+
 	
 	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
@@ -287,6 +307,39 @@ public class ResourceManager extends BaseManager {
 
 	public JSONObject Delete(Session s, String id) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Delete(s, id, new ManagerContext[] {});
+	}
+
+	public JSONArray addQuota(Session s, String type, String id, JSONObject body, boolean cascade) throws McClientJavaBizException, IOException, JSONClientException {
+		body.put("action", "add");
+		body.put("cascade", cascade);
+		return this.quotaSet(s, type, id, body);
+	}
+
+	public JSONArray resetQuota(Session s, String type, String id, JSONObject body, boolean cascade) throws McClientJavaBizException, IOException, JSONClientException {
+		body.put("action", "reset");
+		body.put("cascade", cascade);
+		return this.quotaSet(s, type, id, body);
+	}
+
+	private JSONArray quotaSet(Session s, String type, String id, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
+		if (params == null) {
+			return null;
+		} else {
+			StringBuilder url = new StringBuilder();
+			url.append("/");
+			url.append(this.keywordPlural);
+			url.append("/");
+			url.append(type);
+			url.append("/");
+			url.append(id);
+			if ("domains".equals(type) && !params.containsKey("domain")) {
+				params.put("domain", id);
+			}
+
+			JSONObject body = new JSONObject();
+			body.put(this.keywordPlural, params);
+			return this._postV2(s, url.toString(), body, this.keywordPlural);
+		}
 	}
 
 }
