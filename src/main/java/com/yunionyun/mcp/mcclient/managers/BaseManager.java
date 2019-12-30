@@ -3,6 +3,7 @@ package com.yunionyun.mcp.mcclient.managers;
 
 import java.io.IOException;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.HttpHeaders;
@@ -73,6 +74,17 @@ public class BaseManager {
 			return body;
 		}
 	}
+
+	public JSONArray _getV2(Session s, String url, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
+		JSONObject body = this.jsonRequest(s, "GET", url, null, null);
+		if (respKey != null && body != null) {
+			return body.getJSONArray(respKey);
+		} else {
+			JSONArray arr = new JSONArray();
+			arr.add(body);
+			return arr;
+		}
+	}
 	
 	public JSONObject _post(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject respBody = this.jsonRequest(s, "POST", url, null, body);
@@ -86,6 +98,15 @@ public class BaseManager {
 		}
 		
 		return null;
+	}
+
+	public JSONArray _postV2(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
+		JSONObject respBody = this.jsonRequest(s, "POST", url, (HttpHeaders)null, body);
+		if (respBody != null && respKey != null ) {
+			return respBody.getJSONArray(respKey);
+		} else {
+			return null;
+		}
 	}
 	
 	public JSONObject _put(Session s, String url, JSONObject body, String respKey) throws McClientJavaBizException, IOException, JSONClientException {
