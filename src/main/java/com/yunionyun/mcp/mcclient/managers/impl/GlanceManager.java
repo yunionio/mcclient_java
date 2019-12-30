@@ -12,7 +12,7 @@ public class GlanceManager extends ResourceManager {
         super("image", EndpointType.InternalURL, "v1", columns, adminColumns, keyword, keywordPlural, (String)null);
     }
     public GlanceManager(String serviceType, String keyword, String keywordPlural, EndpointType endpointType){
-        super(serviceType, endpointType, "v1", new String[0], new String[0], keyword, keywordPlural, (String)null);
+        super(serviceType, endpointType, null, new String[0], new String[0], keyword, keywordPlural, (String)null);
     }
 
     public GlanceManager(EndpointType endpointType){

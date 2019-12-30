@@ -3,7 +3,9 @@ package com.yunionyun.mcp.mcclient.managers;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Map;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.JSONClientException;
@@ -123,7 +125,7 @@ public class ResourceManager extends BaseManager {
 	public JSONObject Get(Session s, String id, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Get(s, id, query, new ManagerContext[]{});
 	}
-	
+
 	public JSONObject GetSpecific(Session s, String id, String spec, JSONObject query, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
