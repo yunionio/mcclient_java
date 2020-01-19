@@ -3,6 +3,7 @@ package com.yunionyun.mcp.mcclient.managers.impl;
 import java.io.IOException;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.Utils;
@@ -11,28 +12,28 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
 
 public class UsageManager extends ComputeManager
 {
-    public UsageManager()
-    {
-    	super("usage", "usages", new String[] { "Field", "Value" }, new String[] {});
+    public UsageManager() {
+        this(EndpointType.InternalURL);
     }
-    
-    
-    public JSONObject Get(Session s, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException
-    {
+
+    public UsageManager(EndpointType endpointType) {
+        super("usage", "usages", endpointType, new String[]{"Field", "Value"}, new String[]{});
+    }
+
+
+    public JSONObject Get(Session s, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
         StringBuilder url = new StringBuilder();
         url.append("/");
         url.append(this.keywordPlural);
-        
-        if (query != null)
-        {
+
+        if (query != null) {
             String queryStr = Utils.JSONObject2QueryString(query);
-            if (queryStr.length() > 0)
-            {
+            if (queryStr.length() > 0) {
                 url.append("?");
                 url.append(queryStr);
             }
         }
-        
+
         return this._get(s, url.toString(), this.keyword);
     }
 }
