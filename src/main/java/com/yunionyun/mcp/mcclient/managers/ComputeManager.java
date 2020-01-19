@@ -12,11 +12,14 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ComputeManager extends ResourceManager {
-
-	public ComputeManager(String keyword, String keywordPlural, String[] columns, String[] adminColumns) {
-		super("compute", EndpointType.InternalURL, null, columns, adminColumns, keyword, keywordPlural, null);
-	}
-
+	/**
+	 *
+	 * @param keyword
+	 * @param keywordPlural
+	 * @param endpointType  EndpointType.InternalURL
+	 * @param columns
+	 * @param adminColumns
+	 */
 	public ComputeManager(String keyword, String keywordPlural, EndpointType endpointType, String[] columns, String[] adminColumns) {
 		super("compute", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}

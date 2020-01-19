@@ -2,15 +2,13 @@ package com.yunionyun.mcp.mcclient.managers;
 
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
-import java.util.Map;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.yunionyun.mcp.mcclient.EndpointType;
-import com.yunionyun.mcp.mcclient.JSONClientException;
-import com.yunionyun.mcp.mcclient.Session;
-import com.yunionyun.mcp.mcclient.Utils;
+import com.yunionyun.mcp.mcclient.*;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 
 public class ResourceManager extends BaseManager {
@@ -289,6 +287,10 @@ public class ResourceManager extends BaseManager {
 
 	public JSONObject Delete(Session s, String id) throws McClientJavaBizException, IOException, JSONClientException {
 		return this.Delete(s, id, new ManagerContext[] {});
+	}
+
+	public JSONObject upload(Session session, String path, HttpHeaders headers, InputStream body) throws KeyManagementException, NoSuchAlgorithmException, McClientJavaBizException, IOException, JSONClientException {
+		return session.rowRequest(this.serviceType,this.endpointType,"POST",path,headers,body);
 	}
 
 }
