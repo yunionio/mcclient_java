@@ -5,9 +5,7 @@ import com.yunionyun.mcp.mcclient.managers.KeystoneManager;
 
 public class RoleAssignmentManager extends KeystoneManager {
 	public RoleAssignmentManager() {
-		super("role_assignment", "role_assignments",
-                new String[] {"Scope", "User", "Group", "Role"},
-                new String[] {});
+		this(EndpointType.AdminURL);
 	}
 	public RoleAssignmentManager(EndpointType endpointType) {
 		super("role_assignment", "role_assignments", endpointType,

@@ -124,6 +124,10 @@ public class Client
 	public JSONObject jsonRequest(String endpoint, String token, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws IOException, JSONClientException {
 		return this.parseJSONResult(this._jsonRequest(endpoint, token, method, url, headers, jsonBody));
 	}
+
+	public JSONObject rowBaseUrlRequest(String endpoint, String token, String method, String url, HttpHeaders headers, InputStream body) throws IOException, JSONClientException, NoSuchAlgorithmException, KeyManagementException {
+		return this.parseJSONResult(rawRequest(endpoint,token,method,url,headers, body));
+	}
 	
 	private HttpURLConnection _jsonRequest(String endpoint, String token, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws JSONClientException {
 		String bodyStr = null;
