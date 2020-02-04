@@ -6,7 +6,7 @@ import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
-import com.yunionyun.mcp.mcclient.managers.BaseManager;
+import com.yunionyun.mcp.mcclient.managers.GlanceManager;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -17,16 +17,13 @@ import java.util.Map;
  * @date 2019/09/26
  */
 public class ImageQuotaManager extends GlanceManager {
-    public ImageQuotaManager() {
-        super("quota", "quotas", new String[0], new String[0]);
-    }
 
-    public ImageQuotaManager(String serviceType, String keyword, String keywordPlural, EndpointType endpointType){
-        super(serviceType,keyword, keywordPlural, endpointType);
+    public ImageQuotaManager(){
+        this(EndpointType.InternalURL);
     }
 
     public ImageQuotaManager(EndpointType endpointType){
-        super(endpointType);
+        super("quota", "quotas", endpointType,new String[0], new String[0]);
     }
 
     public JSONObject get(Session s, Map<String, String> param) throws McClientJavaBizException, IOException, JSONClientException {

@@ -1,11 +1,16 @@
 package com.yunionyun.mcp.mcclient.managers.impl;
 
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.managers.KeystoneManager;
 
 public class DomainManager extends KeystoneManager {
 	public DomainManager() {
-		super("domain", "domains",
-		        new String[] {},
-		        new String[] {"ID", "Name", "Enabled", "Description", "Driver"});
+		this(EndpointType.AdminURL);
+	}
+
+	public DomainManager(EndpointType endpointType) {
+		super("domain", "domains",endpointType,
+				new String[] {"ID", "Name", "Enabled", "Description", "Driver"},
+				new String[] {});
 	}
 }

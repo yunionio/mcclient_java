@@ -8,10 +8,7 @@ import com.yunionyun.mcp.mcclient.managers.ListResult;
 
 public class UserManager extends KeystoneManager {
 	public UserManager() {
-		super("user", "users",
-                new String[] {},
-                new String[]{"ID", "Name", "Domain_Id",
-                        "Enabled", "Email", "Mobile"});
+		this(EndpointType.AdminURL);
 	}
 
 	public UserManager(EndpointType endpointType) {

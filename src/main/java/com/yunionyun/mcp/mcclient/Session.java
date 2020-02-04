@@ -1,6 +1,9 @@
 package com.yunionyun.mcp.mcclient;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 import org.slf4j.Logger;
 
@@ -92,5 +95,13 @@ public class Session {
 	
 	public void clearTaskNotifyUrl() {
 		this.removeHeader(TASK_NOTIFY_URL_HEAD);
+	}
+
+	public JSONObject rowRequest(String service, EndpointType endpointType, String method, String url, HttpHeaders headers, InputStream body) throws NoSuchAlgorithmException, McClientJavaBizException, IOException, KeyManagementException, JSONClientException {
+		String baseurl = Utils.stripURLVersion(this.getServiceUrl(service, endpointType));
+		if (this.headers != null){
+			headers.update(this.headers);
+		}
+		return this.client.rowBaseUrlRequest(baseurl,this.token.getToken(),method,url,headers,body);
 	}
 }

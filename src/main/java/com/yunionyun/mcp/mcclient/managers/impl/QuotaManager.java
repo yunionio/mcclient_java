@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class QuotaManager extends ComputeManager {
     public QuotaManager() {
-        super("quota", "quotas", new String[0], new String[0]);
+        this(EndpointType.InternalURL);
     }
 
     public QuotaManager(String keyword, String keywordPlural, EndpointType endpointType){

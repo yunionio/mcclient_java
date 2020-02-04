@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
@@ -13,8 +14,12 @@ import com.yunionyun.mcp.mcclient.managers.ManagerContext;
 
 public class MonitorNodeManager extends BaseMonitorManager {
 
-	public MonitorNodeManager() {
-		super("node", "nodes",
+	public MonitorNodeManager(){
+        this(EndpointType.InternalURL);
+    }
+
+    public MonitorNodeManager(EndpointType endpointType) {
+		super("node", "nodes", endpointType,
 		        new String[] {"ID", "name", "status", "create_by", "update_by", "delete_by", "gmt_create", "gmt_modified", "gmt_delete", "is_deleted", "project_id", "remark"},
 		        new String[] {});
 	}
