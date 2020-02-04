@@ -49,12 +49,5 @@
 			<version>4.5.3</version>
 		</dependency>
 	</dependencies>
-    
-    <distributionManagement>
-        <repository>
-            <id>maven-3rd</id>
-            <url>http://10.168.222.237:18081/repository/maven-3rd/</url>
-        </repository>
-    </distributionManagement>
 
 </project>
