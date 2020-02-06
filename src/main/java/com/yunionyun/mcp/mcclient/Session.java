@@ -89,6 +89,10 @@ public class Session {
 	    return this.token.getProjectId();
 	}
 
+	public String getProjectDomainId(){
+		return this.token.getProjectDomainId();
+	}
+
 	public void setTaskNotifyUrl(String url) {
 		this.setHeader(TASK_NOTIFY_URL_HEAD, url);
 	}
