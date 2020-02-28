@@ -214,12 +214,18 @@ public class Utils {
 	 */
 	private static void addKeyValueToStringBuilder(StringBuilder queryBuilder, String key, String val)
 			throws UnsupportedEncodingException {
+	    //key值为空直接跳过
+	    if (key == null){
+	        return;
+        }
 		if (queryBuilder.length() > 0) {
 			queryBuilder.append("&");
 		}
 		queryBuilder.append(URLEncoder.encode(key, "UTF-8"));
 		queryBuilder.append("=");
-		queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
+		if (val != null){
+            queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
+        }
 	}
 	
 	
