@@ -9,7 +9,10 @@ public class VCenterManager extends ComputeManager {
 	}
 
 	public VCenterManager(EndpointType endpointType) {
-		super("vcenter", "vcenters", endpointType,
+		super(
+				"vcenter",
+				"vcenters",
+				endpointType,
 				new String[]{"ID", "Name", "Hostname", "Status", "Version", "Host_count"},
 				new String[]{});
 	}

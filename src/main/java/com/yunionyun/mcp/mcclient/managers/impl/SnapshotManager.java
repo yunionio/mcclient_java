@@ -10,9 +10,11 @@ public class SnapshotManager extends ComputeManager {
 	}
 
 	public SnapshotManager(EndpointType endpointType) {
-		super("snapshot", "snapshots", endpointType,
-				new String[] {"ID", "Name", "Size", "Status", "Disk_id", "Storage_id"},
-				new String[] {});
+		super(
+				"snapshot",
+				"snapshots",
+				endpointType,
+				new String[]{"ID", "Name", "Size", "Status", "Disk_id", "Storage_id"},
+				new String[]{});
 	}
-	
- }
+}

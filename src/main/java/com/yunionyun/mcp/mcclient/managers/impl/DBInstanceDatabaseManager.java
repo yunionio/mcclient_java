@@ -8,13 +8,16 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/18
  */
 public class DBInstanceDatabaseManager extends ComputeManager {
-    public DBInstanceDatabaseManager() {
-        this(EndpointType.InternalURL);
-    }
+	public DBInstanceDatabaseManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public DBInstanceDatabaseManager(EndpointType endpointType){
-        super("dbinstancedatabase", "dbinstancedatabases",endpointType,
-                new String[]{"ID", "Name", "Character_Set", "DBInstance_id", "DBInstance", "Status"},
-                new String[]{});
-    }
+	public DBInstanceDatabaseManager(EndpointType endpointType) {
+		super(
+				"dbinstancedatabase",
+				"dbinstancedatabases",
+				endpointType,
+				new String[]{"ID", "Name", "Character_Set", "DBInstance_id", "DBInstance", "Status"},
+				new String[]{});
+	}
 }

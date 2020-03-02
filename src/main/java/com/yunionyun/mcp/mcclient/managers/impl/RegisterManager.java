@@ -8,14 +8,11 @@ import com.yunionyun.mcp.mcclient.managers.YunionAgentManager;
  * @date 2020/01/19
  */
 public class RegisterManager extends YunionAgentManager {
-    public RegisterManager() {
-        this(EndpointType.InternalURL);
-    }
+	public RegisterManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public RegisterManager(EndpointType endpointType){
-        super("register", "registers", endpointType,
-                new String[]{},
-                new String[]{});
-    }
-
+	public RegisterManager(EndpointType endpointType) {
+		super("register", "registers", endpointType, new String[]{}, new String[]{});
+	}
 }

@@ -8,13 +8,26 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/19
  */
 public class SecGroupRuleManager extends ComputeManager {
-    public SecGroupRuleManager() {
-        this(EndpointType.InternalURL);
-    }
+	public SecGroupRuleManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public SecGroupRuleManager(EndpointType endpointType){
-        super("secgrouprule", "secgrouprules", endpointType,
-                new String[]{"ID", "Name", "Direction", "Action", "Protocol", "Ports", "Priority", "Cidr", "Description"},
-                new String[]{"SecGroups"});
-    }
+	public SecGroupRuleManager(EndpointType endpointType) {
+		super(
+				"secgrouprule",
+				"secgrouprules",
+				endpointType,
+				new String[]{
+						"ID",
+						"Name",
+						"Direction",
+						"Action",
+						"Protocol",
+						"Ports",
+						"Priority",
+						"Cidr",
+						"Description"
+				},
+				new String[]{"SecGroups"});
+	}
 }

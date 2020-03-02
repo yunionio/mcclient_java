@@ -8,13 +8,11 @@ import com.yunionyun.mcp.mcclient.managers.BaseNotifyManager;
  * @date 2020/01/18
  */
 public class ConfigsManager extends BaseNotifyManager {
-    public ConfigsManager(){
-       this(EndpointType.InternalURL);
-    }
+	public ConfigsManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public ConfigsManager(EndpointType endpointType){
-        super("config", "configs", endpointType,
-                new String[]{},
-                new String[]{});
-    }
+	public ConfigsManager(EndpointType endpointType) {
+		super("config", "configs", endpointType, new String[]{}, new String[]{});
+	}
 }

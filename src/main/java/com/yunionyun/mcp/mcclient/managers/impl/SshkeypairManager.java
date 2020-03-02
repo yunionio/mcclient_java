@@ -8,13 +8,11 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/19
  */
 public class SshkeypairManager extends ComputeManager {
-    public SshkeypairManager() {
-        this(EndpointType.InternalURL);
-    }
+	public SshkeypairManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public SshkeypairManager(EndpointType endpointType){
-        super("sshkeypair", "sshkeypairs", endpointType,
-                new String[]{},
-                new String[]{});
-    }
+	public SshkeypairManager(EndpointType endpointType) {
+		super("sshkeypair", "sshkeypairs", endpointType, new String[]{}, new String[]{});
+	}
 }

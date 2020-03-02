@@ -8,13 +8,11 @@ import com.yunionyun.mcp.mcclient.managers.YunionAgentManager;
  * @date 2020/01/19
  */
 public class VersionManager extends YunionAgentManager {
-    public VersionManager() {
-        this(EndpointType.InternalURL);
-    }
+	public VersionManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public VersionManager(EndpointType endpointType){
-        super("version", "versions", endpointType,
-                new String[]{},
-                new String[]{});
-    }
+	public VersionManager(EndpointType endpointType) {
+		super("version", "versions", endpointType, new String[]{}, new String[]{});
+	}
 }

@@ -8,13 +8,18 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/19
  */
 public class ReservedIPManager extends ComputeManager {
-    public ReservedIPManager() {
-        this(EndpointType.InternalURL);
-    }
+	public ReservedIPManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public ReservedIPManager(EndpointType endpointType){
-        super("reservedip", "reservedips", endpointType,
-                new String[]{},
-                new String[]{"Id", "Network_ID", "Network", "IP_addr", "Notes", "Expired_At", "Expired", "Status"});
-    }
+	public ReservedIPManager(EndpointType endpointType) {
+		super(
+				"reservedip",
+				"reservedips",
+				endpointType,
+				new String[]{},
+				new String[]{
+						"Id", "Network_ID", "Network", "IP_addr", "Notes", "Expired_At", "Expired", "Status"
+				});
+	}
 }

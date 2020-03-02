@@ -15,29 +15,29 @@ import java.io.IOException;
  * @date 2020/02/28
  */
 public class SkuManagerTest extends TestCase {
-    private static Logger logger = LoggerUtils.createLoggerFor(SkuManagerTest.class.getName());
+	private static Logger logger = LoggerUtils.createLoggerFor(SkuManagerTest.class.getName());
 
-    public void testApp() {
-        Client cli = new Client("", 500, true, true);
-        TokenCredential token = null;
-        try {
-            token = cli.Authenticate("", "", "Default", "");
-            Session s = cli.newSession("", null, null, token, "");
-            SkuManager manager = new SkuManager(EndpointType.PublicURL);
-            JSONObject query = new JSONObject();
-            query.put("t1", null);
-            query.put(null, null);
-            JSONObject get = manager.Get(s, "instance-specs", query);
-            if (get != null){
+	public void testApp() {
+		Client cli = new Client("", 500, true, true);
+		TokenCredential token = null;
+		try {
+			token = cli.Authenticate("", "", "Default", "");
+			Session s = cli.newSession("", null, null, token, "");
+			SkuManager manager = new SkuManager(EndpointType.PublicURL);
+			JSONObject query = new JSONObject();
+			query.put("t1", null);
+			query.put(null, null);
+			JSONObject get = manager.Get(s, "instance-specs", query);
+			if (get != null) {
+			}
 
-            }
-            logger.debug(query.toString());
-        } catch (JSONClientException e) {
-            e.printStackTrace();
-        } catch (McClientJavaBizException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			logger.debug(query.toString());
+		} catch (JSONClientException e) {
+			e.printStackTrace();
+		} catch (McClientJavaBizException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

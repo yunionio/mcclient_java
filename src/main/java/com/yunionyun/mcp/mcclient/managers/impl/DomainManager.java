@@ -9,8 +9,11 @@ public class DomainManager extends KeystoneManager {
 	}
 
 	public DomainManager(EndpointType endpointType) {
-		super("domain", "domains",endpointType,
-				new String[] {"ID", "Name", "Enabled", "Description", "Driver"},
-				new String[] {});
+		super(
+				"domain",
+				"domains",
+				endpointType,
+				new String[]{"ID", "Name", "Enabled", "Description", "Driver"},
+				new String[]{});
 	}
 }
