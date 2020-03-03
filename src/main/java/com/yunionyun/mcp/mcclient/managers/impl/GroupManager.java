@@ -11,7 +11,10 @@ public class GroupManager extends KeystoneManager {
 	}
 
 	public GroupManager(EndpointType endpointType) {
-		super("group", "groups",endpointType,
+		super(
+				"group",
+				"groups",
+				endpointType,
 				new String[]{"ID", "Name", "Domain_Id", "Description"},
 				new String[]{});
 	}

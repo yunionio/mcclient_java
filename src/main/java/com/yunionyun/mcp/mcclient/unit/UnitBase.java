@@ -4,17 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 class UnitBase {
-	private String rep;
-	private int base;
-	
-	private static Map<String, UnitBase> all;
-	
-	private UnitBase(String rep, int base) {
-		this.rep = rep;
-		this.base = base;
-		all.put(rep, this);
-	}
-	
 	public static final UnitBase none;
 	public static final UnitBase joule;
 	public static final UnitBase watt;
@@ -26,10 +15,11 @@ class UnitBase {
 	public static final UnitBase percent;
 	public static final UnitBase millionth;
 	public static final UnitBase io;
-	
+	private static Map<String, UnitBase> all;
+
 	static {
 		all = new HashMap<String, UnitBase>();
-		
+
 		none = new UnitBase("", 1000);
 		joule = new UnitBase("j", 1000);
 		watt = new UnitBase("w", 1000);
@@ -42,11 +32,16 @@ class UnitBase {
 		millionth = new UnitBase("%%", 1000);
 		io = new UnitBase("io", 1000);
 	}
-	
-	protected String String() {
-		return this.rep;
+
+	private String rep;
+	private int base;
+
+	private UnitBase(String rep, int base) {
+		this.rep = rep;
+		this.base = base;
+		all.put(rep, this);
 	}
-	
+
 	protected static UnitBase parse(String unitstr) {
 		if (all.containsKey(unitstr)) {
 			return all.get(unitstr);
@@ -54,7 +49,11 @@ class UnitBase {
 			return new UnitBase(unitstr, 1000);
 		}
 	}
-	
+
+	protected String String() {
+		return this.rep;
+	}
+
 	protected int getBase() {
 		return this.base;
 	}

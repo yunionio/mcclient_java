@@ -8,13 +8,30 @@ import com.yunionyun.mcp.mcclient.managers.BaseMonitorManager;
  * @date 2020/01/19
  */
 public class ServiceTreeManager extends BaseMonitorManager {
-    public ServiceTreeManager() {
-        this(EndpointType.InternalURL);
-    }
+	public ServiceTreeManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public ServiceTreeManager(EndpointType endpointType){
-        super("service_tree", "service_trees", endpointType,
-                new String[]{"id", "service_tree_name", "service_tree_struct", "status", "create_by", "update_by", "delete_by", "gmt_create", "gmt_modified", "gmt_delete", "is_deleted", "project_id", "remark"},
-                new String[]{});
-    }
+	public ServiceTreeManager(EndpointType endpointType) {
+		super(
+				"service_tree",
+				"service_trees",
+				endpointType,
+				new String[]{
+						"id",
+						"service_tree_name",
+						"service_tree_struct",
+						"status",
+						"create_by",
+						"update_by",
+						"delete_by",
+						"gmt_create",
+						"gmt_modified",
+						"gmt_delete",
+						"is_deleted",
+						"project_id",
+						"remark"
+				},
+				new String[]{});
+	}
 }

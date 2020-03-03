@@ -1,8 +1,5 @@
 package com.yunionyun.mcp.mcclient.managers;
 
-
-import java.io.IOException;
-
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.JSONClientException;
@@ -10,17 +7,31 @@ import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.Utils;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 
+import java.io.IOException;
+
 public class JointResourceManager extends ResourceManager {
 	private ResourceManager master;
 	private ResourceManager slave;
-	
-	public JointResourceManager(String serviceType, EndpointType endpointType, String version, String[] columns, String[] adminColumns, String keyword, String keywordPlural, String context, ResourceManager master, ResourceManager slave) {
-		super(serviceType, endpointType, version, columns, adminColumns, keyword, keywordPlural, context);	
+
+	public JointResourceManager(
+			String serviceType,
+			EndpointType endpointType,
+			String version,
+			String[] columns,
+			String[] adminColumns,
+			String keyword,
+			String keywordPlural,
+			String context,
+			ResourceManager master,
+			ResourceManager slave) {
+		super(
+				serviceType, endpointType, version, columns, adminColumns, keyword, keywordPlural, context);
 		this.master = master;
 		this.slave = slave;
 	}
-	
-	public JSONObject Get(Session s, String mid, String sid, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
+
+	public JSONObject Get(Session s, String mid, String sid, JSONObject query)
+			throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(null);
 		url.append(this.master.urlKey());
 		url.append("/");
@@ -38,8 +49,9 @@ public class JointResourceManager extends ResourceManager {
 		}
 		return this._get(s, url.toString(), this.keyword);
 	}
-	
-	public ListResult LisDescendent(Session s, String mid, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
+
+	public ListResult LisDescendent(Session s, String mid, JSONObject query)
+			throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(null);
 		url.append(this.master.urlKey());
 		url.append("/");
@@ -55,8 +67,9 @@ public class JointResourceManager extends ResourceManager {
 		}
 		return this._list(s, url.toString(), this.keywordPlural);
 	}
-	
-	public JSONObject Attach(Session s, String mid, String sid, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
+
+	public JSONObject Attach(Session s, String mid, String sid, JSONObject params)
+			throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(null);
 		url.append(this.master.urlKey());
 		url.append("/");
@@ -68,8 +81,9 @@ public class JointResourceManager extends ResourceManager {
 		url.append(this.urlKey());
 		return this._post(s, url.toString(), params, this.keyword);
 	}
-	
-	public JSONObject Detach(Session s, String mid, String sid) throws McClientJavaBizException, IOException, JSONClientException {
+
+	public JSONObject Detach(Session s, String mid, String sid)
+			throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(null);
 		url.append(this.master.urlKey());
 		url.append("/");
@@ -81,8 +95,9 @@ public class JointResourceManager extends ResourceManager {
 		url.append(this.urlKey());
 		return this._delete(s, url.toString(), null, this.keyword);
 	}
-	
-	public JSONObject Update(Session s, String mid, String sid, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
+
+	public JSONObject Update(Session s, String mid, String sid, JSONObject params)
+			throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(null);
 		url.append(this.master.urlKey());
 		url.append("/");
@@ -94,8 +109,9 @@ public class JointResourceManager extends ResourceManager {
 		url.append(this.urlKey());
 		return this._put(s, url.toString(), params, this.keyword);
 	}
-	
-	public JSONObject Patch(Session s, String mid, String sid, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
+
+	public JSONObject Patch(Session s, String mid, String sid, JSONObject params)
+			throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = this.getContextPath(null);
 		url.append(this.master.urlKey());
 		url.append("/");

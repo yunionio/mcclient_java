@@ -8,14 +8,30 @@ import com.yunionyun.mcp.mcclient.managers.MeterManager;
  * @date 2020/01/17
  */
 public class BillDetailManager extends MeterManager {
-    public BillDetailManager() {
-        this(EndpointType.InternalURL);
-    }
+	public BillDetailManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public BillDetailManager(EndpointType endpointType){
-        super("bill_detail", "bill_details",endpointType,
-                new String[]{"bill_id", "account", "platform", "region", "manager_project", "res_id", "res_type", "res_name", "start_time",
-                        "end_time", "charge_type", "item_rate", "item_fee"},
-                new String[]{});
-    }
+	public BillDetailManager(EndpointType endpointType) {
+		super(
+				"bill_detail",
+				"bill_details",
+				endpointType,
+				new String[]{
+						"bill_id",
+						"account",
+						"platform",
+						"region",
+						"manager_project",
+						"res_id",
+						"res_type",
+						"res_name",
+						"start_time",
+						"end_time",
+						"charge_type",
+						"item_rate",
+						"item_fee"
+				},
+				new String[]{});
+	}
 }

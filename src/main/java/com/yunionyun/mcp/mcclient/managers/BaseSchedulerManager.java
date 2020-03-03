@@ -7,15 +7,19 @@ import com.yunionyun.mcp.mcclient.EndpointType;
  * @date 2020/01/19
  */
 public class BaseSchedulerManager extends ResourceManager {
-    /**
-     *
-     * @param keyword
-     * @param keywordPlural
-     * @param endpointType EndpointType.InternalURL
-     * @param columns
-     * @param adminColumns
-     */
-    public BaseSchedulerManager(String keyword, String keywordPlural, EndpointType endpointType, String[] columns, String[] adminColumns){
-        super("scheduler", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
-    }
+	/**
+	 * @param keyword
+	 * @param keywordPlural
+	 * @param endpointType  EndpointType.InternalURL
+	 * @param columns
+	 * @param adminColumns
+	 */
+	public BaseSchedulerManager(
+			String keyword,
+			String keywordPlural,
+			EndpointType endpointType,
+			String[] columns,
+			String[] adminColumns) {
+		super("scheduler", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+	}
 }

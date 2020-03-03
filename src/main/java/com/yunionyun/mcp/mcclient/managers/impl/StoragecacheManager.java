@@ -8,13 +8,16 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/19
  */
 public class StoragecacheManager extends ComputeManager {
-    public StoragecacheManager() {
-        this(EndpointType.InternalURL);
-    }
+	public StoragecacheManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public StoragecacheManager(EndpointType endpointType){
-        super("storagecache", "storagecaches", endpointType,
-                new String[]{"ID", "Name", "Path", "Storages", "size", "count"},
-                new String[]{});
-    }
+	public StoragecacheManager(EndpointType endpointType) {
+		super(
+				"storagecache",
+				"storagecaches",
+				endpointType,
+				new String[]{"ID", "Name", "Path", "Storages", "size", "count"},
+				new String[]{});
+	}
 }

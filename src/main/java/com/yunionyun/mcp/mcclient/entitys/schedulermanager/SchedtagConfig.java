@@ -7,36 +7,36 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @date 2020/02/05
  */
 public class SchedtagConfig {
-    @JSONField(name = "id")
-    private String id;
+	@JSONField(name = "id")
+	private String id;
 
-    @JSONField(name = "strategy")
-    private String strategy;
+	@JSONField(name = "strategy")
+	private String strategy;
 
-    @JSONField(name = "weight")
-    private int weight;
+	@JSONField(name = "weight")
+	private int weight;
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getStrategy() {
-        return strategy;
-    }
+	public String getStrategy() {
+		return strategy;
+	}
 
-    public void setStrategy(String strategy) {
-        this.strategy = strategy;
-    }
+	public void setStrategy(String strategy) {
+		this.strategy = strategy;
+	}
 
-    public int getWeight() {
-        return weight;
-    }
+	public int getWeight() {
+		return weight;
+	}
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
 }

@@ -4,22 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 class UnitPrefix {
-	private String rep;
-	private int scale;
-	private UnitPrefix lower;
-	private UnitPrefix higher;
-	
-	private static List<UnitPrefix> all;
-	
-	private UnitPrefix(String str, int scale) {
-		this.rep = str;
-		this.scale = scale;
-		this.lower = null;
-		this.higher = null;
-		
-		all.add(this);
-	}
-	
 	public static final UnitPrefix none;
 	public static final UnitPrefix n;
 	public static final UnitPrefix u;
@@ -32,10 +16,11 @@ class UnitPrefix {
 	public static final UnitPrefix E;
 	public static final UnitPrefix Z;
 	public static final UnitPrefix Y;
-	
+	private static List<UnitPrefix> all;
+
 	static {
 		all = new ArrayList<UnitPrefix>();
-		
+
 		n = new UnitPrefix("n", -3); // nano
 		u = new UnitPrefix("u", -2); // micro
 		m = new UnitPrefix("m", -1); // milli
@@ -48,7 +33,7 @@ class UnitPrefix {
 		E = new UnitPrefix("E", 6);
 		Z = new UnitPrefix("Z", 7);
 		Y = new UnitPrefix("Y", 8);
-		
+
 		n.between(null, u);
 		u.between(n, m);
 		m.between(u, none);
@@ -62,39 +47,44 @@ class UnitPrefix {
 		Z.between(E, Y);
 		Y.between(Z, null);
 	}
-	
-	private void between(UnitPrefix lower, UnitPrefix higher) {
-		this.lower = lower;
-		this.higher = higher;
+
+	private String rep;
+	private int scale;
+	private UnitPrefix lower;
+	private UnitPrefix higher;
+
+	private UnitPrefix(String str, int scale) {
+		this.rep = str;
+		this.scale = scale;
+		this.lower = null;
+		this.higher = null;
+
+		all.add(this);
 	}
-	
-	protected String String() {
-		return this.rep;
-	}
-	
-	static protected double convert(double value, int base, UnitPrefix oldpref, UnitPrefix newpref) {		
+
+	protected static double convert(double value, int base, UnitPrefix oldpref, UnitPrefix newpref) {
 		int diff = 0;
 		if (newpref.scale > oldpref.scale) {
 			diff = newpref.scale - oldpref.scale;
-		}else if (newpref.scale < oldpref.scale) {
+		} else if (newpref.scale < oldpref.scale) {
 			diff = oldpref.scale - newpref.scale;
-		}else {
+		} else {
 			return value;
 		}
-		for (int i = 0; i < diff; i ++) {
+		for (int i = 0; i < diff; i++) {
 			if (newpref.scale > oldpref.scale) {
 				value /= base;
-			}else {
+			} else {
 				value *= base;
 			}
 		}
 		return value;
 	}
-	
+
 	protected static UnitPrefix parse(String unitstr) {
 		UnitPrefix match = null;
 		int matchLen = -1;
-		for(UnitPrefix pref: all) {
+		for (UnitPrefix pref : all) {
 			if (pref.rep != null && unitstr.startsWith(pref.rep) && matchLen < pref.rep.length()) {
 				match = pref;
 				matchLen = pref.rep.length();
@@ -105,15 +95,24 @@ class UnitPrefix {
 		}
 		return match;
 	}
-	
+
+	private void between(UnitPrefix lower, UnitPrefix higher) {
+		this.lower = lower;
+		this.higher = higher;
+	}
+
+	protected String String() {
+		return this.rep;
+	}
+
 	protected int length() {
 		return this.rep.length();
 	}
-	
+
 	protected UnitPrefix getLower() {
 		return this.lower;
 	}
-	
+
 	protected UnitPrefix getHigher() {
 		return this.higher;
 	}

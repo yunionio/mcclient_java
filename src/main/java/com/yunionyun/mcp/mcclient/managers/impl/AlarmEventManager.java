@@ -14,17 +14,47 @@ import java.io.IOException;
  * @date 2020/01/17
  */
 public class AlarmEventManager extends BaseMonitorManager {
-    public AlarmEventManager() {
-       this(EndpointType.InternalURL);
-    }
+	public AlarmEventManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public AlarmEventManager(EndpointType endpointType) {
-        super("alarm_event", "alarm_events", endpointType,
-                new String[]{"ID", "metric_name", "host_name", "host_ip", "alarm_condition", "template", "first_alarm_time", "last_alarm_time", "alarm_status", "alarm_times", "ack_time", "ack_status", "ack_wait_time", "upgrade_time", "upgrade_status", "status", "create_by", "update_by", "delete_by", "gmt_create", "gmt_modified", "gmt_delete", "is_deleted", "project_id", "remark"},
-                new String[]{});
-    }
+	public AlarmEventManager(EndpointType endpointType) {
+		super(
+				"alarm_event",
+				"alarm_events",
+				endpointType,
+				new String[]{
+						"ID",
+						"metric_name",
+						"host_name",
+						"host_ip",
+						"alarm_condition",
+						"template",
+						"first_alarm_time",
+						"last_alarm_time",
+						"alarm_status",
+						"alarm_times",
+						"ack_time",
+						"ack_status",
+						"ack_wait_time",
+						"upgrade_time",
+						"upgrade_status",
+						"status",
+						"create_by",
+						"update_by",
+						"delete_by",
+						"gmt_create",
+						"gmt_modified",
+						"gmt_delete",
+						"is_deleted",
+						"project_id",
+						"remark"
+				},
+				new String[]{});
+	}
 
-    public JSONObject DoBatchUpdate(Session session, JSONObject body) throws JSONClientException, McClientJavaBizException, IOException {
-        return _put(session,"/alarm_events",body,"alarm_events");
-    }
+	public JSONObject DoBatchUpdate(Session session, JSONObject body)
+			throws JSONClientException, McClientJavaBizException, IOException {
+		return _put(session, "/alarm_events", body, "alarm_events");
+	}
 }

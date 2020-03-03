@@ -8,13 +8,16 @@ import com.yunionyun.mcp.mcclient.managers.BaseNotifyManager;
  * @date 2020/01/18
  */
 public class NotifyTemplateManager extends BaseNotifyManager {
-    public NotifyTemplateManager() {
-        this(EndpointType.InternalURL);
-    }
+	public NotifyTemplateManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public NotifyTemplateManager(EndpointType endpointType){
-        super("notifytemplate", "notifytemplates", endpointType,
-                new String[]{"Contact_Type", "Topic", "Template_Type"},
-                new String[]{});
-    }
+	public NotifyTemplateManager(EndpointType endpointType) {
+		super(
+				"notifytemplate",
+				"notifytemplates",
+				endpointType,
+				new String[]{"Contact_Type", "Topic", "Template_Type"},
+				new String[]{});
+	}
 }

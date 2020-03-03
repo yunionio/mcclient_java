@@ -8,13 +8,16 @@ import com.yunionyun.mcp.mcclient.managers.BaseMonitorManager;
  * @date 2020/01/18
  */
 public class ProjectAdminCandidateManager extends BaseMonitorManager {
-    public ProjectAdminCandidateManager() {
-        this(EndpointType.InternalURL);
-    }
+	public ProjectAdminCandidateManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public ProjectAdminCandidateManager(EndpointType endpointType){
-        super("project_admin_candidate", "project_admin_candidates", endpointType,
-                new String[]{"id", "name"},
-                new String[]{});
-    }
+	public ProjectAdminCandidateManager(EndpointType endpointType) {
+		super(
+				"project_admin_candidate",
+				"project_admin_candidates",
+				endpointType,
+				new String[]{"id", "name"},
+				new String[]{});
+	}
 }
