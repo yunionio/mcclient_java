@@ -1,5 +1,17 @@
 package com.yunionyun.mcp.mcclient;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.openssl.PEMKeyPair;
+import org.bouncycastle.openssl.PEMParser;
+import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
+import org.slf4j.Logger;
+import sun.net.www.protocol.https.HttpsURLConnectionImpl;
+
+import javax.crypto.Cipher;
+import javax.net.ssl.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,26 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.crypto.Cipher;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openssl.PEMKeyPair;
-import org.bouncycastle.openssl.PEMParser;
-import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
-import org.slf4j.Logger;
-
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
-
-import sun.net.www.protocol.https.HttpsURLConnectionImpl;
 
 
 public class Utils {
@@ -214,12 +206,19 @@ public class Utils {
 	 */
 	private static void addKeyValueToStringBuilder(StringBuilder queryBuilder, String key, String val)
 			throws UnsupportedEncodingException {
+	    //key值为空直接跳过
+	    if (key == null){
+	        return;
+        }
+
 		if (queryBuilder.length() > 0) {
-			queryBuilder.append("&");
+            queryBuilder.append("&");
 		}
 		queryBuilder.append(URLEncoder.encode(key, "UTF-8"));
 		queryBuilder.append("=");
-		queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
+		if (val != null){
+            queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
+        }
 	}
 	
 	
