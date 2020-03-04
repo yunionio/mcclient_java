@@ -8,13 +8,19 @@ import com.yunionyun.mcp.mcclient.managers.ComputeJointManager;
  * @date 2020/01/19
  */
 public class SchedtagstorageManager extends ComputeJointManager {
-    public SchedtagstorageManager(SchedTagManager master, StorageManager slave) {
-        this(EndpointType.InternalURL,master,slave);
-    }
+	public SchedtagstorageManager(SchedTagManager master, StorageManager slave) {
+		this(EndpointType.InternalURL, master, slave);
+	}
 
-    public SchedtagstorageManager(EndpointType endpointType,SchedTagManager master, StorageManager slave){
-        super("schedtagstorage", "schedtagstorages", endpointType,
-                new String[]{"Storage_ID", "Storage","Schedtag_ID", "Schedtag"},
-                new String[]{},master,slave);
-    }
+	public SchedtagstorageManager(
+			EndpointType endpointType, SchedTagManager master, StorageManager slave) {
+		super(
+				"schedtagstorage",
+				"schedtagstorages",
+				endpointType,
+				new String[]{"Storage_ID", "Storage", "Schedtag_ID", "Schedtag"},
+				new String[]{},
+				master,
+				slave);
+	}
 }

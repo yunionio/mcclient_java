@@ -8,13 +8,25 @@ import com.yunionyun.mcp.mcclient.managers.MeterManager;
  * @date 2020/01/18
  */
 public class PriceInfoManager extends MeterManager {
-    public PriceInfoManager() {
-        this(EndpointType.InternalURL);
-    }
+	public PriceInfoManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public PriceInfoManager(EndpointType endpointType){
-        super("price_info", "price_infos", endpointType,
-                new String[]{"provider", "currency", "sum_price", "spec", "quantity", "period", "price_key", "region_id"},
-                new String[]{});
-    }
+	public PriceInfoManager(EndpointType endpointType) {
+		super(
+				"price_info",
+				"price_infos",
+				endpointType,
+				new String[]{
+						"provider",
+						"currency",
+						"sum_price",
+						"spec",
+						"quantity",
+						"period",
+						"price_key",
+						"region_id"
+				},
+				new String[]{});
+	}
 }

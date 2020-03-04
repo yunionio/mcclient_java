@@ -8,13 +8,26 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/18
  */
 public class NatGatewayManager extends ComputeManager {
-    public NatGatewayManager() {
-        this(EndpointType.InternalURL);
-    }
+	public NatGatewayManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public NatGatewayManager(EndpointType endpointType){
-        super("natgateway", "natgateways", endpointType,
-                new String[]{"ID", "Name", "Enabled", "Status", "Cloudregion_Id", "Region", "Vpc_Id", "Charge_Type", "Nat_Spec"},
-                new String[]{});
-    }
+	public NatGatewayManager(EndpointType endpointType) {
+		super(
+				"natgateway",
+				"natgateways",
+				endpointType,
+				new String[]{
+						"ID",
+						"Name",
+						"Enabled",
+						"Status",
+						"Cloudregion_Id",
+						"Region",
+						"Vpc_Id",
+						"Charge_Type",
+						"Nat_Spec"
+				},
+				new String[]{});
+	}
 }

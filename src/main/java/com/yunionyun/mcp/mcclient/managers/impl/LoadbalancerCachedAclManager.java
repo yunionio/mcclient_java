@@ -8,13 +8,16 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/18
  */
 public class LoadbalancerCachedAclManager extends ComputeManager {
-    public LoadbalancerCachedAclManager() {
-        this(EndpointType.InternalURL);
-    }
+	public LoadbalancerCachedAclManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public LoadbalancerCachedAclManager(EndpointType endpointType){
-        super("cachedloadbalanceracl", "cachedloadbalanceracls", endpointType,
-                new String[]{"id", "acl_id", "name", "acl_entries"},
-                new String[]{"tenant"});
-    }
+	public LoadbalancerCachedAclManager(EndpointType endpointType) {
+		super(
+				"cachedloadbalanceracl",
+				"cachedloadbalanceracls",
+				endpointType,
+				new String[]{"id", "acl_id", "name", "acl_entries"},
+				new String[]{"tenant"});
+	}
 }

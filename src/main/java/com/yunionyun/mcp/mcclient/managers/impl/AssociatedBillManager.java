@@ -8,13 +8,16 @@ import com.yunionyun.mcp.mcclient.managers.MeterManager;
  * @date 2020/01/17
  */
 public class AssociatedBillManager extends MeterManager {
-    public AssociatedBillManager() {
-       this(EndpointType.InternalURL);
-    }
+	public AssociatedBillManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public AssociatedBillManager(EndpointType endpointType){
-        super("associated_bill", "associated_bills",endpointType,
-                new String[]{"account", "brand", "resource_id", "resource_name", "amount"},
-                new String[]{});
-    }
+	public AssociatedBillManager(EndpointType endpointType) {
+		super(
+				"associated_bill",
+				"associated_bills",
+				endpointType,
+				new String[]{"account", "brand", "resource_id", "resource_name", "amount"},
+				new String[]{});
+	}
 }

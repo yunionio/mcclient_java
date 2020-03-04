@@ -8,13 +8,31 @@ import com.yunionyun.mcp.mcclient.managers.BaseMonitorManager;
  * @date 2020/01/18
  */
 public class MonitorInputManager extends BaseMonitorManager {
-    public MonitorInputManager(){
-        this(EndpointType.InternalURL);
-    }
+	public MonitorInputManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public MonitorInputManager(EndpointType endpointType){
-        super("monitor_input", "monitor_inputs", endpointType,
-                new String[]{"ID", "monitor_name", "monitor_parameters", "sample", "status", "create_by", "update_by", "delete_by", "gmt_create", "gmt_modified", "gmt_delete", "is_deleted", "project_id", "remark"},
-                new String[]{});
-    }
+	public MonitorInputManager(EndpointType endpointType) {
+		super(
+				"monitor_input",
+				"monitor_inputs",
+				endpointType,
+				new String[]{
+						"ID",
+						"monitor_name",
+						"monitor_parameters",
+						"sample",
+						"status",
+						"create_by",
+						"update_by",
+						"delete_by",
+						"gmt_create",
+						"gmt_modified",
+						"gmt_delete",
+						"is_deleted",
+						"project_id",
+						"remark"
+				},
+				new String[]{});
+	}
 }

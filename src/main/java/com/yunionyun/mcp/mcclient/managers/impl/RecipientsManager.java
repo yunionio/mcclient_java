@@ -8,14 +8,30 @@ import com.yunionyun.mcp.mcclient.managers.BaseMonitorManager;
  * @date 2020/01/18
  */
 public class RecipientsManager extends BaseMonitorManager {
-    public RecipientsManager() {
-        this(EndpointType.InternalURL);
-    }
+	public RecipientsManager() {
+		this(EndpointType.InternalURL);
+	}
 
-
-    public RecipientsManager(EndpointType endpointType){
-        super("recipient", "recipients", endpointType,
-                new String[]{"id", "type", "details", "status", "create_by", "update_by", "delete_by", "gmt_create", "gmt_modified", "gmt_delete", "is_deleted", "project_id", "remark"},
-                new String[]{});
-    }
+	public RecipientsManager(EndpointType endpointType) {
+		super(
+				"recipient",
+				"recipients",
+				endpointType,
+				new String[]{
+						"id",
+						"type",
+						"details",
+						"status",
+						"create_by",
+						"update_by",
+						"delete_by",
+						"gmt_create",
+						"gmt_modified",
+						"gmt_delete",
+						"is_deleted",
+						"project_id",
+						"remark"
+				},
+				new String[]{});
+	}
 }

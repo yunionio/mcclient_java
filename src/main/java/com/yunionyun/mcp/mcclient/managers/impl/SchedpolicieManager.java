@@ -8,14 +8,26 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/19
  */
 public class SchedpolicieManager extends ComputeManager {
-    public SchedpolicieManager() {
-        this(EndpointType.InternalURL);
-    }
+	public SchedpolicieManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public SchedpolicieManager(EndpointType endpointType){
-        super("schedpolicy", "schedpolicies", endpointType,
-                new String[]{"ID", "Name", "Description", "Condition", "Schedtag", "Resource_Type", "Schedtag_Id",
-                        "Strategy", "Enabled"},
-                new String[]{});
-    }
+	public SchedpolicieManager(EndpointType endpointType) {
+		super(
+				"schedpolicy",
+				"schedpolicies",
+				endpointType,
+				new String[]{
+						"ID",
+						"Name",
+						"Description",
+						"Condition",
+						"Schedtag",
+						"Resource_Type",
+						"Schedtag_Id",
+						"Strategy",
+						"Enabled"
+				},
+				new String[]{});
+	}
 }
