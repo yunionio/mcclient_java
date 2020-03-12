@@ -9,11 +9,27 @@ public class NetworkManager extends ComputeManager {
 	}
 
 	public NetworkManager(EndpointType endpointType) {
-		super("network", "networks",endpointType,
-				new String[]{"ID", "Name", "Guest_ip_start", "Guest_ip_end", "Guest_ip_mask",
-						"wire_id", "wire", "is_public", "exit", "Ports", "vnics",
-						"group_vnics", "bm_vnics", "reserve_vnics", "server_type"},
+		super(
+				"network",
+				"networks",
+				endpointType,
+				new String[]{
+						"ID",
+						"Name",
+						"Guest_ip_start",
+						"Guest_ip_end",
+						"Guest_ip_mask",
+						"wire_id",
+						"wire",
+						"is_public",
+						"exit",
+						"Ports",
+						"vnics",
+						"group_vnics",
+						"bm_vnics",
+						"reserve_vnics",
+						"server_type"
+				},
 				new String[]{});
 	}
-
- }
+}

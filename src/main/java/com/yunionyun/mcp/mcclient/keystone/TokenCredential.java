@@ -1,16 +1,15 @@
 package com.yunionyun.mcp.mcclient.keystone;
 
-import java.util.Date;
-import java.util.HashSet;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
 import com.yunionyun.mcp.mcclient.Utils;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Date;
+import java.util.HashSet;
 
 public class TokenCredential {
 	private static final Logger logger = LoggerFactory.getLogger(TokenCredential.class);
@@ -41,7 +40,7 @@ public class TokenCredential {
 		JSONArray rolesJSON = token.getJSONArray("roles");
 		this.roles = new Role[rolesJSON.size()];
 
-		for(int i = 0; i < rolesJSON.size(); ++i) {
+		for (int i = 0; i < rolesJSON.size(); ++i) {
 			this.roles[i] = new Role();
 			this.roles[i].parseJSON(rolesJSON.getJSONObject(i));
 		}
@@ -49,11 +48,10 @@ public class TokenCredential {
 		JSONArray serviceJSON = token.getJSONArray("catalog");
 		this.services = new Service[serviceJSON.size()];
 
-		for(int i = 0; i < serviceJSON.size(); ++i) {
+		for (int i = 0; i < serviceJSON.size(); ++i) {
 			this.services[i] = new Service();
 			this.services[i].parseJSON(serviceJSON.getJSONObject(i));
 		}
-
 	}
 
 	public String getToken() {
@@ -104,7 +102,7 @@ public class TokenCredential {
 	public String[] getRoles() {
 		String[] roles = new String[this.roles.length];
 
-		for(int i = 0; i < roles.length; ++i) {
+		for (int i = 0; i < roles.length; ++i) {
 			roles[i] = this.roles[i].getName();
 		}
 
@@ -114,38 +112,53 @@ public class TokenCredential {
 	public String[] getRegions() {
 		HashSet<String> regionSet = new HashSet();
 
-		for(int i = 0; i < this.services.length; ++i) {
+		for (int i = 0; i < this.services.length; ++i) {
 			this.services[i].addRegions(regionSet);
 		}
 
 		String[] regions = new String[regionSet.size()];
-		return (String[])regionSet.toArray(regions);
+		return (String[]) regionSet.toArray(regions);
 	}
 
-	public String[] getServiceUrls(String service, String region, String zone, EndpointType endpointType) throws McClientJavaBizException {
-		for(int i = 0; i < this.services.length; ++i) {
+	public String[] getServiceUrls(
+			String service, String region, String zone, EndpointType endpointType)
+			throws McClientJavaBizException {
+		for (int i = 0; i < this.services.length; ++i) {
 			if (this.services[i].getType().equals(service)) {
 				return this.services[i].getServiceUrls(region, zone, endpointType);
 			}
 		}
 
-		throw new McClientJavaBizException("No service URL found for " + service + " " + endpointType + " " + Endpoint.RegionID(region, zone));
+		throw new McClientJavaBizException(
+				"No service URL found for "
+						+ service
+						+ " "
+						+ endpointType
+						+ " "
+						+ Endpoint.RegionID(region, zone));
 	}
 
-	public String getServiceUrl(String service, String region, String zone, EndpointType endpointType) throws McClientJavaBizException {
-		for(int i = 0; i < this.services.length; ++i) {
+	public String getServiceUrl(String service, String region, String zone, EndpointType endpointType)
+			throws McClientJavaBizException {
+		for (int i = 0; i < this.services.length; ++i) {
 			if (this.services[i].getType().equals(service)) {
 				return this.services[i].getServiceUrl(region, zone, endpointType);
 			}
 		}
 
-		throw new McClientJavaBizException("No service URL found for " + service + " " + endpointType + " " + Endpoint.RegionID(region, zone));
+		throw new McClientJavaBizException(
+				"No service URL found for "
+						+ service
+						+ " "
+						+ endpointType
+						+ " "
+						+ Endpoint.RegionID(region, zone));
 	}
 
 	public boolean isAdmin() {
 		String[] roles = this.getRoles();
 
-		for(int i = 0; i < roles.length; ++i) {
+		for (int i = 0; i < roles.length; ++i) {
 			if (roles[i].equals("admin")) {
 				return true;
 			}

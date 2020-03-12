@@ -8,13 +8,18 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/19
  */
 public class VpcsManager extends ComputeManager {
-    public VpcsManager() {
-        this(EndpointType.InternalURL);
-    }
+  public VpcsManager() {
+    this(EndpointType.InternalURL);
+  }
 
-    public VpcsManager(EndpointType endpointType){
-        super("vpc", "vpcs", endpointType,
-                new String[]{"ID", "Name", "Enabled", "Status", "Cloudregion_Id", "Is_default", "Cidr_Block", "Region"},
-                new String[]{});
-    }
+  public VpcsManager(EndpointType endpointType) {
+    super(
+        "vpc",
+        "vpcs",
+        endpointType,
+        new String[] {
+          "ID", "Name", "Enabled", "Status", "Cloudregion_Id", "Is_default", "Cidr_Block", "Region"
+        },
+        new String[] {});
+  }
 }

@@ -8,12 +8,11 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/18
  */
 public class CapabilitieManager extends ComputeManager {
-    public CapabilitieManager(){
-        this(EndpointType.InternalURL);
-    }
+	public CapabilitieManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public CapabilitieManager(EndpointType endpointType){
-        super("capability", "capabilities",endpointType, new String[]{}, new String[]{});
-    }
-
+	public CapabilitieManager(EndpointType endpointType) {
+		super("capability", "capabilities", endpointType, new String[]{}, new String[]{});
+	}
 }

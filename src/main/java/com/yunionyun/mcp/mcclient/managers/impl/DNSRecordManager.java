@@ -8,13 +8,16 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/18
  */
 public class DNSRecordManager extends ComputeManager {
-    public DNSRecordManager() {
-        this(EndpointType.InternalURL);
-    }
+	public DNSRecordManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public DNSRecordManager(EndpointType endpointType){
-        super("dnsrecord", "dnsrecords",endpointType,
-                new String[]{"ID", "Name", "Records", "TTL", "is_public"},
-                new String[]{});
-    }
+	public DNSRecordManager(EndpointType endpointType) {
+		super(
+				"dnsrecord",
+				"dnsrecords",
+				endpointType,
+				new String[]{"ID", "Name", "Records", "TTL", "is_public"},
+				new String[]{});
+	}
 }

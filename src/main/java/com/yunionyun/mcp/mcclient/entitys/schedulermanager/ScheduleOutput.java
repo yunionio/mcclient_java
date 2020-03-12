@@ -7,14 +7,14 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @date 2020/02/05
  */
 public class ScheduleOutput {
-    @JSONField(name = "candidates")
-    private CandidateResource[] candidates;
+  @JSONField(name = "candidates")
+  private CandidateResource[] candidates;
 
-    public CandidateResource[] getCandidates() {
-        return candidates;
-    }
+  public CandidateResource[] getCandidates() {
+    return candidates;
+  }
 
-    public void setCandidates(CandidateResource[] candidates) {
-        this.candidates = candidates;
-    }
+  public void setCandidates(CandidateResource[] candidates) {
+    this.candidates = candidates;
+  }
 }

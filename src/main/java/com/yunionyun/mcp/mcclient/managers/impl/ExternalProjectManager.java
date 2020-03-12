@@ -8,13 +8,16 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/18
  */
 public class ExternalProjectManager extends ComputeManager {
-    public ExternalProjectManager() {
-        this(EndpointType.InternalURL);
-    }
+	public ExternalProjectManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public ExternalProjectManager(EndpointType endpointType){
-        super("externalproject", "externalprojects",endpointType,
-                new String[]{"ID", "Name", "External_Id", "Tenant_id", "Tenant", "Manager_id", "Manager"},
-                new String[]{});
-    }
+	public ExternalProjectManager(EndpointType endpointType) {
+		super(
+				"externalproject",
+				"externalprojects",
+				endpointType,
+				new String[]{"ID", "Name", "External_Id", "Tenant_id", "Tenant", "Manager_id", "Manager"},
+				new String[]{});
+	}
 }

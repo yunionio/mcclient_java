@@ -21,22 +21,28 @@ import java.security.NoSuchAlgorithmException;
  * @date 2020/01/18
  */
 public class DBInstanceAccountManager extends ComputeManager {
-    public DBInstanceAccountManager() {
-        this(EndpointType.InternalURL);
-    }
+	public DBInstanceAccountManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public DBInstanceAccountManager(EndpointType endpointType) {
-        super("dbinstanceaccount", "dbinstanceaccounts", endpointType,
-                new String[]{"ID", "Name", "DBInstance_id", "Status", "Dbinstanceprivileges"},
-                new String[]{});
-    }
+	public DBInstanceAccountManager(EndpointType endpointType) {
+		super(
+				"dbinstanceaccount",
+				"dbinstanceaccounts",
+				endpointType,
+				new String[]{"ID", "Name", "DBInstance_id", "Status", "Dbinstanceprivileges"},
+				new String[]{});
+	}
 
-    public JSONObject getLoginInfo(Session session, String id, JSONObject query) throws JSONClientException, McClientJavaBizException, IOException, NoSuchPaddingException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-        JSONObject data = Get(session, id, null);
-        String password = CodecUtils.decryptAESBase64(data.getString("secret"), data.getString("id"));
-        JSONObject rtn = new JSONObject();
-        rtn.put("accout", data.get("name"));
-        rtn.put("password", password);
-        return rtn;
-    }
+	public JSONObject getLoginInfo(Session session, String id, JSONObject query)
+			throws JSONClientException, McClientJavaBizException, IOException, NoSuchPaddingException,
+			InvalidAlgorithmParameterException, NoSuchAlgorithmException, IllegalBlockSizeException,
+			BadPaddingException, InvalidKeyException {
+		JSONObject data = Get(session, id, null);
+		String password = CodecUtils.decryptAESBase64(data.getString("secret"), data.getString("id"));
+		JSONObject rtn = new JSONObject();
+		rtn.put("accout", data.get("name"));
+		rtn.put("password", password);
+		return rtn;
+	}
 }

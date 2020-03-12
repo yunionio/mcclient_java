@@ -8,13 +8,11 @@ import com.yunionyun.mcp.mcclient.managers.YunionAgentManager;
  * @date 2020/01/18
  */
 public class CopyrightManage extends YunionAgentManager {
-    public CopyrightManage() {
-        this(EndpointType.InternalURL);
-    }
+	public CopyrightManage() {
+		this(EndpointType.InternalURL);
+	}
 
-    public CopyrightManage(EndpointType endpointType){
-        super("info", "infos",endpointType,
-                new String[]{"copyright", "email"},
-                new String[]{});
-    }
+	public CopyrightManage(EndpointType endpointType) {
+		super("info", "infos", endpointType, new String[]{"copyright", "email"}, new String[]{});
+	}
 }

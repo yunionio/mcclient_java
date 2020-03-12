@@ -8,14 +8,28 @@ import com.yunionyun.mcp.mcclient.managers.ComputeManager;
  * @date 2020/01/18
  */
 public class LoadbalancerManager extends ComputeManager {
-    public LoadbalancerManager() {
-        this(EndpointType.InternalURL);
-    }
+  public LoadbalancerManager() {
+    this(EndpointType.InternalURL);
+  }
 
-    public LoadbalancerManager(EndpointType endpointType){
-        super("loadbalancer", "loadbalancers", endpointType,
-                new String[]{"id", "name", "status", "address_type", "address", "network_type", "network_id", "charge_type",
-                        "egress_mbps", "loadbalancer_spec", "cloudregion_id"},
-                new String[]{"tenant"});
-    }
+  public LoadbalancerManager(EndpointType endpointType) {
+    super(
+        "loadbalancer",
+        "loadbalancers",
+        endpointType,
+        new String[] {
+          "id",
+          "name",
+          "status",
+          "address_type",
+          "address",
+          "network_type",
+          "network_id",
+          "charge_type",
+          "egress_mbps",
+          "loadbalancer_spec",
+          "cloudregion_id"
+        },
+        new String[] {"tenant"});
+  }
 }

@@ -15,24 +15,23 @@ import java.io.IOException;
  * @date 2020/02/06
  */
 public class SchedulerManagerTest extends TestCase {
-    private static Logger logger = LoggerUtils.createLoggerFor(SchedulerManagerTest.class.getName());
+	private static Logger logger = LoggerUtils.createLoggerFor(SchedulerManagerTest.class.getName());
 
-    public void testApp()  {
-        Client cli = new Client("", 500, true, true);
-        TokenCredential token = null;
-        try {
-            token = cli.Authenticate("", "", "Default", "");
-            Session s = cli.newSession("", null, null, token, "");
-            SchedulerManager manager = new SchedulerManager(EndpointType.PublicURL);
-            JSONObject jsonObject = manager.doForecast(s, null);
-            logger.debug(jsonObject.toString());
-        } catch (JSONClientException e) {
-            e.printStackTrace();
-        } catch (McClientJavaBizException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
+	public void testApp() {
+		Client cli = new Client("", 500, true, true);
+		TokenCredential token = null;
+		try {
+			token = cli.Authenticate("", "", "Default", "");
+			Session s = cli.newSession("", null, null, token, "");
+			SchedulerManager manager = new SchedulerManager(EndpointType.PublicURL);
+			JSONObject jsonObject = manager.doForecast(s, null);
+			logger.debug(jsonObject.toString());
+		} catch (JSONClientException e) {
+			e.printStackTrace();
+		} catch (McClientJavaBizException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

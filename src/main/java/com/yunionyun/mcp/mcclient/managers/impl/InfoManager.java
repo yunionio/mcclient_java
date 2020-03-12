@@ -8,11 +8,11 @@ import com.yunionyun.mcp.mcclient.managers.YunionAgentManager;
  * @date 2020/01/18
  */
 public class InfoManager extends YunionAgentManager {
-    public InfoManager() {
-        this(EndpointType.InternalURL);
-    }
+	public InfoManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public InfoManager(EndpointType endpointType) {
-        super("info", "infos", endpointType, new String[]{}, new String[]{});
-    }
+	public InfoManager(EndpointType endpointType) {
+		super("info", "infos", endpointType, new String[]{}, new String[]{});
+	}
 }

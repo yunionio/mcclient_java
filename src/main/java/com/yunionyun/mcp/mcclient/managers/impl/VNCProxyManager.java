@@ -8,11 +8,11 @@ import com.yunionyun.mcp.mcclient.managers.BaseVNCProxyManager;
  * @date 2020/01/19
  */
 public class VNCProxyManager extends BaseVNCProxyManager {
-    public VNCProxyManager(){
-        this(EndpointType.InternalURL);
-    }
+	public VNCProxyManager() {
+		this(EndpointType.InternalURL);
+	}
 
-    public VNCProxyManager(EndpointType endpointType){
-        super("vncproxy","vncproxy",endpointType,new String[]{},new String[]{});
-    }
+	public VNCProxyManager(EndpointType endpointType) {
+		super("vncproxy", "vncproxy", endpointType, new String[]{}, new String[]{});
+	}
 }

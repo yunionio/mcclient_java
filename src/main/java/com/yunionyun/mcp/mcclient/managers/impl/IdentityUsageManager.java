@@ -15,27 +15,28 @@ import java.io.IOException;
  * @date 2020/01/18
  */
 public class IdentityUsageManager extends KeystoneManager {
-    public IdentityUsageManager(){
-        this(EndpointType.AdminURL);
-    }
+	public IdentityUsageManager() {
+		this(EndpointType.AdminURL);
+	}
 
-    public IdentityUsageManager(EndpointType endpointType){
-        super("usage", "usages",endpointType, new String[]{}, new String[]{});
-    }
+	public IdentityUsageManager(EndpointType endpointType) {
+		super("usage", "usages", endpointType, new String[]{}, new String[]{});
+	}
 
-    public JSONObject Get(Session s, JSONObject query) throws McClientJavaBizException, IOException, JSONClientException {
-        StringBuilder url = new StringBuilder();
-        url.append("/");
-        url.append(this.keywordPlural);
+	public JSONObject Get(Session s, JSONObject query)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		StringBuilder url = new StringBuilder();
+		url.append("/");
+		url.append(this.keywordPlural);
 
-        if (query != null) {
-            String queryStr = Utils.JSONObject2QueryString(query);
-            if (queryStr.length() > 0) {
-                url.append("?");
-                url.append(queryStr);
-            }
-        }
+		if (query != null) {
+			String queryStr = Utils.JSONObject2QueryString(query);
+			if (queryStr.length() > 0) {
+				url.append("?");
+				url.append(queryStr);
+			}
+		}
 
-        return this._get(s, url.toString(), this.keyword);
-    }
+		return this._get(s, url.toString(), this.keyword);
+	}
 }
