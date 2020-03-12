@@ -26,6 +26,10 @@ public class ImageQuotaManager extends GlanceManager {
 		super("quota", "quotas", endpointType, new String[0], new String[0]);
 	}
 
+	public ImageQuotaManager(String serviceType, String keyword, String keywordPlural, EndpointType endpointType) {
+		super(serviceType, keyword, keywordPlural, endpointType);
+	}
+
 	public JSONObject get(Session s, Map<String, String> param)
 			throws McClientJavaBizException, IOException, JSONClientException {
 		StringBuilder url = new StringBuilder();

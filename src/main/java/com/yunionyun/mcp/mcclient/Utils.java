@@ -212,8 +212,8 @@ public class Utils {
 	 */
 	private static void addKeyValueToStringBuilder(StringBuilder queryBuilder, String key, String val)
 			throws UnsupportedEncodingException {
-		// key值为空直接跳过
-		if (key == null) {
+		// key value值为空直接跳过
+		if (key == null || val == null) {
 			return;
 		}
 
@@ -222,9 +222,7 @@ public class Utils {
 		}
 		queryBuilder.append(URLEncoder.encode(key, "UTF-8"));
 		queryBuilder.append("=");
-		if (val != null) {
-			queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
-		}
+		queryBuilder.append(URLEncoder.encode(val, "UTF-8"));
 	}
 
 	public static int bitLength(long num) {
