@@ -53,7 +53,8 @@ public class SchedulerManager extends BaseSchedulerManager {
 			domainId = "";
 		}
 		if (domainId == "") {
-			JSONObject rtn = this.Get(session, projectId, null);
+			ProjectManager projectManager = new ProjectManager(this.getEndpontType());
+			JSONObject rtn = projectManager.Get(session, projectId, null);
 			domainId = rtn.getString("domain_id");
 		}
 		params.put("domain_id", domainId);
