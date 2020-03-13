@@ -21,10 +21,16 @@ public class SchedulerManagerTest extends TestCase {
 		Client cli = new Client("", 500, true, true);
 		TokenCredential token = null;
 		try {
-			token = cli.Authenticate("", "", "Default", "");
-			Session s = cli.newSession("", null, null, token, "");
+			token = cli.Authenticate("", "", "", "system");
+			Session s = cli.newSession("YunionHQ", null, null, token, "");
 			SchedulerManager manager = new SchedulerManager(EndpointType.PublicURL);
-			JSONObject jsonObject = manager.doForecast(s, null);
+			JSONObject param = new JSONObject();
+			param.put("auto_start", true);
+			param.put("generate_name", "rwa");
+			param.put("hypervisor", "huawei");
+			param.put("__count__", "1");
+
+			JSONObject jsonObject = manager.doForecast(s, param);
 			logger.debug(jsonObject.toString());
 		} catch (JSONClientException e) {
 			e.printStackTrace();
