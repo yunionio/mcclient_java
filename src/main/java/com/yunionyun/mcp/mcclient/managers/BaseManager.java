@@ -149,4 +149,8 @@ public class BaseManager {
 			return respBody;
 		}
 	}
+
+	public EndpointType getEndpontType() {
+		return this.endpointType;
+	}
 }
