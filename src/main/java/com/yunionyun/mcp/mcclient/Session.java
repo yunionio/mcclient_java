@@ -1,5 +1,6 @@
 package com.yunionyun.mcp.mcclient;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
@@ -96,6 +97,18 @@ public class Session {
 		}
 		tmpHdr.update(this.headers);
 		return this.client.jsonRequest(baseurl, this.token.getToken(), method, url, tmpHdr, jsonBody);
+	}
+
+	public JSONArray jsonRequestArray(String service, EndpointType endpointType, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {
+		String baseurl = Utils.stripURLVersion(this.getServiceUrl(service, endpointType));
+		logger.debug("jsonRequestArray " + baseurl + " token " + this.token.getToken());
+		HttpHeaders tmpHdr = new HttpHeaders();
+		if (headers != null) {
+			tmpHdr.update(headers);
+		}
+
+		tmpHdr.update(this.headers);
+		return this.client.jsonRequestArray(baseurl, this.token.getToken(), method, url, tmpHdr, jsonBody);
 	}
 
 	public boolean isSystemAdmin() {

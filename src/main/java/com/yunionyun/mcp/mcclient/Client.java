@@ -1,5 +1,7 @@
 package com.yunionyun.mcp.mcclient;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
@@ -129,6 +131,10 @@ public class Client {
 		return this.parseJSONResult(this._jsonRequest(endpoint, token, method, url, headers, jsonBody));
 	}
 
+	public JSONArray jsonRequestArray(String endpoint, String token, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {
+		return (JSONArray) this.parseJSONResult(this._jsonRequest(endpoint, token, method, url, headers, jsonBody), "array");
+	}
+
 	public JSONObject rowBaseUrlRequest(
 			String endpoint,
 			String token,
@@ -230,6 +236,78 @@ public class Client {
 				}
 			} else {
 				throw new JSONClientException(code, req.getResponseMessage(), jsonResult.toString());
+			}
+		} else if (textResult != null) {
+			throw new JSONClientException(code, req.getResponseMessage(), textResult);
+		} else {
+			throw new JSONClientException(code, req.getResponseMessage(), req.getResponseMessage());
+		}
+	}
+
+	/**
+	 * @param req
+	 * @param type 根据type 判断返回值类型：array-JsonArray；others-JsonObject
+	 * @return
+	 * @throws Exception
+	 */
+	private JSON parseJSONResult(HttpURLConnection req, String type) throws Exception {
+		int code = req.getResponseCode();
+		req.getErrorStream();
+		InputStream input = null;
+		if (req.getResponseCode() >= 400) {
+			input = req.getErrorStream();
+		} else {
+			input = req.getInputStream();
+		}
+
+		String textResult = null;
+		JSON jsonResult = null;
+		if (input != null) {
+			textResult = this._inputStream2String(input);
+			if (this.debug) {
+				logger.debug("Response code: " + code);
+				logger.debug("Response: " + textResult);
+			}
+
+			try {
+				if (type != null && "array".equalsIgnoreCase(type)) {
+					jsonResult = JSONObject.parseArray(textResult);
+				} else {
+					jsonResult = JSONObject.parseObject(textResult);
+				}
+			} catch (Exception var10) {
+				throw new JSONClientException(499, "Malformed JSON body", textResult);
+			}
+		} else if (this.debug) {
+			logger.debug("jsonRequest: no body");
+		}
+
+		if (code >= 200 && code < 300) {
+			return (JSON) jsonResult;
+		} else if (code >= 300 && code < 400) {
+			throw new JSONClientException(code, "redirect", req.getHeaderField("Location"));
+		} else if (jsonResult != null) {
+			if (jsonResult instanceof JSONObject) {
+				JSONObject obj = (JSONObject) jsonResult;
+				if (obj.containsKey("error")) {
+					JSONObject errBody = obj.getJSONObject("error");
+					if (errBody.containsKey("message") && errBody.containsKey("title") && errBody.containsKey("code")) {
+						throw new JSONClientException(errBody.getIntValue("code"), errBody.getString("title"), errBody.getString("message"));
+					} else if (errBody.containsKey("code") && errBody.containsKey("details")) {
+						String errCls = req.getResponseMessage();
+						if (errBody.containsKey("class")) {
+							errCls = errBody.getString("class");
+						}
+
+						throw new JSONClientException(errBody.getIntValue("code"), errCls, errBody.getString("details"));
+					} else {
+						throw new JSONClientException(code, req.getResponseMessage(), errBody.toString());
+					}
+				} else {
+					throw new JSONClientException(code, req.getResponseMessage(), ((JSON) jsonResult).toString());
+				}
+			} else {
+				return null;
 			}
 		} else if (textResult != null) {
 			throw new JSONClientException(code, req.getResponseMessage(), textResult);
