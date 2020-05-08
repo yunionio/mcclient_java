@@ -25,6 +25,10 @@ public class QuotaManager extends ComputeManager {
 		super(keyword, keywordPlural, endpointType, new String[0], new String[0]);
 	}
 
+	public QuotaManager(String service, String keyword, String keywordPlural, String version, EndpointType endpointType) {
+		super(service, keyword, keywordPlural, endpointType, version, new String[0], new String[0]);
+	}
+
 	public QuotaManager(EndpointType endpointType) {
 		super("quota", "quotas", endpointType, new String[0], new String[0]);
 	}
