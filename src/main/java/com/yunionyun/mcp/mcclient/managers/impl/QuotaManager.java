@@ -76,6 +76,21 @@ public class QuotaManager extends ComputeManager {
 		return this.quotaSet(s, type, id, body);
 	}
 
+	public JSONArray subQuota(Session s, String type, String id, JSONObject body, boolean cascade)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		body.put("action", "sub");
+		body.put("cascade", cascade);
+		return this.quotaSet(s, type, id, body);
+	}
+
+	public JSONArray replaceQuota(Session s, String type, String id, JSONObject body, boolean cascade)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		body.put("action", "replace");
+		body.put("cascade", cascade);
+		return this.quotaSet(s, type, id, body);
+	}
+
+
 	public JSONArray resetQuota(Session s, String type, String id, JSONObject body, boolean cascade)
 			throws McClientJavaBizException, IOException, JSONClientException {
 		body.put("action", "reset");
