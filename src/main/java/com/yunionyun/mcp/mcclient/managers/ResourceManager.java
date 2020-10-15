@@ -175,7 +175,7 @@ public class ResourceManager extends BaseManager {
 		StringBuilder url = this.getContextPath(ctx);
 		url.append(this.urlKey());
 		if (query != null) {
-			String queryStr = Utils.JSONObject2QueryString(query);
+			String queryStr = Utils.JSONObject2QueryStringFollowOnecloud(query);
 			if (queryStr.length() > 0) {
 				url.append("?");
 				url.append(queryStr);
