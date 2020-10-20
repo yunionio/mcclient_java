@@ -80,7 +80,7 @@ public class Service extends BaseResource {
 			return candidates[randidx];
 		} else {
 			// 此种情况是服务端目录列表中没有对应的url与配置文件中传入的url进行匹配
-			throw new McClientJavaBizException("服务端目录列表中没有对应的url");
+			throw new McClientJavaBizException("服务端目录列表中没有" + this.type + "对应的url");
 		}
 	}
 }

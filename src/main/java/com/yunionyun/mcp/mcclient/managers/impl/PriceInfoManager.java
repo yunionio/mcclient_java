@@ -1,7 +1,20 @@
 package com.yunionyun.mcp.mcclient.managers.impl;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
+import com.yunionyun.mcp.mcclient.JSONClientException;
 import com.yunionyun.mcp.mcclient.managers.MeterManager;
+import com.yunionyun.mcp.mcclient.utils.pricespec.ResourceSpec;
+
+import jdk.jfr.internal.Utils;
+
+import com.yunionyun.mcp.mcclient.Session;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
+
 
 /**
  * @author zxc
@@ -28,5 +41,16 @@ public class PriceInfoManager extends MeterManager {
 						"region_id"
 				},
 				new String[]{});
+	}
+	
+	public JSONObject getPrice(Session s, ArrayList<ResourceSpec> specs) 
+			throws McClientJavaBizException, IOException, JSONClientException {
+		String[] queries = new String[specs.size()];
+		for(int i = 0; i < specs.size(); i ++) {
+			queries[i] = "price_keys=" + URLEncoder.encode(specs.get(i).GetPriceKey(), Charset.forName("utf8"));
+		}
+		String url = "/price_infos/total?" + String.join("&", queries);
+		System.out.println(url);
+		return this._get(s, url, this.keyword);
 	}
 }
