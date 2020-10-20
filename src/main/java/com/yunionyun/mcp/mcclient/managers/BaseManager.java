@@ -73,6 +73,10 @@ public class BaseManager {
 		return ret;
 	}
 
+	public JSONArray _listRaw(Session s, String url) throws Exception {
+		return s.jsonRequestArray(this.serviceType, this.endpointType, "GET", url, (HttpHeaders) null, (JSONObject) null);
+	}
+
 	public JSONObject _get(Session s, String url, String respKey)
 			throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject body = this.jsonRequest(s, "GET", url, null, null);

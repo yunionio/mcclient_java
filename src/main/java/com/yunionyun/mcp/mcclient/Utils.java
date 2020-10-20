@@ -57,7 +57,7 @@ public class Utils {
 					public X509Certificate[] getAcceptedIssuers() {
 						return null;
 					}
-        };
+				};
 
 		TrustManager[] trustAllCerts = new TrustManager[]{tm};
 
@@ -200,6 +200,41 @@ public class Utils {
 			}
 		}
 		return queryBuilder.toString();
+	}
+
+	public static String JSONObject2QueryStringFollowOnecloud(JSONObject obj) {
+		try {
+			StringBuilder queryBuilder = new StringBuilder();
+			_JSONObject2QueryStringFollowOnecloud(queryBuilder, obj, "");
+			return queryBuilder.toString();
+		} catch (Exception e) {
+			logger.error("", e);
+		}
+		return "";
+	}
+
+	private static void _JSONObject2QueryStringFollowOnecloud(StringBuilder queryBuilder, JSONObject obj, String ky)
+			throws UnsupportedEncodingException {
+		for (String key : obj.keySet()) {
+			Object valObj = obj.get(key);
+			if (valObj instanceof JSONArray) { // 如果是JSONArray的情况@added by zhengjiajie@20180418
+				JSONArray dataArray = (JSONArray) valObj;
+				for (int idx = 0; idx < dataArray.size(); idx++) {
+					Object valO = dataArray.get(idx);
+					if (valO instanceof JSONObject) {
+						_JSONObject2QueryStringFollowOnecloud(queryBuilder, (JSONObject) valO, ky == "" || ky == null ? key : ky + "." + key);
+					} else {
+						String val = (String) valO;
+						addKeyValueToStringBuilder(queryBuilder, key, val);
+					}
+				}
+			} else if (valObj instanceof JSONObject) { // 不是JSONArray的情况,按照原有的逻辑进行处理
+				_JSONObject2QueryStringFollowOnecloud(queryBuilder, (JSONObject) valObj, ky == "" || ky == null ? key : ky + "." + key);
+			} else {
+				String val = obj.getString(key);
+				addKeyValueToStringBuilder(queryBuilder, ky == "" || ky == null ? key : ky + "." + key, val);
+			}
+		}
 	}
 
 	/**

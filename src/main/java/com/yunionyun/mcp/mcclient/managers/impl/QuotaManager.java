@@ -25,6 +25,10 @@ public class QuotaManager extends ComputeManager {
 		super(keyword, keywordPlural, endpointType, new String[0], new String[0]);
 	}
 
+	public QuotaManager(String service, String keyword, String keywordPlural, String version, EndpointType endpointType) {
+		super(service, keyword, keywordPlural, endpointType, version, new String[0], new String[0]);
+	}
+
 	public QuotaManager(EndpointType endpointType) {
 		super("quota", "quotas", endpointType, new String[0], new String[0]);
 	}
@@ -71,6 +75,21 @@ public class QuotaManager extends ComputeManager {
 		body.put("cascade", cascade);
 		return this.quotaSet(s, type, id, body);
 	}
+
+	public JSONArray subQuota(Session s, String type, String id, JSONObject body, boolean cascade)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		body.put("action", "sub");
+		body.put("cascade", cascade);
+		return this.quotaSet(s, type, id, body);
+	}
+
+	public JSONArray replaceQuota(Session s, String type, String id, JSONObject body, boolean cascade)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		body.put("action", "replace");
+		body.put("cascade", cascade);
+		return this.quotaSet(s, type, id, body);
+	}
+
 
 	public JSONArray resetQuota(Session s, String type, String id, JSONObject body, boolean cascade)
 			throws McClientJavaBizException, IOException, JSONClientException {

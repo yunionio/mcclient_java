@@ -44,7 +44,8 @@ public class AuthAgent {
 						this.client.Authenticate(this.user, this.passwd, this.domain, this.project);
 				this.adminToken = adminToken;
 			} catch (Exception e) {
-				logger.error("Fail to get adminToken");
+				logger.error("Fail to get adminToken：");
+				logger.error(e.getMessage());
 			}
 		}
 	}
