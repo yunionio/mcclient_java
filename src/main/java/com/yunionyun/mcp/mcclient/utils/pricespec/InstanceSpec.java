@@ -8,7 +8,6 @@ public class InstanceSpec {
 	private String zone;
 	private String instanceType;
 	private ArrayList<InstanceDiskSpec> disks;
-	
 	public InstanceSpec(String brand, String region, String zone, String instanceType, String diskType, int sizeGB) {
 		this.brand = brand;
 		this.region = region;
@@ -26,9 +25,9 @@ public class InstanceSpec {
 	public ArrayList<ResourceSpec> getSpecs() {
 		ArrayList<ResourceSpec> specs = new ArrayList<ResourceSpec>();
 		specs.add(new CpuMemSpec(this.brand, this.region, this.zone, this.instanceType));
-		for(int i = 0; i < this.disks.size(); i ++) {
+		for (int i = 0; i < this.disks.size(); i++) {
 			InstanceDiskSpec idisk = this.disks.get(i);
-			specs.add(new DiskSpec(this.brand, this.region, this.zone, idisk.diskType, idisk.sizeGB));
+			specs.add(new DiskSpec(this.brand, this.region, this.zone, idisk.resourceType, idisk.diskType, idisk.sizeGB));
 		}
 		return specs;
 	}

@@ -1,11 +1,12 @@
 package com.yunionyun.mcp.mcclient.utils.pricespec;
 
-public class InstanceDiskSpec {
+public class RdsDiskSpec {
 	protected String resourceType;
 	protected String diskType;
 	protected int sizeGB;
-	public InstanceDiskSpec(String diskType, int sizeGB) {
-		this.resourceType = "disk";
+
+	public RdsDiskSpec(String diskType, int sizeGB) {
+		this.resourceType = "rds_storage";
 		this.diskType = diskType;
 		this.sizeGB = sizeGB;
 	}
