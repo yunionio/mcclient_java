@@ -56,6 +56,7 @@ public class UserMangerTest extends TestCase {
 			input.setEffective(true);
 //			input.setRole("domainadmin");
 			input.setProject("system");
+			input.setProjectDomains(new String[]{"default"});
 			input.setRoles(new String[]{"domainadmin"});
 			ListResult list1 = roleAssignmentManager.List(s, input);
 			if (list1 != null) {

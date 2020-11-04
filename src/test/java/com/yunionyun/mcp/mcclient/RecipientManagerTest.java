@@ -12,13 +12,13 @@ public class RecipientManagerTest extends TestCase {
 	private static Logger logger = LoggerUtils.createLoggerFor(RecipientManagerTest.class.getName());
 
 	public void testApp() {
-		Client cli = new Client("http://192.168.0.246:35357/v3", 5000, true, true);
+		Client cli = new Client("", 5000, true, true);
 		try {
 			TokenCredential token =
-					cli.Authenticate("servicetreeadm", "123@yunion.com", "Default", "system");
+					cli.Authenticate("", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("Beijing", null, null, token, "");
+			Session s = cli.newSession("", null, null, token, "");
 			RecipientManager manager = new RecipientManager();
 
 			JSONObject query = new JSONObject();

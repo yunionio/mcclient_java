@@ -53,7 +53,7 @@ public class BaseManager {
 		}
 		url = url.substring(offset);
 		if (this.version != null && this.version.length() > 0) {
-			return this.version + "/" + url;
+			return "/" + this.version + "/" + url;
 		} else {
 			return url;
 		}
@@ -62,7 +62,7 @@ public class BaseManager {
 	protected JSONObject jsonRequest(
 			Session s, String method, String url, HttpHeaders headers, JSONObject body)
 			throws McClientJavaBizException, IOException, JSONClientException {
-		return s.jsonRequest(this.serviceType, this.endpointType, method, url, headers, body);
+		return s.jsonRequest(this.serviceType, this.endpointType, method, this.getUrl(url), headers, body);
 	}
 
 	public ListResult _list(Session s, String url, String respKey)

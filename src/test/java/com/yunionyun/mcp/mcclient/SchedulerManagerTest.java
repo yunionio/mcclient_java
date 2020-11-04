@@ -18,11 +18,11 @@ public class SchedulerManagerTest extends TestCase {
 	private static Logger logger = LoggerUtils.createLoggerFor(SchedulerManagerTest.class.getName());
 
 	public void testApp() {
-		Client cli = new Client("https://192.168.222.171:30500/v3", 500, true, true);
+		Client cli = new Client("", 500, true, true);
 		TokenCredential token = null;
 		try {
-			token = cli.Authenticate("sysadmin", "ixtPb1Z3_crqS8YG", "", "system");
-			Session s = cli.newSession("YunionHQ", null, null, token, "");
+			token = cli.Authenticate("", "", "", "");
+			Session s = cli.newSession("", null, null, token, "");
 			SchedulerManager manager = new SchedulerManager(EndpointType.PublicURL);
 			JSONObject param = new JSONObject();
 			param.put("auto_start", true);

@@ -16,6 +16,6 @@ public class BaseNotifyManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("notify", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("notify", endpointType, "v2", columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

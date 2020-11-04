@@ -13,12 +13,12 @@ public class CloudProviderManagerTest extends TestCase {
 			LoggerUtils.createLoggerFor(CloudProviderManagerTest.class.getName());
 
 	public void testApp() {
-		Client cli = new Client("http://192.168.0.246:5000/v3", 5000, true, true);
+		Client cli = new Client("", 5000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("sysadmin", "ieju4an@ahJe18Q2", "Default", "system");
+			TokenCredential token = cli.Authenticate("", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("YunionHQ", null, null, token, "v2");
+			Session s = cli.newSession("", null, null, token, "v2");
 			CloudProviderManager manager = new CloudProviderManager();
 
 			JSONObject query = new JSONObject();

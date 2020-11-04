@@ -74,6 +74,9 @@ public class RoleAssignmentManager extends KeystoneManager {
 		if (input.getDomains().length > 0) {
 			query.put("domains", JSONObject.parseArray(JSONObject.toJSONString(input.getDomains())));
 		}
+		if (input.getProjectDomains().length > 0) {
+			query.put("project_domains", JSONObject.parseArray(JSONObject.toJSONString(input.getProjectDomains())));
+		}
 		if (input.getLimit() >= 0) {
 			query.put("limit", input.getLimit());
 		}
