@@ -3,7 +3,7 @@ package com.yunionyun.mcp.mcclient;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
-import com.yunionyun.mcp.mcclient.managers.impl.LogManager;
+import com.yunionyun.mcp.mcclient.managers.impl.LogActionManager;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 import junit.framework.TestCase;
 import org.slf4j.Logger;
@@ -19,15 +19,15 @@ public class LogActionTest extends TestCase {
 			logger.info(token.toString());
 			logger.debug(token.toString());
 
-			Session s = cli.newSession("", null, EndpointType.PublicURL, token, "v2");
-			LogManager manager = new LogManager();
-
+			Session s = cli.newSession("region0", null, EndpointType.PublicURL, token, "v1");
+//			LogManager manager = new LogManager();
+			LogActionManager manager = new LogActionManager();
 			JSONObject params = new JSONObject();
 			params.put("obj_type", "eip");
-//			params.put("obj_id", "d1f6ebdf-4bac-4b22-853d-8928c970af7d");
-//			params.put("action", "detach");
+			params.put("obj_id", "d1f6ebdf-4bac-4b22-853d-8928c970af7d");
+			params.put("action", "detach");
 			params.put("scope", "system");
-//			params.put("limit", "0");
+			params.put("limit", "0");
 			params.put("filter", "action.in(eip_detach)");
 			ListResult list = manager.List(s, params);
 			if (list != null) {
