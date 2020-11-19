@@ -11,6 +11,8 @@ import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import java.io.IOException;
 
 public class BaseManager {
+
+	static final String DEFAULT_API_VERSION = "v1";
 	String serviceType;
 	EndpointType endpointType;
 	String version;
@@ -52,17 +54,17 @@ public class BaseManager {
 			offset += 1;
 		}
 		url = url.substring(offset);
-		if (this.version != null && this.version.length() > 0) {
-			return this.version + "/" + url;
+		if (this.version != null && this.version.length() > 0 && !this.version.equalsIgnoreCase(DEFAULT_API_VERSION)) {
+			return "/" + this.version + "/" + url;
 		} else {
-			return url;
+			return "/" + url;
 		}
 	}
 
 	protected JSONObject jsonRequest(
 			Session s, String method, String url, HttpHeaders headers, JSONObject body)
 			throws McClientJavaBizException, IOException, JSONClientException {
-		return s.jsonRequest(this.serviceType, this.endpointType, method, url, headers, body);
+		return s.jsonRequest(this.serviceType, this.endpointType, method, this.getUrl(url), headers, body);
 	}
 
 	public ListResult _list(Session s, String url, String respKey)

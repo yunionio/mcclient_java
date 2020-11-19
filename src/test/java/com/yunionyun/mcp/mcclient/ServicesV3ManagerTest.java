@@ -16,11 +16,11 @@ public class ServicesV3ManagerTest extends TestCase {
 
 	public void testApp() {
 
-		Client cli = new Client("https://10.127.190.252:30500/v3", 5000, true, true);
+		Client cli = new Client("", 5000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("sysadmin", "p8HZtrCcSnjmH4Jk", "Default", "system");
+			TokenCredential token = cli.Authenticate("", "", "", "");
 
-			Session s = cli.newSession("region0", null, null, token, "");
+			Session s = cli.newSession("", null, null, token, "");
 
 			ServicesV3Manager v3Manager = new ServicesV3Manager(EndpointType.PublicURL);
 			JSONObject jsonObject = v3Manager.GetSpecific(s, "common", "config", null);

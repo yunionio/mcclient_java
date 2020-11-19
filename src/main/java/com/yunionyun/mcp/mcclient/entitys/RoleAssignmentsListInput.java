@@ -26,6 +26,7 @@ public class RoleAssignmentsListInput {
 	private String[] roles;
 	private String[] projects;
 	private String[] domains;
+	private String[] projectDomains;
 
 	public RoleAssignmentsListInput() {
 		this.effective = true;
@@ -48,6 +49,15 @@ public class RoleAssignmentsListInput {
 		this.roles = new String[]{};
 		this.projects = new String[]{};
 		this.domains = new String[]{};
+		this.projectDomains = new String[]{};
+	}
+
+	public String[] getProjectDomains() {
+		return projectDomains;
+	}
+
+	public void setProjectDomains(String[] projectDomains) {
+		this.projectDomains = projectDomains;
 	}
 
 	public boolean getEffective() {
@@ -202,4 +212,6 @@ public class RoleAssignmentsListInput {
 	public void setDomains(String[] domains) {
 		this.domains = domains;
 	}
+
+
 }

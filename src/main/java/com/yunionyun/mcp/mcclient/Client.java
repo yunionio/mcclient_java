@@ -15,6 +15,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
 
 /**
  * Hello world!
@@ -47,7 +48,7 @@ public class Client {
 		if (this.debug) {
 			logger.debug(method + " " + endpoint + url);
 		}
-		URL requrl = new URL(endpoint + url);
+		URL requrl = new URL(joinUrl(endpoint, url));
 
 		if (requrl.getProtocol().equals("https") && this.inSecure) {
 			Utils.disableHttpsVerification();
@@ -391,5 +392,33 @@ public class Client {
 			TokenCredential token,
 			String apiVersion) {
 		return new Session(this, region, zone, endpointType, token, apiVersion);
+	}
+
+	public String joinUrl(String endpoint, String path) {
+		int endindex = endpoint.length() - 1;
+		String base = "", version = "";
+		for (; endindex >= 0 && endpoint.charAt(endindex) == '/'; endindex--) {
+
+		}
+		int lastslash = endpoint.substring(0, endindex + 1).lastIndexOf('/');
+		if (lastslash > 0) {
+			if ("latest".equalsIgnoreCase(endpoint.substring(lastslash + 1, endindex + 1))) {
+				base = endpoint.substring(0, lastslash);
+			} else {
+				if (Pattern.matches("^v\\d+\\.?\\d*", endpoint.substring(lastslash + 1, endindex + 1))) {
+					base = endpoint.substring(0, lastslash);
+					version = endpoint.substring(lastslash + 1, endindex + 1);
+				}
+			}
+
+		} else {
+			base = endpoint.substring(0, endindex + 1);
+		}
+		if (version.length() > 0) {
+			if (path.startsWith(String.format("/%s/", version))) {
+				endpoint = base;
+			}
+		}
+		return String.format("%s%s", endpoint, path);
 	}
 }
