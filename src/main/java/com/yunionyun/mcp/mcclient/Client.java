@@ -323,6 +323,7 @@ public class Client {
 			String passwd,
 			String projectId,
 			String projectName,
+			String projectDomain,
 			String token)
 			throws JSONClientException, McClientJavaBizException, IOException {
 		JSONObject body = new JSONObject();
@@ -349,7 +350,11 @@ public class Client {
 			Utils.JSONAdd(body, projectId, "auth", "scope", "project", "id");
 		}
 		if (projectName != null && projectName.length() > 0) {
-			Utils.JSONAdd(body, "default", "auth", "scope", "project", "domain", "id");
+			if (projectDomain == null || projectDomain.length() == 0) {
+				Utils.JSONAdd(body, "default", "auth", "scope", "project", "domain", "id");
+			} else {
+				Utils.JSONAdd(body, projectDomain, "auth", "scope", "project", "domain", "name");
+			}
 			Utils.JSONAdd(body, projectName, "auth", "scope", "project", "name");
 		}
 		HttpURLConnection req =
@@ -366,12 +371,22 @@ public class Client {
 
 	public TokenCredential Authenticate(String user, String passwd, String domain, String project)
 			throws JSONClientException, McClientJavaBizException, IOException {
-		return this._auth(domain, user, passwd, null, project, null);
+		return this._auth(domain, user, passwd, null, project, null, null);
+	}
+	
+	public TokenCredential Authenticate(String user, String passwd, String domain, String project, String projectDomain)
+			throws JSONClientException, McClientJavaBizException, IOException {
+		return this._auth(domain, user, passwd, null, project, projectDomain, null);
 	}
 
 	public TokenCredential SwitchProject(String projectId, String projectName, TokenCredential token)
 			throws JSONClientException, McClientJavaBizException, IOException {
-		return this._auth(null, null, null, projectId, projectName, token.getToken());
+		return this._auth(null, null, null, projectId, projectName, null, token.getToken());
+	}
+	
+	public TokenCredential SwitchProject(String projectId, String projectName, String projectDomain, TokenCredential token)
+			throws JSONClientException, McClientJavaBizException, IOException {
+		return this._auth(null, null, null, projectId, projectName, projectDomain, token.getToken());
 	}
 
 	public TokenCredential Verify(String adminToken, String token)

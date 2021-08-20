@@ -14,6 +14,7 @@ public class AuthAgent {
 	private String user;
 	private String passwd;
 	private String project;
+	private String projectDomain;
 	private TokenCredential adminToken;
 	private Cache<TokenCredential> tokenCache;
 	private int checkPeriodSeconds;
@@ -28,11 +29,39 @@ public class AuthAgent {
 			int timeout,
 			boolean debug,
 			boolean insecure) {
+		this.init(authUrl, domain, user, passwd, project, null, cacheSize, timeout, debug, insecure);
+	}
+	
+	public AuthAgent(
+			String authUrl,
+			String domain,
+			String user,
+			String passwd,
+			String project,
+			String projectDomain,
+			int cacheSize,
+			int timeout,
+			boolean debug,
+			boolean insecure) {
+		this.init(authUrl, domain, user, passwd, project, projectDomain, cacheSize, timeout, debug, insecure);
+	}
+	
+	private void init(String authUrl,
+			String domain,
+			String user,
+			String passwd,
+			String project,
+			String projectDomain,
+			int cacheSize,
+			int timeout,
+			boolean debug,
+			boolean insecure) {
 		this.client = new Client(authUrl, timeout, debug, insecure);
 		this.domain = domain;
 		this.user = user;
 		this.passwd = passwd;
 		this.project = project;
+		this.projectDomain = projectDomain;
 		this.tokenCache = new Cache<TokenCredential>(cacheSize);
 		this.checkPeriodSeconds = 300; // every 5 mintues
 	}
@@ -41,7 +70,7 @@ public class AuthAgent {
 		if (this.adminToken == null || this.adminToken.expireSeconds() < 3600) {
 			try {
 				TokenCredential adminToken =
-						this.client.Authenticate(this.user, this.passwd, this.domain, this.project);
+						this.client.Authenticate(this.user, this.passwd, this.domain, this.project, this.projectDomain);
 				this.adminToken = adminToken;
 			} catch (Exception e) {
 				logger.error("Fail to get adminToken：");
