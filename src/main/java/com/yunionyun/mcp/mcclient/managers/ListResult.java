@@ -8,6 +8,9 @@ public class ListResult {
 	int total;
 	int limit;
 	int offset;
+	String markerField;
+	String markerOrder;
+	String nextMarker;
 	// String prev;
 	// String next;
 
@@ -16,6 +19,9 @@ public class ListResult {
 		this.total = 0;
 		this.limit = 0;
 		this.offset = 0;
+		this.markerField = "";
+		this.markerOrder = "";
+		this.nextMarker = "";
 		// this.prev = null;
 		// this.next = null;
 	}
@@ -52,6 +58,15 @@ public class ListResult {
 			this.limit = 0;
 			this.offset = 0;
 		}
+		if (result.containsKey("marker_field")) {
+			this.markerField = result.getString("marker_field");
+		}
+		if (result.containsKey("marker_order")) {
+			this.markerOrder = result.getString("marker_order");
+		}
+		if (result.containsKey("next_marker")) {
+			this.nextMarker = result.getString("next_marker");
+		}
     /* if (result.containsKey("prev")) {
     	this.prev = result.getString("prev");
     }
@@ -60,11 +75,21 @@ public class ListResult {
     }*/
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder buf = new StringBuilder();
 		buf.append("total: " + total + "\n");
 		buf.append("limit: " + limit + "\n");
 		buf.append("offset: " + offset + "\n");
+		if (this.markerOrder.length() > 0) {
+			buf.append("marker_order:" + this.markerOrder + "\n");
+		}
+		if (this.markerField.length() > 0) {
+			buf.append("marker_field:" + this.markerField + "\n");
+		}
+		if (this.nextMarker.length() > 0) {
+			buf.append("next_marker:" + this.nextMarker + "\n");
+		}
 		for (int i = 0; i < this.data.length; i++) {
 			buf.append(this.data[i].toString());
 			buf.append("\n");
@@ -102,5 +127,17 @@ public class ListResult {
 
 	public int getDataSize() {
 		return this.data.length;
+	}
+
+	public String getMarkerField() {
+		return this.markerField;
+	}
+
+	public String getMarkerOrder() {
+		return this.markerOrder;
+	}
+
+	public String getNextMarker() {
+		return this.nextMarker;
 	}
 }
