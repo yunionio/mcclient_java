@@ -7,6 +7,7 @@ import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
 import com.yunionyun.mcp.mcclient.managers.impl.DomainManager;
 import com.yunionyun.mcp.mcclient.managers.impl.RoleAssignmentManager;
+import com.yunionyun.mcp.mcclient.managers.impl.UserManager;
 import junit.framework.TestCase;
 
 import java.io.IOException;
@@ -23,27 +24,28 @@ public class UserMangerTest extends TestCase {
 		TokenCredential token = null;
 		try {
 			Set<String> hashSet = new HashSet<>();
-			token = cli.Authenticate("", "", "", "");
+			token = cli.Authenticate("", "", "Default", "system");
 			Session s = cli.newSession("", null, null, token, "v1");
-//			UserManager userManager = new UserManager();
-//			JSONObject ob = new JSONObject();
+			UserManager userManager = new UserManager();
+			JSONObject ob = new JSONObject();
 //			ob.put("role", "domainadmin");
-////			ob.put("scope", "system");
-//			ListResult list = userManager.List(s, ob);
-//			if (list != null) {
-//				for (int i = 0; i < list.getTotal(); i++) {
-//					JSONObject jsonObject = list.getDataAt(i);
-//					if (jsonObject.containsKey("id") && jsonObject.getString("id") != null) {
-//						String id = jsonObject.getString("id");
-//						if (id != null && id.length() != 0) {
-//							StringBuilder sb = new StringBuilder();
-//							sb.append(" id:").append(id);
-//							sb.append(" name:").append(jsonObject.getString("name"));
-//							hashSet.add(id);
-//						}
-//					}
-//				}
-//			}
+			ob.put("scope", "system");
+			ob.put("limit", 0);
+			ListResult list = userManager.List(s, ob);
+			if (list != null) {
+				for (int i = 0; i < list.getTotal(); i++) {
+					JSONObject jsonObject = list.getDataAt(i);
+					if (jsonObject.containsKey("id") && jsonObject.getString("id") != null) {
+						String id = jsonObject.getString("id");
+						if (id != null && id.length() != 0) {
+							StringBuilder sb = new StringBuilder();
+							sb.append(" id:").append(id);
+							sb.append(" name:").append(jsonObject.getString("name"));
+							hashSet.add(id);
+						}
+					}
+				}
+			}
 //			System.out.println(hashSet.size());
 			DomainManager domainManager = new DomainManager();
 			JSONObject jsonObject = domainManager.GetById(s, "zzytest", new JSONObject());

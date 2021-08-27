@@ -3,6 +3,7 @@ package com.yunionyun.mcp.mcclient;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
+import com.yunionyun.mcp.mcclient.managers.impl.CloudAccountManager;
 import com.yunionyun.mcp.mcclient.managers.impl.CloudregionManager;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 import junit.framework.TestCase;
@@ -19,12 +20,14 @@ public class CloudRegionManagerTest extends TestCase {
 	public void testAPP() {
 		Client cli = new Client("", 5000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("", "", "Default", "system");
+			TokenCredential token = cli.Authenticate("", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("YunionHQ", null, null, token, "v2");
-			CloudregionManager manager = new CloudregionManager(EndpointType.PublicURL);
+			Session s = cli.newSession("", null, EndpointType.AdminURL, token, "v2");
 			JSONObject query = new JSONObject();
+			CloudregionManager manager = new CloudregionManager(EndpointType.PublicURL);
+			CloudAccountManager cloudAccountManager = new CloudAccountManager();
+			query.put("scope", "system");
 			JSONArray regionCities = manager.getRegionCities(s, query);
 			if (regionCities != null) {
 			}
