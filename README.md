@@ -41,7 +41,6 @@ public Client(String authUrl, int timeout, boolean debug, boolean insecure)
 认证接口，初始化Client之后，调用该接口认证，认证成功获得token（TokenCredential）。
 
 ```java
-public TokenCredential Authenticate(String user, String passwd, String domain, String project)
 public TokenCredential Authenticate(String user, String passwd, String domain, String project, String projectDomain)
 ```
 
@@ -63,8 +62,7 @@ public Session newSession(
 			String region,
 			String zone,
 			EndpointType endpointType,
-			TokenCredential token,
-			String apiVersion)
+			TokenCredential token)
 ```
 
 参数说明如下：
@@ -73,7 +71,6 @@ public Session newSession(
 * zone(String): 访问的可用区，该参数可选。一般为null
 * endpointType(String): 访问服务端点的类型，可选值为：internal和public。一般要选择public。只有客户端在部署Cloudpods的Kubernetes集群里运行时，才可以使用internal。
 * token(TokenCredential): 调用client.Authenticate认证获得的token，该值必填
-* apiVersion(String): 调用后端的API版本号，可以不填
 
 返回值：返回一个session，该session包含了token以及环境变量，用于访问各类资源的接口。
 
@@ -124,7 +121,7 @@ public void start_sync_ready()
 该方法返回AuthAgent保存的adminToken生成的session，用于访问API。
 
 ```java
-public Session getAdminSession(String region, String zone, EndpointType endpointType, String apiVersion)
+public Session getAdminSession(String region, String zone, EndpointType endpointType)
 ```
 
 参数说明如下：
@@ -132,7 +129,6 @@ public Session getAdminSession(String region, String zone, EndpointType endpoint
 * region(String): 访问的Cloudpods实例的region，一般为"region0"
 * zone(String): 访问的可用区，该参数可选。一般为null
 * endpointType(EndpointType): 访问服务端点的类型，可选值为：EndpointType.InternalURL和EndpointType.PublicURL。一般需要选择public。只有客户端在部署Cloudpods的Kubernetes集群里运行时，才可以使用internal。
-* apiVersion(String): 调用后端的API版本号，可以不填
 
 #### 4) AuthAgent.verify
 
