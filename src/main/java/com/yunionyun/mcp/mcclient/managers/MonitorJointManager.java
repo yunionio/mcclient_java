@@ -27,6 +27,7 @@ public class MonitorJointManager extends JointResourceManager {
 			BaseMonitorManager slave) {
 		super(
 				"servicetree",
+				null,
 				endpointType,
 				"v1",
 				columns,

@@ -15,8 +15,8 @@ public class EndpointManagerTest extends TestCase {
 		Client cli = new Client("", 500, true, true);
 		TokenCredential token = null;
 		try {
-			token = cli.Authenticate("", "", "", "");
-			Session s = cli.newSession("", null, null, token, "");
+			token = cli.Authenticate("", "", "", "", "");
+			Session s = cli.newSession("", null, null, token);
 			EndpointsV3Manager manager = new EndpointsV3Manager();
 			JSONObject query = new JSONObject();
 			query.put("details", true);

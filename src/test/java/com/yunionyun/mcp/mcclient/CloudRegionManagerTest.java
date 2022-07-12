@@ -20,10 +20,10 @@ public class CloudRegionManagerTest extends TestCase {
 	public void testAPP() {
 		Client cli = new Client("", 5000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("", "", "", "");
+			TokenCredential token = cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("", null, EndpointType.AdminURL, token, "v2");
+			Session s = cli.newSession("", null, EndpointType.AdminURL, token);
 			JSONObject query = new JSONObject();
 			CloudregionManager manager = new CloudregionManager(EndpointType.PublicURL);
 			CloudAccountManager cloudAccountManager = new CloudAccountManager();

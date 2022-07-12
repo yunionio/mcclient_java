@@ -15,6 +15,7 @@ public class JointResourceManager extends ResourceManager {
 
 	public JointResourceManager(
 			String serviceType,
+			String apiVersion,
 			EndpointType endpointType,
 			String version,
 			String[] columns,
@@ -24,8 +25,7 @@ public class JointResourceManager extends ResourceManager {
 			String context,
 			ResourceManager master,
 			ResourceManager slave) {
-		super(
-				serviceType, endpointType, version, columns, adminColumns, keyword, keywordPlural, context);
+		super(serviceType, apiVersion, endpointType, version, columns, adminColumns, keyword, keywordPlural, context);
 		this.master = master;
 		this.slave = slave;
 	}

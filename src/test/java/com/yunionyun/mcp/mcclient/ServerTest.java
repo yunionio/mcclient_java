@@ -17,18 +17,16 @@ public class ServerTest extends TestCase {
 	private static Logger logger = LoggerUtils.createLoggerFor(ServerManager.class.getName());
 
 	public void testApp() {
-		Client cli = new Client("", 5000, true, true);
+		Client cli = new Client("https://192.168.2.1:30500/v3", 5000, true, true);
 		try {
-			TokenCredential token =
-					cli.Authenticate("", "", "", "");
+			TokenCredential token =	cli.Authenticate("uname", "passwd", "udomain", "system", "Default");
 			logger.info(token.toString());
-			logger.debug(token.toString());
 			JSONObject rtn = new JSONObject();
 
-			Session s = cli.newSession("", null, EndpointType.PublicURL, token, "v2");
+			Session s = cli.newSession("region0", null, EndpointType.PublicURL, token);
 
 			ServerManager serverManager = new ServerManager();
-			JSONObject serverInfo = serverManager.GetById(s, "", null);
+			JSONObject serverInfo = serverManager.GetById(s, "2db6124a-f5de-4ec2-8fbe-16e4b0362f63", null);
 			JSONObject metaData = serverInfo.getJSONObject("metadata");
 
 			String userName = metaData.getString("login_account");
@@ -44,7 +42,7 @@ public class ServerTest extends TestCase {
 					passwd = CodecUtils.decryptAESBase64(loginKey, private_key);
 				} else {
 					//如果不存在keypair_id,直接用id信息进行解码
-					String id = "7268fe9c-e21f-4cf2-8481-a3e162016a1f";//.replace("_", "+").replace("-", "/");
+					String id = "2db6124a-f5de-4ec2-8fbe-16e4b0362f63";//.replace("_", "+").replace("-", "/");
 					passwd = CodecUtils.decryptAESBase64(loginKey, id);
 				}
 				rtn.put("password", passwd);

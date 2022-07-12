@@ -19,11 +19,11 @@ public class ActionManagerTest extends TestCase {
 		Client cli = new Client("", 5000, true, true);
 		try {
 			TokenCredential token =
-					cli.Authenticate("", "", "", "");
+					cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
 
-			Session s = cli.newSession("", null, EndpointType.PublicURL, token, "v1");
+			Session s = cli.newSession("", null, EndpointType.PublicURL, token);
 
 			PriceInfoManager priceInfoManager = new PriceInfoManager();
 			JSONObject query = new JSONObject();

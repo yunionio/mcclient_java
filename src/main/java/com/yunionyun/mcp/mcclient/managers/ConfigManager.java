@@ -17,6 +17,6 @@ public class ConfigManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("yunionconf", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("yunionconf", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

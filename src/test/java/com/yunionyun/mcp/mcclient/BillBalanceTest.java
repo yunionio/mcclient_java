@@ -23,7 +23,7 @@ public class BillBalanceTest extends TestCase {
 						authURL, domain, username, password, project, cacheSize, timeout, debug, insecure);
 		authAgent.start_sync_ready();
 
-		Session session = authAgent.getAdminSession("", null, null, "");
+		Session session = authAgent.getAdminSession("", null, null);
 
 		try {
 			BillBalanceManager manager = new BillBalanceManager();

@@ -21,8 +21,8 @@ public class SchedulerManagerTest extends TestCase {
 		Client cli = new Client("", 500, true, true);
 		TokenCredential token = null;
 		try {
-			token = cli.Authenticate("", "", "", "");
-			Session s = cli.newSession("", null, null, token, "");
+			token = cli.Authenticate("", "", "", "", "");
+			Session s = cli.newSession("", null, null, token);
 			SchedulerManager manager = new SchedulerManager(EndpointType.PublicURL);
 			JSONObject param = new JSONObject();
 			param.put("auto_start", true);

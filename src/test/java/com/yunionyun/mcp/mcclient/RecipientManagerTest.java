@@ -15,10 +15,10 @@ public class RecipientManagerTest extends TestCase {
 		Client cli = new Client("", 5000, true, true);
 		try {
 			TokenCredential token =
-					cli.Authenticate("", "", "", "");
+					cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("", null, null, token, "");
+			Session s = cli.newSession("", null, null, token);
 			RecipientManager manager = new RecipientManager();
 
 			JSONObject query = new JSONObject();

@@ -18,9 +18,9 @@ public class ServicesV3ManagerTest extends TestCase {
 
 		Client cli = new Client("", 5000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("", "", "", "");
+			TokenCredential token = cli.Authenticate("", "", "", "", "");
 
-			Session s = cli.newSession("", null, null, token, "");
+			Session s = cli.newSession("", null, null, token);
 
 			ServicesV3Manager v3Manager = new ServicesV3Manager(EndpointType.PublicURL);
 			JSONObject jsonObject = v3Manager.GetSpecific(s, "common", "config", null);

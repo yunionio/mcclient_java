@@ -24,8 +24,8 @@ public class UserMangerTest extends TestCase {
 		TokenCredential token = null;
 		try {
 			Set<String> hashSet = new HashSet<>();
-			token = cli.Authenticate("", "", "Default", "system");
-			Session s = cli.newSession("", null, null, token, "v1");
+			token = cli.Authenticate("", "", "Default", "system", "Default");
+			Session s = cli.newSession("", null, null, token);
 			UserManager userManager = new UserManager();
 			JSONObject ob = new JSONObject();
 //			ob.put("role", "domainadmin");
