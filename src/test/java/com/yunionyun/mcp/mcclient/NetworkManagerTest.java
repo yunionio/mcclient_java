@@ -22,8 +22,8 @@ public class NetworkManagerTest extends TestCase {
 		Client cli = new Client("", 500, true, true);
 		TokenCredential token = null;
 		try {
-			token = cli.Authenticate("", "", "", "");
-			Session s = cli.newSession("", null, null, token, "v2");
+			token = cli.Authenticate("", "", "", "", "");
+			Session s = cli.newSession("", null, null, token);
 //			NetworkManager manager = new NetworkManager(EndpointType.PublicURL);
 			SkuManager manager = new SkuManager(EndpointType.PublicURL);
 			JSONObject query = new JSONObject();

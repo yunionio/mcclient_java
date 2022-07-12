@@ -17,6 +17,7 @@ public class ResourceManager extends BaseManager {
 
 	public ResourceManager(
 			String serviceType,
+			String apiVersion,
 			EndpointType endpointType,
 			String version,
 			String[] columns,
@@ -24,7 +25,7 @@ public class ResourceManager extends BaseManager {
 			String keyword,
 			String keywordPlural,
 			String context) {
-		super(serviceType, endpointType, version, columns, adminColumns);
+		super(serviceType, apiVersion, endpointType, version, columns, adminColumns);
 		this.context = context;
 		this.keyword = keyword;
 		this.keywordPlural = keywordPlural;
@@ -337,6 +338,6 @@ public class ResourceManager extends BaseManager {
 	public JSONObject upload(Session session, String path, HttpHeaders headers, InputStream body)
 			throws KeyManagementException, NoSuchAlgorithmException, McClientJavaBizException,
 			IOException, JSONClientException {
-		return session.rowRequest(this.serviceType, this.endpointType, "POST", path, headers, body);
+		return session.rowRequest(this.serviceType, this.apiVersion, this.endpointType, "POST", path, headers, body);
 	}
 }

@@ -38,8 +38,8 @@ public class AppTest extends TestCase {
 	public void testApp() {
 		Client cli = new Client("", 1000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("", "", "", "");
-			Session s = cli.newSession("", null, null, token, "v2");
+			TokenCredential token = cli.Authenticate("", "", "", "", "");
+			Session s = cli.newSession("", null, null, token);
 			ServerManager mgr = new ServerManager();
 			logger.info("Start List");
 			JSONObject srvquery = new JSONObject();

@@ -20,6 +20,6 @@ public class BaseVNCProxyManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("vncproxy", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("vncproxy", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

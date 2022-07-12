@@ -16,6 +16,6 @@ public class BaseMonitorManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("servicetree", endpointType, "v1", columns, adminColumns, keyword, keywordPlural, null);
+		super("servicetree", null, endpointType, "v1", columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

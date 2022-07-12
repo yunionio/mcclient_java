@@ -16,6 +16,6 @@ public class BaseWebsocketManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("websocket", endpointType, "v1", columns, adminColumns, keyword, keywordPlural, null);
+		super("websocket", null, endpointType, "v1", columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

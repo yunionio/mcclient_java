@@ -368,15 +368,10 @@ public class Client {
 		cred.parseJSON(result);
 		return cred;
 	}
-
-	public TokenCredential Authenticate(String user, String passwd, String domain, String project)
-			throws JSONClientException, McClientJavaBizException, IOException {
-		return this._auth(domain, user, passwd, null, project, null, null);
-	}
 	
-	public TokenCredential Authenticate(String user, String passwd, String domain, String project, String projectDomain)
+	public TokenCredential Authenticate(String user, String passwd, String userDomain, String project, String projectDomain)
 			throws JSONClientException, McClientJavaBizException, IOException {
-		return this._auth(domain, user, passwd, null, project, projectDomain, null);
+		return this._auth(userDomain, user, passwd, null, project, projectDomain, null);
 	}
 
 	public TokenCredential SwitchProject(String projectId, String projectName, TokenCredential token)
@@ -404,9 +399,8 @@ public class Client {
 			String region,
 			String zone,
 			EndpointType endpointType,
-			TokenCredential token,
-			String apiVersion) {
-		return new Session(this, region, zone, endpointType, token, apiVersion);
+			TokenCredential token) {
+		return new Session(this, region, zone, endpointType, token);
 	}
 
 	public String joinUrl(String endpoint, String path) {

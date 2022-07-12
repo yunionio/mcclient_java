@@ -19,11 +19,11 @@ public class NotifyManagerTest extends TestCase {
 		Client cli = new Client("", 5000, true, true);
 		try {
 			TokenCredential token =
-					cli.Authenticate("", "", "", "");
+					cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
 
-			Session s = cli.newSession("region0", null, EndpointType.PublicURL, token, "v1");
+			Session s = cli.newSession("region0", null, EndpointType.PublicURL, token);
 //			LogManager manager = new LogManager();
 			NotifyManager notify = new NotifyManager();
 			JSONObject params = new JSONObject();

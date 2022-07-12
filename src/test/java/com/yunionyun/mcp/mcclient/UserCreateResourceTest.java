@@ -23,11 +23,11 @@ public class UserCreateResourceTest extends TestCase {
 		Client cli = new Client("", 5000, true, true);
 		try {
 			TokenCredential token =
-					cli.Authenticate("", "", "", "");
+					cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
 
-			Session s = cli.newSession("", null, EndpointType.PublicURL, token, "v1");
+			Session s = cli.newSession("", null, EndpointType.PublicURL, token);
 			LogActionManager manager = new LogActionManager();
 			JSONObject params = new JSONObject();
 			params.put("scope", "system");

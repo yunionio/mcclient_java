@@ -16,6 +16,6 @@ public class BaseLogActionManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("log", endpointType, "v1", columns, adminColumns, keyword, keywordPlural, null);
+		super("log", null, endpointType, "v1", columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

@@ -20,6 +20,6 @@ public class BaseAutoUpdateManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("autoupdate", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("autoupdate", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

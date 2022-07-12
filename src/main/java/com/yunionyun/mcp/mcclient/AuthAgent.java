@@ -106,8 +106,8 @@ public class AuthAgent {
 	}
 
 	public Session getAdminSession(
-			String region, String zone, EndpointType endpointType, String apiVersion) {
-		return this.client.newSession(region, zone, endpointType, this.adminToken, apiVersion);
+			String region, String zone, EndpointType endpointType) {
+		return this.client.newSession(region, zone, endpointType, this.adminToken);
 	}
 
 	public TokenCredential verify(String token) {

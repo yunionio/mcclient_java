@@ -20,6 +20,6 @@ public class BaseDevtoolManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("devtool", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("devtool", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

@@ -22,8 +22,8 @@ public class SkuManagerTest extends TestCase {
 		Client cli = new Client("", 500, true, true);
 		TokenCredential token = null;
 		try {
-			token = cli.Authenticate("", "", "Default", "");
-			Session s = cli.newSession("", null, null, token, "");
+			token = cli.Authenticate("", "", "Default", "", "");
+			Session s = cli.newSession("", null, null, token);
 			SkuManager manager = new SkuManager(EndpointType.PublicURL);
 			JSONObject query = new JSONObject();
 			query.put("public_cloud", false);

@@ -20,6 +20,6 @@ public class BaseITSMManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("itsm", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("itsm", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

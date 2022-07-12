@@ -9,8 +9,8 @@ public class PatchTest extends TestCase {
 	public void testApp() {
 		Client cli = new Client("", 1000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("", "", "", "");
-			Session s = cli.newSession("", null, null, token, "");
+			TokenCredential token = cli.Authenticate("", "", "", "", "");
+			Session s = cli.newSession("", null, null, token);
 			ProjectManager projman = new ProjectManager();
 			JSONObject results = projman.GetByName(s, "system", null);
 			String id = results.getString("id");

@@ -22,6 +22,7 @@ public class ComputeJointManager extends JointResourceManager {
 			ComputeManager slave) {
 		super(
 				"compute",
+				"v2",
 				endpointType,
 				null,
 				columns,

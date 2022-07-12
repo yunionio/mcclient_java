@@ -16,10 +16,10 @@ public class AlarmEventTest extends TestCase {
 	public void testBatchInsert() {
 		Client cli = new Client("", 5000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("", "", "", "");
+			TokenCredential token = cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("", null, null, token, "");
+			Session s = cli.newSession("", null, null, token);
 
 			MonitorAlarmEventManager manager = new MonitorAlarmEventManager();
 
@@ -53,10 +53,10 @@ public class AlarmEventTest extends TestCase {
 	public void testBatchUpdate() {
 		Client cli = new Client("http://10.168.222.251:35357/v3", 5000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("sysadmin", "MxqhTC2VKe067jtD", "Default", "system");
+			TokenCredential token = cli.Authenticate("sysadmin", "MxqhTC2VKe067jtD", "Default", "system", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("LocalTest", null, null, token, "");
+			Session s = cli.newSession("LocalTest", null, null, token);
 
 			MonitorAlarmEventManager manager = new MonitorAlarmEventManager();
 

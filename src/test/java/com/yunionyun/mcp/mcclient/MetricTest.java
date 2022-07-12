@@ -19,10 +19,10 @@ public class MetricTest extends TestCase {
 		Client cli = new Client("", 5000, true, true);
 		try {
 			TokenCredential token =
-					cli.Authenticate("", "", "", "");
+					cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("", null, null, token, "");
+			Session s = cli.newSession("", null, null, token);
 			MonitorMetricManager manager = new MonitorMetricManager();
 
 			Set<String> sets = new HashSet<String>(Arrays.asList("test_metric01", "test_metric02"));

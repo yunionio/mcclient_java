@@ -15,10 +15,10 @@ public class CloudProviderManagerTest extends TestCase {
 	public void testApp() {
 		Client cli = new Client("", 5000, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("", "", "", "");
+			TokenCredential token = cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("", null, null, token, "v2");
+			Session s = cli.newSession("", null, null, token);
 			CloudProviderManager manager = new CloudProviderManager();
 
 			JSONObject query = new JSONObject();

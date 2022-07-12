@@ -17,10 +17,10 @@ public class BatchAddNodeTest extends TestCase {
 		Client cli = new Client("", 5000, true, true);
 		try {
 			TokenCredential token =
-					cli.Authenticate("", "", "", "");
+					cli.Authenticate("", "", "", "", "");
 			logger.info(token.toString());
 			logger.debug(token.toString());
-			Session s = cli.newSession("", null, null, token, "");
+			Session s = cli.newSession("", null, null, token);
 			MonitorNodeManager manager = new MonitorNodeManager();
 
 			Set<String> sets = new HashSet<String>(Arrays.asList("host01_1.1.1.1", "host02_2.2.2.2"));
