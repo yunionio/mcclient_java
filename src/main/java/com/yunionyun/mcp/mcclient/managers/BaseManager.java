@@ -34,13 +34,19 @@ public class BaseManager {
 		this.version = version;
 		this.colums = columns;
 		this.adminColums = adminColumns;
-		this.allColumns = new String[columns.length + adminColumns.length];
-		for (int i = 0; i < columns.length; i++) {
+		if (this.colums == null) {
+			this.colums = new String[0];
+		}
+		if (this.adminColums == null) {
+			this.adminColums = new String[0];
+		}
+		this.allColumns = new String[this.colums.length + this.adminColums.length];
+		for (int i = 0; i < this.colums.length; i++) {
 			this.allColumns[i] = this.colums[i];
-		}
-		for (int i = 0; i < adminColumns.length; i++) {
+		}	
+		for (int i = 0; i < this.adminColums.length; i++) {
 			this.allColumns[this.colums.length + i] = this.adminColums[i];
-		}
+		}	
 	}
 
 	public String[] getColumns(Session s) {
