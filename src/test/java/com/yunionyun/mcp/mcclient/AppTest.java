@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
 import com.yunionyun.mcp.mcclient.managers.impl.*;
+import com.yunionyun.mcp.mcclient.managers.impl.cloudid.SamlUserManager;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -39,7 +40,7 @@ public class AppTest extends TestCase {
 		Client cli = new Client("", 1000, true, true);
 		try {
 			TokenCredential token = cli.Authenticate("", "", "", "", "");
-			Session s = cli.newSession("", null, null, token);
+			Session s = cli.newSession("", null, EndpointType.PublicURL, token);
 			ServerManager mgr = new ServerManager();
 			logger.info("Start List");
 			JSONObject srvquery = new JSONObject();
@@ -67,7 +68,7 @@ public class AppTest extends TestCase {
 			logger.info(imgs.toString());
 
 			ProjectManager projman = new ProjectManager();
-			JSONObject proj = projman.GetByName(s, "newproject", null);
+			JSONObject proj = projman.GetByName(s, "qiujian", null);
 			RoleManager roleman = new RoleManager();
 			JSONObject role = roleman.GetByName(s, "project_owner", null);
 			if (role != null) {
@@ -92,6 +93,11 @@ public class AppTest extends TestCase {
 					"test",
 					NotifyManager.PRIORITY_NORMAL,
 					"This is a normal message");
+
+			SamlUserManager saml = new SamlUserManager();
+			String uid = "admin";
+			JSONObject sinfo = saml.GetSpecific(s, uid, "saml", null);
+			System.out.println(sinfo);
 
 			logger.info("Test complete!!!");
 		} catch (Exception e) {
