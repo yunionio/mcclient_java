@@ -2,7 +2,7 @@ package com.yunionyun.mcp.mcclient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
-import com.yunionyun.mcp.mcclient.managers.impl.BillBalanceManager;
+import com.yunionyun.mcp.mcclient.managers.impl.meter.BillBalanceManager;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 

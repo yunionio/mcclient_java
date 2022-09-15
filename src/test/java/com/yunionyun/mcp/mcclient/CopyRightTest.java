@@ -2,7 +2,7 @@ package com.yunionyun.mcp.mcclient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
-import com.yunionyun.mcp.mcclient.managers.impl.CopyrightManage;
+import com.yunionyun.mcp.mcclient.managers.impl.yunionagent.CopyrightManage;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 import junit.framework.TestCase;
 import org.slf4j.Logger;

@@ -2,8 +2,8 @@ package com.yunionyun.mcp.mcclient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
-import com.yunionyun.mcp.mcclient.managers.impl.InfoManager;
-import com.yunionyun.mcp.mcclient.managers.impl.NotifyManager;
+import com.yunionyun.mcp.mcclient.managers.impl.yunionagent.InfoManager;
+import com.yunionyun.mcp.mcclient.managers.impl.notify.NotifyManager;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 import junit.framework.TestCase;
 import org.slf4j.Logger;

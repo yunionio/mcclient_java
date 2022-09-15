@@ -3,7 +3,7 @@ package com.yunionyun.mcp.mcclient;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
-import com.yunionyun.mcp.mcclient.managers.impl.SchedulerManager;
+import com.yunionyun.mcp.mcclient.managers.impl.scheduler.SchedulerManager;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 import junit.framework.TestCase;
 import org.slf4j.Logger;

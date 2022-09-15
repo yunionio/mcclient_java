@@ -5,9 +5,9 @@ import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import com.yunionyun.mcp.mcclient.entitys.RoleAssignmentsListInput;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
-import com.yunionyun.mcp.mcclient.managers.impl.DomainManager;
-import com.yunionyun.mcp.mcclient.managers.impl.RoleAssignmentManager;
-import com.yunionyun.mcp.mcclient.managers.impl.UserManager;
+import com.yunionyun.mcp.mcclient.managers.impl.keystone.DomainManager;
+import com.yunionyun.mcp.mcclient.managers.impl.keystone.RoleAssignmentManager;
+import com.yunionyun.mcp.mcclient.managers.impl.keystone.UserManager;
 import junit.framework.TestCase;
 
 import java.io.IOException;
@@ -20,12 +20,12 @@ import java.util.Set;
  */
 public class UserMangerTest extends TestCase {
 	public void testApp() {
-		Client cli = new Client("", 500, true, true);
+		Client cli = new Client("https://127.0.0.1:5000/v3", 500, true, true);
 		TokenCredential token = null;
 		try {
 			Set<String> hashSet = new HashSet<>();
-			token = cli.Authenticate("", "", "Default", "system", "Default");
-			Session s = cli.newSession("", null, null, token);
+			token = cli.Authenticate("admin", "123@admin", "Default", "system", "Default");
+			Session s = cli.newSession("region0", null, null, token);
 			UserManager userManager = new UserManager();
 			JSONObject ob = new JSONObject();
 //			ob.put("role", "domainadmin");
@@ -48,7 +48,7 @@ public class UserMangerTest extends TestCase {
 			}
 //			System.out.println(hashSet.size());
 			DomainManager domainManager = new DomainManager();
-			JSONObject jsonObject = domainManager.GetById(s, "zzytest", new JSONObject());
+			JSONObject jsonObject = domainManager.GetById(s, "default", new JSONObject());
 			String id = jsonObject.getString("id");
 			if (!"".equalsIgnoreCase(id) && id != null) {
 
