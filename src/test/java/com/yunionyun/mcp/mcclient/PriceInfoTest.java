@@ -1,7 +1,7 @@
 package com.yunionyun.mcp.mcclient;
 
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
-import com.yunionyun.mcp.mcclient.managers.impl.PriceInfoManager;
+import com.yunionyun.mcp.mcclient.managers.impl.meter.PriceInfoManager;
 import com.yunionyun.mcp.mcclient.utils.pricespec.InstanceSpec;
 import com.yunionyun.mcp.mcclient.utils.pricespec.RdsSpec;
 import com.yunionyun.mcp.mcclient.utils.pricespec.RedisSpec;

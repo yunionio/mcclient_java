@@ -3,7 +3,7 @@ package com.yunionyun.mcp.mcclient;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
-import com.yunionyun.mcp.mcclient.managers.impl.PriceInfoManager;
+import com.yunionyun.mcp.mcclient.managers.impl.meter.PriceInfoManager;
 import com.yunionyun.mcp.mcclient.utils.LoggerUtils;
 import junit.framework.TestCase;
 import org.slf4j.Logger;

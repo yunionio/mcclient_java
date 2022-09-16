@@ -3,7 +3,7 @@ package com.yunionyun.mcp.mcclient;
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import com.yunionyun.mcp.mcclient.managers.ListResult;
-import com.yunionyun.mcp.mcclient.managers.impl.EndpointsV3Manager;
+import com.yunionyun.mcp.mcclient.managers.impl.keystone.EndpointsV3Manager;
 import junit.framework.TestCase;
 
 /**

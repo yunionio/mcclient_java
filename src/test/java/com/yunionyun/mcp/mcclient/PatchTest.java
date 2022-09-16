@@ -2,7 +2,7 @@ package com.yunionyun.mcp.mcclient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
-import com.yunionyun.mcp.mcclient.managers.impl.ProjectManager;
+import com.yunionyun.mcp.mcclient.managers.impl.keystone.ProjectManager;
 import junit.framework.TestCase;
 
 public class PatchTest extends TestCase {
