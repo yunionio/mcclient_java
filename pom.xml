@@ -113,6 +113,15 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <tags>
+                        <tag>
+                            <name>date</name>
+                            <placement>a</placement>
+                            <head>Written date:</head>
+                        </tag>
+                    </tags>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
