@@ -1,10 +1,9 @@
 # Cloudpods Java SDK
 
-Cloudpods Java SDK为访问多云平台API的Java SDK。实现了账号认证，获取认证token，并携带token，构造HTTP REST API访问各类资源接口的功能。SDK下载地址为：
+Cloudpods Java SDK为访问多云平台API的Java SDK。实现了账号认证，获取认证token，并携带token，构造HTTP REST API访问各类资源接口的功能。
 
-```
-https://github.com/yunionio/mcclient_java
-```
+- SDK 源码地址为: https://github.com/yunionio/mcclient_java
+- 做为 maven 模块使用请参考: https://central.sonatype.com/artifact/com.yunionyun.mcp/mcclient/overview
 
 ## 1. 主要的类
 
