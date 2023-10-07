@@ -9,7 +9,7 @@ public class BastionHostManager extends BastionhostManager {
     }
 
     public BastionHostManager(EndpointType endpointType) {
-        super("bation_host", "bastion_hosts",
+        super("bastion_host", "bastion_hosts",
                 endpointType,
                 new String[]{},
                 new String[]{});
