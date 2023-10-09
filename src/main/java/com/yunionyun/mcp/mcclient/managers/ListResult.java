@@ -3,6 +3,9 @@ package com.yunionyun.mcp.mcclient.managers;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ListResult {
 	JSONObject[] data;
 	int total;
@@ -127,6 +130,14 @@ public class ListResult {
 
 	public int getDataSize() {
 		return this.data.length;
+	}
+
+	public JSONObject[] getData() {
+		return this.data;
+	}
+
+	public List<JSONObject> getDataList() {
+		return Arrays.asList(this.data);
 	}
 
 	public String getMarkerField() {
