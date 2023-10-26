@@ -56,13 +56,21 @@ public class ResourceManager extends BaseManager {
 	}
 
 	private JSONObject genBody(JSONObject params) {
+		return this.genBody(params, this.keyword);
+	}
+
+	private JSONObject genBody(JSONObject params, String key) {
 		if (params != null) {
 			JSONObject body = new JSONObject();
-			body.put(this.keyword, params);
+			body.put(key, params);
 			return body;
 		} else {
 			return null;
 		}
+	}
+
+	private JSONObject genPluralBody(JSONObject params) {
+		return this.genBody(params, this.keywordPlural);
 	}
 
 	public JSONObject GetByName(Session s, String name, JSONObject query, ManagerContext[] ctx)
@@ -253,6 +261,18 @@ public class ResourceManager extends BaseManager {
 	public JSONObject PerformAction(Session s, String id, String action, JSONObject params)
 			throws McClientJavaBizException, IOException, JSONClientException {
 		return this.PerformAction(s, id, action, params, new ManagerContext[]{});
+	}
+
+	public JSONObject PerformClassAction(Session s, String action, JSONObject params, ManagerContext[] ctx) throws McClientJavaBizException, IOException, JSONClientException {
+		StringBuilder url = this.getContextPath(ctx);
+		url.append(this.urlKey());
+		url.append("/");
+		url.append(action);
+		return this._post(s, url.toString(), genPluralBody(params), this.keyword);
+	}
+
+	public JSONObject PerformClassAction(Session s, String action, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
+		return this.PerformClassAction(s, action, params, new ManagerContext[]{});
 	}
 
 	public JSONObject Update(Session s, String id, JSONObject params, ManagerContext[] ctx)
