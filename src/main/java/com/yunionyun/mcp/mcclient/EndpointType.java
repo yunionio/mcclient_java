@@ -7,11 +7,13 @@ public class EndpointType extends BaseEnumConstants {
 	public static final EndpointType InternalURL;
 	public static final EndpointType PublicURL;
 	public static final EndpointType AdminURL;
+	public static final EndpointType ApigatewayURL;
 
 	static {
 		InternalURL = new EndpointType("internalURL");
 		PublicURL = new EndpointType("PublicURL");
 		AdminURL = new EndpointType("AdminURL");
+        ApigatewayURL = new EndpointType("apigateway");
 	}
 
 	private EndpointType(String rep) {

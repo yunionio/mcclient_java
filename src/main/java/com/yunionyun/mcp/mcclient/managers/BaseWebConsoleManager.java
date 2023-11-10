@@ -20,6 +20,6 @@ public class BaseWebConsoleManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("webconsole", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("webconsole", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

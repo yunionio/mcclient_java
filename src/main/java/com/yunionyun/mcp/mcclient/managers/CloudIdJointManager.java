@@ -22,7 +22,6 @@ public class CloudIdJointManager extends JointResourceManager {
 			BaseCloudIdManager slave) {
 		super(
 				"cloudid",
-				null,
 				endpointType,
 				null,
 				columns,

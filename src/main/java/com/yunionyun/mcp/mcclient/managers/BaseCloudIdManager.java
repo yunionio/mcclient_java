@@ -20,6 +20,6 @@ public class BaseCloudIdManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("cloudid", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("cloudid", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

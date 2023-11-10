@@ -138,7 +138,7 @@ public class TokenCredential {
 						+ Endpoint.RegionID(region, zone));
 	}
 
-	public String getServiceUrl(String service, String region, String zone, EndpointType endpointType)
+	/*public String getServiceUrl(String service, String region, String zone, EndpointType endpointType)
 			throws McClientJavaBizException {
 		for (int i = 0; i < this.services.length; ++i) {
 			if (this.services[i].getType().equals(service)) {
@@ -153,7 +153,7 @@ public class TokenCredential {
 						+ endpointType
 						+ " "
 						+ Endpoint.RegionID(region, zone));
-	}
+	}*/
 
 	public boolean isAdmin() {
 		String[] roles = this.getRoles();

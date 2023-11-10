@@ -430,4 +430,8 @@ public class Client {
 		}
 		return String.format("%s%s", endpoint, path);
 	}
+
+	public String getAuthUrl() {
+		return this.authUrl;
+	}
 }

@@ -20,6 +20,6 @@ public class BaseMeterAlertManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("meteralert", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("meteralert", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

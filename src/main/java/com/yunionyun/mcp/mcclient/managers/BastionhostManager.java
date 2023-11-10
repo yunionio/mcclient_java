@@ -9,6 +9,6 @@ public class BastionhostManager extends ResourceManager {
             EndpointType endpointType,
             String[] columns,
             String[] adminColumns) {
-        super("bastionhost", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+        super("bastionhost", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
     }
 }

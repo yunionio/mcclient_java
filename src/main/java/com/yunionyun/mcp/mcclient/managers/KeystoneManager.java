@@ -17,6 +17,6 @@ public class KeystoneManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("identity", null, endpointType, "v3", columns, adminColumns, keyword, keywordPlural, null);
+		super("identity", endpointType, "v3", columns, adminColumns, keyword, keywordPlural, null);
 	}
 }
