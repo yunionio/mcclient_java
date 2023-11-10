@@ -20,6 +20,6 @@ public class BaseSchedulerManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("scheduler", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("scheduler", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

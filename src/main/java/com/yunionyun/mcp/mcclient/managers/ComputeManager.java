@@ -16,6 +16,6 @@ public class ComputeManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("compute", "v2", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("compute", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

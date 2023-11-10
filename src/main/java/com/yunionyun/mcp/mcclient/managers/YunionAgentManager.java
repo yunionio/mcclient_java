@@ -21,6 +21,6 @@ public class YunionAgentManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("yunionagent", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("yunionagent", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

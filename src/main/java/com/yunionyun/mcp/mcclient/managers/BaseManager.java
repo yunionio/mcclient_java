@@ -19,18 +19,15 @@ public class BaseManager {
 	String[] colums;
 	String[] adminColums;
 	String[] allColumns;
-	String apiVersion;
 
 	public BaseManager(
 			String serviceType,
-			String apiVersion,
 			EndpointType endpointType,
 			String version,
 			String[] columns,
 			String[] adminColumns) {
 		this.serviceType = serviceType;
 		this.endpointType = endpointType;
-		this.apiVersion = apiVersion;
 		this.version = version;
 		this.colums = columns;
 		this.adminColums = adminColumns;
@@ -73,7 +70,7 @@ public class BaseManager {
 	protected JSONObject jsonRequest(
 			Session s, String method, String url, HttpHeaders headers, JSONObject body)
 			throws McClientJavaBizException, IOException, JSONClientException {
-		return s.jsonRequest(this.serviceType, this.apiVersion, this.endpointType, method, this.getUrl(url), headers, body);
+		return s.jsonRequest(this.serviceType, this.endpointType, method, this.getUrl(url), headers, body);
 	}
 
 	public ListResult _list(Session s, String url, String respKey)
@@ -85,7 +82,7 @@ public class BaseManager {
 	}
 
 	public JSONArray _listRaw(Session s, String url) throws Exception {
-		return s.jsonRequestArray(this.serviceType, this.apiVersion, this.endpointType, "GET", url, (HttpHeaders) null, (JSONObject) null);
+		return s.jsonRequestArray(this.serviceType, this.endpointType, "GET", url, (HttpHeaders) null, (JSONObject) null);
 	}
 
 	public JSONObject _get(Session s, String url, String respKey)

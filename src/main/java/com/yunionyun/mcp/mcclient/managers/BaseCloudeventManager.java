@@ -20,6 +20,6 @@ public class BaseCloudeventManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("cloudevent", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("cloudevent", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

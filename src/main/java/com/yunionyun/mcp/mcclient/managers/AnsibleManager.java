@@ -13,6 +13,6 @@ public class AnsibleManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("ansible", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("ansible", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

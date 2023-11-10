@@ -17,6 +17,6 @@ public class MonitorManager extends ResourceManager {
             EndpointType endpointType,
             String[] columns,
             String[] adminColumns) {
-        super("monitor", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+        super("monitor", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
     }
 }

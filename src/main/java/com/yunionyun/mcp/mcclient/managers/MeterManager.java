@@ -17,6 +17,6 @@ public class MeterManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("meter", null, endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
+		super("meter", endpointType, null, columns, adminColumns, keyword, keywordPlural, null);
 	}
 }

@@ -17,6 +17,6 @@ public class GlanceManager extends ResourceManager {
 			EndpointType endpointType,
 			String[] columns,
 			String[] adminColumns) {
-		super("image", null, endpointType, "v1", columns, adminColumns, keyword, keywordPlural, (String) null);
+		super("image", endpointType, "v1", columns, adminColumns, keyword, keywordPlural, (String) null);
 	}
 }

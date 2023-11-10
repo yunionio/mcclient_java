@@ -72,7 +72,7 @@ public class Service extends BaseResource {
 		}
 	}
 
-	public String getServiceUrl(String region, String zone, EndpointType endpointType)
+	/*public String getServiceUrl(String region, String zone, EndpointType endpointType)
 			throws McClientJavaBizException {
 		String[] candidates = this.getServiceUrls(region, zone, endpointType);
 		int randidx = (int) (Math.random() * candidates.length);
@@ -82,5 +82,5 @@ public class Service extends BaseResource {
 			// 此种情况是服务端目录列表中没有对应的url与配置文件中传入的url进行匹配
 			throw new McClientJavaBizException("服务端目录列表中没有" + this.type + "对应的url");
 		}
-	}
+	}*/
 }
