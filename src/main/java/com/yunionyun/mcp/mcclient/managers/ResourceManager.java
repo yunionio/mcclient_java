@@ -267,7 +267,7 @@ public class ResourceManager extends BaseManager {
 		url.append(this.urlKey());
 		url.append("/");
 		url.append(action);
-		return this._post(s, url.toString(), genPluralBody(params), this.keyword);
+		return this._post(s, url.toString(), genPluralBody(params), this.keywordPlural);
 	}
 
 	public JSONObject PerformClassAction(Session s, String action, JSONObject params) throws McClientJavaBizException, IOException, JSONClientException {
