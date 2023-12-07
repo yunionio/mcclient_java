@@ -28,8 +28,6 @@ public class UnifiedMonitorManager extends MonitorManager {
     }
 
     public JSONObject PerformQuery(Session session, MetricQueryInput input) throws JSONClientException, McClientJavaBizException, IOException {
-        JSONObject object = input.toJSONObject();
-        System.out.printf("\n===query data: %s\n", object);
-        return this.PerformClassAction(session, "query", object);
+        return this.PerformClassAction(session, "query", input.toJSONObject());
     }
 }
