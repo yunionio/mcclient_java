@@ -1,7 +1,13 @@
 package com.yunionyun.mcp.mcclient.managers.impl.monitor;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yunionyun.mcp.mcclient.EndpointType;
+import com.yunionyun.mcp.mcclient.JSONClientException;
+import com.yunionyun.mcp.mcclient.Session;
+import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 import com.yunionyun.mcp.mcclient.managers.MonitorManager;
+
+import java.io.IOException;
 
 /**
  * @author qx
@@ -19,5 +25,11 @@ public class UnifiedMonitorManager extends MonitorManager {
                 endpointType,
                 new String[]{},
                 new String[]{});
+    }
+
+    public JSONObject PerformQuery(Session session, MetricQueryInput input) throws JSONClientException, McClientJavaBizException, IOException {
+        JSONObject object = input.toJSONObject();
+        System.out.printf("\n===query data: %s\n", object);
+        return this.PerformClassAction(session, "query", object);
     }
 }
