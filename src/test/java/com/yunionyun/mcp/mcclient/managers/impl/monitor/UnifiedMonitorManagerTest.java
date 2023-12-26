@@ -12,6 +12,8 @@ import com.yunionyun.mcp.mcclient.keystone.TokenCredential;
 import junit.framework.TestCase;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UnifiedMonitorManagerTest extends TestCase {
 
@@ -22,7 +24,7 @@ public class UnifiedMonitorManagerTest extends TestCase {
 //			UnifiedMonitorManager man = new UnifiedMonitorManager();
 //			Session session = cli.newSession("YunionHQ", null, EndpointType.PublicURL, token);
 //			MetricQueryInput input = MetricQueryInput.newQuery("1h", "5m");
-//			input.addMetric("vm_cpu", "usage_active", "vm_id", "021e9e2b-ae4e-4bc9-8a29-d80225db379e");
+//			input.addMetric("disk", "free", "host", "office-controller", MetricQueryInput.GroupBy("path", "host", "host_ip"));
 //			JSONObject jsonObject = man.PerformQuery(session, input);
 //			System.out.printf("jsonObject: " + jsonObject.toJSONString(jsonObject, SerializerFeature.PrettyFormat));
 //		} catch (JSONClientException e) {

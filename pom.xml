@@ -4,7 +4,7 @@
 
   <groupId>com.yunionyun.mcp</groupId>
   <artifactId>mcclient</artifactId>
-  <version>3.2.11</version>
+  <version>3.2.13</version>
   <packaging>jar</packaging>
 
   <name>${project.groupId}:${project.artifactId}</name>

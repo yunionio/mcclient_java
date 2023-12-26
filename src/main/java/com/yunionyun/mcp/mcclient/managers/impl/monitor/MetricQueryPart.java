@@ -7,6 +7,7 @@ public class MetricQueryPart {
 	public static final String TYPE_FIELD = "field";
 	public static final String TYPE_MEAN = "mean";
 	public static final String TYPE_ALIAS = "alias";
+	public static final String TYPE_TAG = "tag";
 
 	private String type;
 	private List<String> params;
@@ -15,7 +16,7 @@ public class MetricQueryPart {
 		this.type = type;
 	}
 
-	private MetricQueryPart(String type, String val) {
+	public MetricQueryPart(String type, String val) {
 		List<String> params = new ArrayList<>();
 		params.add(val);
 		this.type = type;
