@@ -77,18 +77,37 @@ public class MetricQueryInput {
 		return this;
 	}
 
-
-	private MetricQueryInput addMetric(String measurement, String field, String alias, String filterKey, String filterValue) {
-		MetricQuery query = MetricQuery.newMetricQuery(measurement, field, alias, filterKey, filterValue);
+	private MetricQueryInput addMetric(String measurement, String field, String alias, String filterKey, String filterValue, List<MetricQueryPart> groupBy) {
+		List<MetricQueryModelTag> tags = new ArrayList<>();
+		if (filterKey != null && !filterKey.isEmpty()) {
+			tags.add(MetricQueryModelTag.Equal(filterKey, filterValue));
+		}
+		MetricQuery query = MetricQuery.newMetricQuery(measurement, field, alias, tags, groupBy);
 		return this.addMetric(query);
+	}
+
+	public MetricQueryInput addMetric(String measurement, String field, String alias, String filterKey, String filterValue) {
+		return this.addMetric(measurement, field, alias, filterKey, filterValue, null);
 	}
 
 	public MetricQueryInput addMetric(String measurement, String field) {
 		return this.addMetric(measurement, field, "", "", "");
 	}
 
+	public MetricQueryInput addMetric(String measurement, String field, String filterKey, String filterValue, List<MetricQueryPart> groupBy) {
+		return this.addMetric(measurement, field, "", filterKey, filterValue, groupBy);
+	}
+
 	public MetricQueryInput addMetric(String measurement, String field, String filterKey, String filterValue) {
 		return this.addMetric(measurement, field, "", filterKey, filterValue);
+	}
+
+	public static List<MetricQueryPart> GroupBy(String... fields) {
+		List<MetricQueryPart> parts = new ArrayList<>();
+		for (String field : fields) {
+			parts.add(new MetricQueryPart(MetricQueryPart.TYPE_TAG, field));
+		}
+		return parts;
 	}
 
 	public String getFrom() {
