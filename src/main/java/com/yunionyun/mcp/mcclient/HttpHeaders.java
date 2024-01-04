@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class HttpHeaders {
 	private HashMap<String, String> _headers;
 
-	HttpHeaders() {
+	public HttpHeaders() {
 		_headers = new HashMap<String, String>();
 	}
 
