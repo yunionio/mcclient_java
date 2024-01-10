@@ -73,9 +73,6 @@ public class Client {
 		}
 
 		boolean input = true;
-		if (method.equals("HEAD")) {
-			input = false;
-		}
 		boolean output = false;
 		if (body != null) {
 			if (headers == null || !headers.has("Content-Length")) {
@@ -147,7 +144,7 @@ public class Client {
 		return this.parseJSONResult(rawRequest(endpoint, token, method, url, headers, body));
 	}
 
-	private HttpURLConnection _jsonRequest(
+	public HttpURLConnection _jsonRequest(
 			String endpoint,
 			String token,
 			String method,
