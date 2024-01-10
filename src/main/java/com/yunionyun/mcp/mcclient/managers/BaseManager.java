@@ -9,6 +9,7 @@ import com.yunionyun.mcp.mcclient.Session;
 import com.yunionyun.mcp.mcclient.common.McClientJavaBizException;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 public class BaseManager {
 
@@ -73,6 +74,12 @@ public class BaseManager {
 		return s.jsonRequest(this.serviceType, this.endpointType, method, this.getUrl(url), headers, body);
 	}
 
+	protected HttpURLConnection jsonRawRequest(
+			Session s, String method, String url, HttpHeaders headers, JSONObject body)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		return s.jsonRawRequest(this.serviceType, this.endpointType, method, this.getUrl(url), headers, body);
+	}
+
 	public ListResult _list(Session s, String url, String respKey)
 			throws McClientJavaBizException, IOException, JSONClientException {
 		JSONObject result = this.jsonRequest(s, "GET", url, null, null);
@@ -93,6 +100,11 @@ public class BaseManager {
 		} else {
 			return body;
 		}
+	}
+
+	public HttpURLConnection _head(Session s, String url)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		return this.jsonRawRequest(s, "HEAD", url, null, null);
 	}
 
 	public JSONArray _getV2(Session s, String url, String respKey)

@@ -28,7 +28,8 @@ public class ImageManagerTest extends TestCase {
 			if (image != null) {
 				logger.debug(image.toString());
 			}
-			logger.debug(params.toString());
+			image = manager.Get(s, id, new JSONObject());
+			System.out.println("image:"+image.toString());
 		} catch (JSONClientException e) {
 			e.printStackTrace();
 		} catch (McClientJavaBizException e) {

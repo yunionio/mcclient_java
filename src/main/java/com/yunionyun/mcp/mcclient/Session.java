@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
@@ -156,6 +157,24 @@ public class Session {
 		}
 		tmpHdr.update(this.headers);
 		return this.client.jsonRequest(baseurl, this.token.getToken(), method, url, tmpHdr, jsonBody);
+	}
+
+	public HttpURLConnection jsonRawRequest(
+			String service,
+			EndpointType endpointType,
+			String method,
+			String url,
+			HttpHeaders headers,
+			JSONObject jsonBody)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		String baseurl = Utils.stripURLVersion(this.getServiceUrl(service, endpointType));
+		logger.debug("jsonRequest " + baseurl + " token " + this.token.getToken());
+		HttpHeaders tmpHdr = new HttpHeaders();
+		if (headers != null) {
+			tmpHdr.update(headers);
+		}
+		tmpHdr.update(this.headers);
+		return this.client._jsonRequest(baseurl, this.token.getToken(), method, url, tmpHdr, jsonBody);
 	}
 
 	public JSONArray jsonRequestArray(String service, EndpointType endpointType, String method, String url, HttpHeaders headers, JSONObject jsonBody) throws Exception {
