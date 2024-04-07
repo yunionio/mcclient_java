@@ -12,8 +12,18 @@ import com.yunionyun.mcp.mcclient.managers.ListResult;
 import com.yunionyun.mcp.mcclient.utils.StringUtils;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ImageManager extends GlanceManager {
+
+	static String IMAGE_META = "X-Image-Meta-";
+	static String IMAGE_META_PROPERTY = "X-Image-Meta-Property-";
+
+	static String IMAGE_METADATA = "X-Image-Meta-Metadata";
+	static String IMAGE_PROJECT_METADATA = "X-Image-Meta-Project_metadata";
 
 	public ImageManager() {
 		this(EndpointType.InternalURL);
@@ -63,6 +73,48 @@ public class ImageManager extends GlanceManager {
 			}
 		}
 		return this._list(s, url.toString(), this.keywordPlural);
+	}
+
+	public JSONObject Get(Session s, String id, JSONObject query)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		return this.GetById(s, id, query);
+	}
+
+	public JSONObject GetById(Session s, String id, JSONObject query)
+			throws McClientJavaBizException, IOException, JSONClientException {
+		StringBuilder url = new StringBuilder();
+		url.append("/");
+		url.append(this.urlKey());
+		url.append("/");
+		url.append(id);
+		JSONObject result = new JSONObject();
+		JSONObject properties = new JSONObject();
+		HttpURLConnection resp = this._head(s, url.toString());
+		Map<String, List<String>> header = resp.getHeaderFields();
+		Set<String> hdrKeys = header.keySet();
+		for (String k : hdrKeys) {
+			if (k == null) {
+				continue;
+			}
+			List<String> v = header.get(k);
+			if (k == IMAGE_METADATA && v.size() == 1) {
+				JSONObject metadata = JSONObject.parseObject(v.get(0));
+				result.put("metadata", metadata);
+			} else if (k == IMAGE_PROJECT_METADATA && v.size() == 1) {
+				JSONObject metadata = JSONObject.parseObject(v.get(0));
+				result.put("project_metadata", metadata);
+			} else if (k.startsWith(IMAGE_META_PROPERTY)) {
+				k = k.substring(IMAGE_META_PROPERTY.length()).toLowerCase();
+				properties.put(k, v.get(0));
+			} else if (k.startsWith(IMAGE_META)) {
+				k = k.substring(IMAGE_META.length()).toLowerCase();;
+				result.put(k, v.get(0));
+			}
+		}
+		if (properties.size() > 0) {
+			result.put("properties", new JSONObject());
+		}
+		return result;
 	}
 
 	public JSONObject Update(Session s, String id, JSONObject params)
