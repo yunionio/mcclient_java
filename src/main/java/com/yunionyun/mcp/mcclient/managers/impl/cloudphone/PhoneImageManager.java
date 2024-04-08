@@ -13,8 +13,8 @@ public class PhoneImageManager extends CloudphoneManager {
 
 	public PhoneImageManager(EndpointType endpointType) {
 		super(
-				"phone-image",
-				"phone-images",
+				"phone_image",
+				"phone_images",
 				endpointType,
 				new String[]{
 				},

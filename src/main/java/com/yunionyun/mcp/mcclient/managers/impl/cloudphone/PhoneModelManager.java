@@ -13,8 +13,8 @@ public class PhoneModelManager extends CloudphoneManager {
 
 	public PhoneModelManager(EndpointType endpointType) {
 		super(
-				"phone-model",
-				"phone-models",
+				"phone_model",
+				"phone_models",
 				endpointType,
 				new String[]{
 				},
