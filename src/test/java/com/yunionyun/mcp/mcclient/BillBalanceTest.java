@@ -8,11 +8,11 @@ import junit.framework.TestCase;
 
 public class BillBalanceTest extends TestCase {
 	public void testBatchInsert() {
-		String authURL = "";
-		String domain = "";
-		String username = "";
-		String password = "";
-		String project = "";
+		String authURL = Env.get("authUrl");
+		String domain = Env.get("domain");
+		String username = Env.get("username");
+		String password = Env.get("password");
+		String project = Env.get("project");
 		int cacheSize = 0;
 		int timeout = 0;
 		boolean debug = true;
@@ -23,7 +23,7 @@ public class BillBalanceTest extends TestCase {
 						authURL, domain, username, password, project, cacheSize, timeout, debug, insecure);
 		authAgent.start_sync_ready();
 
-		Session session = authAgent.getAdminSession("", null, null);
+		Session session = authAgent.getAdminSession(Env.get("region"), null, null);
 
 		try {
 			BillBalanceManager manager = new BillBalanceManager();

@@ -12,11 +12,15 @@ import junit.framework.TestCase;
  */
 public class ApigatewayTest extends TestCase {
 	public void test() {
-		Client cli = new Client("https://192.168.2.1/api/s/identity/v3", 500, true, true);
+		Client cli = new Client(Env.get("authUrl"), 5000, true, true);
 		TokenCredential token = null;
 		try {
-			token = cli.Authenticate("admin", "", "Yunion", "system", "Default");
-			Session s = cli.newSession("region0", null, EndpointType.ApigatewayURL, token);
+			token = cli.Authenticate(Env.get("username"), 
+			Env.get("password"), 
+			Env.get("domain"),
+			Env.get("project"),
+			Env.get("projectDomain"));
+			Session s = cli.newSession(Env.get("region"), null, EndpointType.ApigatewayURL, token);
 			EndpointsV3Manager manager = new EndpointsV3Manager();
 			JSONObject query = new JSONObject();
 			query.put("details", true);

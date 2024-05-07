@@ -17,13 +17,18 @@ public class ServerTest extends TestCase {
 	private static Logger logger = LoggerUtils.createLoggerFor(ServerManager.class.getName());
 
 	public void testApp() {
-		Client cli = new Client("https://192.168.2.1:30500/v3", 5000, true, true);
+		Client cli = new Client(Env.get("authUrl"), 5000, true, true);
 		try {
-			TokenCredential token =	cli.Authenticate("uname", "passwd", "udomain", "system", "Default");
-			logger.info(token.toString());
+			TokenCredential token =	cli.Authenticate(
+				Env.get("username"), 
+				Env.get("password"), 
+				Env.get("domain"),
+				Env.get("project"),
+				Env.get("projectDomain"));
+
 			JSONObject rtn = new JSONObject();
 
-			Session s = cli.newSession("region0", null, EndpointType.PublicURL, token);
+			Session s = cli.newSession(Env.get("region"), null, EndpointType.PublicURL, token);
 
 			ServerManager serverManager = new ServerManager();
 			JSONObject serverInfo = serverManager.GetById(s, "2db6124a-f5de-4ec2-8fbe-16e4b0362f63", null);
