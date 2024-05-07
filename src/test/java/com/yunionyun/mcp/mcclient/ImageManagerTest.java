@@ -15,11 +15,15 @@ public class ImageManagerTest extends TestCase {
     private static Logger logger = LoggerUtils.createLoggerFor(ImageManagerTest.class.getName());
 
 	public void testApp() {
-		Client cli = new Client("", 500, true, true);
+		Client cli = new Client(Env.get("authUrl"), 5000, true, true);
 		TokenCredential token = null;
 		try {
-			token = cli.Authenticate("", "", "Default", "", "");
-			Session s = cli.newSession("", null, null, token);
+			token = cli.Authenticate(Env.get("username"), 
+			Env.get("password"), 
+			Env.get("domain"),
+			Env.get("project"),
+			Env.get("projectDomain"));
+			Session s = cli.newSession(Env.get("region"), null, null, token);
 			ImageManager manager = new ImageManager(EndpointType.PublicURL);
 			JSONObject params = new JSONObject();
 			String id = new String("5b3fa029-74cd-4c5d-88d8-034ce4b4e9d9");

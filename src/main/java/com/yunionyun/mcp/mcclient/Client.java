@@ -368,6 +368,7 @@ public class Client {
 	
 	public TokenCredential Authenticate(String user, String passwd, String userDomain, String project, String projectDomain)
 			throws JSONClientException, McClientJavaBizException, IOException {
+		System.out.println("Authenticate " + user + " against " + this.authUrl);
 		return this._auth(userDomain, user, passwd, null, project, projectDomain, null);
 	}
 

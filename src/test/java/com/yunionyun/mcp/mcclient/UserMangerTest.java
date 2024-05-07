@@ -20,12 +20,16 @@ import java.util.Set;
  */
 public class UserMangerTest extends TestCase {
 	public void testApp() {
-		Client cli = new Client("https://127.0.0.1:5000/v3", 500, true, true);
+		Client cli = new Client(Env.get("authUrl"), 5000, true, true);
 		TokenCredential token = null;
 		try {
 			Set<String> hashSet = new HashSet<>();
-			token = cli.Authenticate("admin", "123@admin", "Default", "system", "Default");
-			Session s = cli.newSession("region0", null, null, token);
+			token = cli.Authenticate(Env.get("username"), 
+			Env.get("password"), 
+			Env.get("domain"),
+			Env.get("project"),
+			Env.get("projectDomain"));
+			Session s = cli.newSession(Env.get("region"), null, null, token);
 			UserManager userManager = new UserManager();
 			JSONObject ob = new JSONObject();
 //			ob.put("role", "domainadmin");

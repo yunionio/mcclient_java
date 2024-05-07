@@ -306,3 +306,27 @@ public JSONObject Delete(Session s, String id)
         // verify failed
     }
 ```
+
+
+## 测试
+
+测试环境变量存储在 /opt/test_conf.properties
+
+在测试代码中，通过 Env.get(key) 获得
+
+```
+# sample test_conf.properties
+authUrl=https://192.168.2.11:30500/v3
+username=test
+password=passwd0
+domain=Default
+project=system
+projectDomain=Default
+region=region0
+```
+
+启动测试：
+
+```
+mvn test
+```

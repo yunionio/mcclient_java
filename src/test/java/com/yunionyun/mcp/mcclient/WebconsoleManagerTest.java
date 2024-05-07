@@ -18,10 +18,14 @@ import java.util.Set;
  */
 public class WebconsoleManagerTest extends TestCase {
 	public void testApp() {
-		Client cli = new Client("https://192.18.222.171:30357/v3", 500, true, true);
+		Client cli = new Client(Env.get("authUrl"), 500, true, true);
 		try {
-			TokenCredential token = cli.Authenticate("test", "password", "Domain", "system", "Default");
-			Session s = cli.newSession("region0", "", EndpointType.PublicURL, token);
+			TokenCredential token = cli.Authenticate(Env.get("username"), 
+			Env.get("password"), 
+			Env.get("domain"),
+			Env.get("project"),
+			Env.get("projectDomain"));
+			Session s = cli.newSession(Env.get("region"), "", EndpointType.PublicURL, token);
 
 			WebConsoleManager webconsole = new WebConsoleManager();
 

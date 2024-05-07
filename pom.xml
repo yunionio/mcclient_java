@@ -4,7 +4,7 @@
 
   <groupId>com.yunionyun.mcp</groupId>
   <artifactId>mcclient</artifactId>
-  <version>3.2.15</version>
+  <version>3.2.16</version>
   <packaging>jar</packaging>
 
   <name>${project.groupId}:${project.artifactId}</name>
@@ -144,6 +144,11 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.1.2</version>
+        <configuration>
+          <systemPropertyVariables>
+            <testEnv>/opt/test_conf.properties</testEnv>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
