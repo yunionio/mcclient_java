@@ -38,6 +38,10 @@ public class Session {
 		this.headers = new HttpHeaders();
 	}
 
+	public TokenCredential getToken() {
+		return token;
+	}
+
 	public void setHeader(String key, String value) {
 		this.headers.set(key, value);
 	}

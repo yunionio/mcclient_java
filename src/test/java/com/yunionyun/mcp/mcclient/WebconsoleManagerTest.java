@@ -20,8 +20,8 @@ public class WebconsoleManagerTest extends TestCase {
 	public void testApp() {
 		Client cli = new Client(Env.get("authUrl"), 500, true, true);
 		try {
-			TokenCredential token = cli.Authenticate(Env.get("username"), 
-			Env.get("password"), 
+			TokenCredential token = cli.Authenticate(Env.get("username"),
+			Env.get("password"),
 			Env.get("domain"),
 			Env.get("project"),
 			Env.get("projectDomain"));
@@ -34,6 +34,8 @@ public class WebconsoleManagerTest extends TestCase {
 
 			result = webconsole.DoRdpConnect(s, "ed73df6af7b", "", 0, "Administrator", "passwd0");
 			System.out.println(result);
+//			JSONObject result = webconsole.DoContainerExec(s, "test-pod1-0");
+//			System.out.println(result);
 
 		} catch (JSONClientException e) {
 			e.printStackTrace();
