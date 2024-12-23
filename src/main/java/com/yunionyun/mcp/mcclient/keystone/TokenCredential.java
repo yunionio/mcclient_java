@@ -19,6 +19,7 @@ public class TokenCredential {
 	private Role[] roles;
 	private Service[] services;
 	private Date expires;
+	private AuthContext context;
 
 	public TokenCredential(String token) {
 		this.token = token;
@@ -52,6 +53,8 @@ public class TokenCredential {
 			this.services[i] = new Service();
 			this.services[i].parseJSON(serviceJSON.getJSONObject(i));
 		}
+		JSONObject context = token.getJSONObject("context");
+		this.context = new AuthContext(context);
 	}
 
 	public String getToken() {
@@ -88,6 +91,10 @@ public class TokenCredential {
 
 	public String getProjectName() {
 		return this.project.getName();
+	}
+
+	public AuthContext getContext() {
+		return context;
 	}
 
 	public boolean isValid() {
