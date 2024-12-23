@@ -4,3 +4,6 @@ all:
 
 clean:
 	mvn clean
+
+release:
+	mvn clean deploy -DskipTests -Dgpg.passphrase=${GPG_PASSPHRASE} -Pci-cd
