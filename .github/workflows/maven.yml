@@ -14,13 +14,16 @@ jobs:
     - name: Set up Maven Central Repository
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
-        java-version: 8
+        distribution: 'adopt'
+        java-version: 17
         server-id: central
         server-username: MAVEN_USERNAME
         server-password: MAVEN_CENTRAL_TOKEN
         gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
         gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+    - name: Prepare Maven environnement with Java 17 for deployment to Sonatype
+      run: export MAVEN_OPTS="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
 
     - name: Deploy with Maven
       run: mvn -B clean deploy -DskipTests -PsonatypeDeploy
